@@ -1,7 +1,8 @@
 collection_name: agent
 persist_directory: chroma_db
 k: 3
-data_path: data
+# 知识库根目录（建议放侗族织绣相关资料）
+data_path: data/dong_embroidery
 md5_hex_store: md5.text
 allow_knowledge_file_type: [".txt", ".pdf"]
 

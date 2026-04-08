@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Any, Callable
 from langchain.agents import AgentState
 from langchain.agents.middleware import (
     wrap_tool_call,
@@ -11,7 +11,19 @@ from langchain.agents.middleware import (
 from langchain_core.messages import ToolMessage
 from langgraph.types import Command
 from utils.logger_handler import logger
-from utils.prompt_loader import load_report_prompt, load_system_prompt
+from utils.prompt_loader import (
+    load_guide_prompt,
+    load_label_prompt,
+    load_research_prompt,
+    load_faq_prompt,
+    load_system_prompt,
+)
+
+
+def _runtime_context_dict(raw_context: Any) -> dict:
+    if isinstance(raw_context, dict):
+        return raw_context
+    return {}
 
 # 工具执行的监控
 @wrap_tool_call
@@ -28,7 +40,9 @@ def mointor_tool(
 
         if request.tool_call['name'] == 'fill_context_for_report':
             logger.info(f"[mointor_tool]fill_context_for_report工具被调用, 注入上下文 report=True")
-            request.runtime.context["report"] = True
+            context = _runtime_context_dict(request.runtime.context)
+            context["report"] = True
+            request.runtime.context = context
         return result
     except Exception as e:
         logger.error(f"[mointor_tool]工具{request.tool_call['name']}调用失败: {e}")
@@ -45,11 +59,20 @@ def log_before_model(
     
     return None
 
-# 动态切换提示词
-@dynamic_prompt      # 每一次生成提示词之前， 调用此函数
-def report_prompt_switch(request: ModelRequest):
-    is_report = request.runtime.context.get("report", False)
-    if is_report:  # 如果上下文包含 report=True 标志， 则加载报告提示词
-        return load_report_prompt()   # 加载报告提示词
+# 动态切换提示词（按模式）
+@dynamic_prompt
+def mode_prompt_switch(request: ModelRequest):
+    context = _runtime_context_dict(request.runtime.context)
+    mode = context.get("mode", "guide")
 
-    return load_system_prompt()  # 加载系统提示词
+    if mode == "guide":
+        return load_guide_prompt()
+    if mode == "label":
+        return load_label_prompt()
+    if mode == "research":
+        return load_research_prompt()
+    if mode == "faq":
+        return load_faq_prompt()
+
+    # 兜底
+    return load_system_prompt()

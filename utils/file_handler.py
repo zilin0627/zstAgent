@@ -43,11 +43,12 @@ def listdir_with_allowed_type(dir_path: str, allowed_types: tuple[str]):
     allowed_files = []
     if not os.path.isdir(dir_path):
         logger.error(f"[listdir_with_allowed_type]路径不是目录: {dir_path}")
-        return allowed_types
+        return []
     
-    for file in os.listdir(dir_path):
-        if file.endswith(allowed_types):  # 检查文件是否以允许的类型结尾
-            allowed_files.append(os.path.join(dir_path, file))
+    for root, _, files in os.walk(dir_path):
+        for file in files:
+            if file.endswith(allowed_types):  # 检查文件是否以允许的类型结尾
+                allowed_files.append(os.path.join(root, file))
     
     return allowed_files
 

@@ -1,3 +1,9 @@
 main_prompt_path: prompts/main_prompt.txt
 rag_summarize_prompt_path: prompts/rag_summarize.txt
 report_prompt_path: prompts/report_prompt.txt
+
+# 导览多模式提示词（面向非遗侗族织绣纹样）
+guide_prompt_path: prompts/guide_prompt.txt
+label_prompt_path: prompts/label_prompt.txt
+research_prompt_path: prompts/research_prompt.txt
+faq_prompt_path: prompts/faq_prompt.txt

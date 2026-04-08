@@ -1,0 +1,270 @@
+2026-04-08 16:58:53,114 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成
+2026-04-08 17:01:00,093 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成
+2026-04-08 17:01:10,223 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载完成
+2026-04-08 17:01:29,827 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载完成
+2026-04-08 17:01:38,103 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载完成
+2026-04-08 17:02:58,424 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 加载完成
+2026-04-08 17:03:09,780 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成
+2026-04-08 17:03:58,360 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成
+2026-04-08 17:05:06,012 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成
+2026-04-08 17:05:23,687 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成
+2026-04-08 17:08:54,033 - agent - ERROR - vector_store.py:107 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载时出错: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 101, in load_document
+    self.vector_store.add_documents(split_documents)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 627, in add_texts
+    embeddings = self._embedding_function.embed_documents(texts)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 155, in embed_documents
+    embeddings = embed_with_retry(
+                 ^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 83, in embed_with_retry
+    return _embed_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 66, in _embed_with_retry
+    resp = embeddings.client.call(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\embeddings\text_embedding.py", line 52, in call
+    return super().call(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-08 17:09:34,382 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成
+2026-04-08 17:14:54,675 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成
+2026-04-08 17:18:39,377 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf
+2026-04-08 17:18:39,429 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf
+2026-04-08 17:18:39,460 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-08 17:18:39,501 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-08 17:18:40,186 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-08 17:18:40,254 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf
+2026-04-08 17:18:40,289 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf
+2026-04-08 17:18:40,376 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf
+2026-04-08 17:18:40,447 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf
+2026-04-08 17:18:40,473 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf
+2026-04-08 17:20:23,069 - agent - INFO - vector_store.py:104 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成
+2026-04-08 17:20:23,157 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf
+2026-04-08 17:20:23,215 - agent - INFO - vector_store.py:86 - [加载知识库]该文件内容已经存在知识库内， 跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-08 17:31:57,373 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 17:31:57,373 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 我想知道 侗族一般主要是在中国哪些地区
+2026-04-08 17:32:01,890 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 17:32:01,891 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族主要分布在中国哪些地区'}
+2026-04-08 17:32:20,888 - agent - INFO - middleware.py:33 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 17:32:42,099 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 17:32:42,103 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"answer": "侗族主要分布在中国贵州省东南部（如从江、榕江、黎平）、广西壮族自治区北部（如三江侗族自治县、融水苗族自治县）以及与之接壤的地区。", "citations": [{"index": 1, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 16, "snippet": "8 侗族简史编写组.侗族简史[M].北京:民族出版社.2008:12-260", "metadata": {"source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗绣传统纹样数字化应用研究_李源.pdf", "creationdate": "2025-02-06T11:29:52-08:00", "author": "CNKI", "producer": "TTKN", "creator": "ReaderEx_DIS 2.5.0 Build 4088", "page_label": "17", "page": 16, "total_pages": 60}}, {"index": 2, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗族刺绣纹样研究_邓惠文.pdf", "page": 11, "snippet": "作者所选择的从江县位于贵州省东南部，与广西壮族自治区接壤，东接广西三江\n侗族自治县，南邻广西融水苗族自治县和环江毛南族自治县，西连荔波、榕江两\n县，北靠黎平县，居都柳江中游属于侗族聚居区的南部地区，境内地形地貌复杂\n多样且公路较少，没有铁路，交通不便，生产力相对落后，环境蔽塞，较为完整 \n保留了刺绣的传统，其原始性并未减少。这样完整而原始的刺绣纹样能让我们直", "metadata": {"total_pages": 91, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗族刺绣纹样研究_邓惠文.pdf", "producer": "TTKN", "page_label": "12", "creationdate": "2023-09-09T03:12:59-08:00", "page": 11, "creator": "ReaderEx_DIS 2.4.0 Build 4047", "author": "CNKI"}}, {"index": 3, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗族刺绣纹样研究_邓惠文.pdf", "page": 11, "snippet": "流传在从江、榕江、黎平的《祖公上河》、《祖源》、《祖宗落村》等祭祖歌里所叙\n述的先民原居的地名音译，皆与唐代的“梧州郡”、“贵州”、“禹州”、“泰州”、\n“龚州”、“端州”、“药州”等地音相近。即今天的广西苍梧、藤县、容溪、陆川、\n贵县、平南、桂平。广东怀集、信宜、罗定县等。其后由于人口繁衍，食不果腹，\n才离乡背井，先后经“谭中”，即今柳州一带，浔江而上，落居于今天侗族地区。", "metadata": {"creationdate": "2023-09-09T03:12:59-08:00", "page_label": "12", "producer": "TTKN", "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗族刺绣纹样研究_邓惠文.pdf", "page": 11, "author": "CNKI", "creator": "ReaderEx_DIS 2.4.0 Build 4047", "total_pages": 91}}]}
+2026-04-08 17:37:33,689 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 17:46:37,575 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 17:46:37,576 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族织绣纹样通常有哪些构成元素？
+2026-04-08 17:46:50,256 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 17:46:50,258 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族织绣纹样 构成元素'}
+2026-04-08 17:47:14,732 - agent - INFO - middleware.py:33 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 17:47:37,517 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 17:47:37,518 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"answer": "侗族织绣纹样的构成元素包括单独纹样、连续纹样（如二方连续、四方连续）、适合纹样和综合纹样，常采用对称式构图，并运用串针、辫针、绕针等20余种针法形成具有立体感的龙、凤、花、草等图案。", "citations": [{"index": 1, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 35, "snippet": "一、三江侗族纹样的语素构成\n三江侗族织绣纹样依托服饰作为载体，以其独特的构图方式活跃于服饰上。\n侗族绣娘通过对织绣纹样形式的创作、感知传达其内心的想法。使其纹样的语素\n构成形成了独特的文化符号。历史上的侗族在没有文字的情况下，运用纹样形成\n了代代相传的家庭文化传承，因此孕育了侗族织绣纹样发展的各方面要素，造成\n了织绣纹样的构成形式与表征语言在内的语构的独特性。", "metadata": {"producer": "TTKN", "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page_label": "36", "total_pages": 89, "author": "CNKI", "creationdate": "2023-12-19T12:53:19-08:00", "creator": "ReaderEx_DIS 2.4.0 Build 4053", "page": 35}}, {"index": 2, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 33, "snippet": "形，在语构中，具体考虑的对象是研究符号的组合形式与构成形式，不考虑其意\n指与行为的关系。三江侗族织绣纹样组合形式通常以二方连续、四方连续的组合\n构成，有其单独纹样形式与对称式纹样形式。纹样的构图形式充分体现侗族的文\n化特点，以及民族特色。", "metadata": {"author": "CNKI", "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "creator": "ReaderEx_DIS 2.4.0 Build 4053", "producer": "TTKN", "total_pages": 89, "page": 33, "page_label": "34", "creationdate": "2023-12-19T12:53:19-08:00"}}, {"index": 3, "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "13\n串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平", "metadata": {"total_pages": 60, "creationdate": "2025-02-06T11:29:52-08:00", "author": "CNKI", "producer": "TTKN", "source": "E:\\github project\\wxyAgent\\data/dong_embroidery\\从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "page_label": "20", "creator": "ReaderEx_DIS 2.5.0 Build 4088"}}]}
+2026-04-08 17:58:14,775 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 17:58:14,776 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族一般在哪些地区
+2026-04-08 17:58:26,522 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 17:58:26,524 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族分布地区'}
+2026-04-08 17:58:49,221 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 17:58:49,226 - agent - INFO - middleware.py:33 - [mointor_tool]工具web_search调用成功
+2026-04-08 17:58:49,231 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 17:58:49,232 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"query": "侗族分布地区", "results": []}
+2026-04-08 18:08:40,549 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:08:40,551 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族一般在哪些地区
+2026-04-08 18:08:52,375 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 18:08:52,377 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族分布地区'}
+2026-04-08 18:09:07,450 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 18:09:07,453 - agent - INFO - middleware.py:33 - [mointor_tool]工具web_search调用成功
+2026-04-08 18:09:07,455 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:09:07,458 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"query": "侗族分布地区", "results": []}
+2026-04-08 18:09:47,483 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:09:47,484 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族一般在哪些地区
+2026-04-08 18:10:00,324 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 18:10:00,325 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族分布地区'}
+2026-04-08 18:10:15,334 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 18:10:15,336 - agent - INFO - middleware.py:33 - [mointor_tool]工具web_search调用成功
+2026-04-08 18:10:15,340 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:10:15,342 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"query": "侗族分布地区", "results": []}
+2026-04-08 18:18:54,738 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:18:54,743 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族一般是哪些地区
+2026-04-08 18:19:08,038 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 18:19:08,039 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族主要分布地区'}
+2026-04-08 18:19:30,338 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 18:19:30,344 - agent - INFO - middleware.py:33 - [mointor_tool]工具web_search调用成功
+2026-04-08 18:19:30,347 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:19:30,351 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"query": "侗族主要分布地区", "results": []}
+2026-04-08 18:27:13,210 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:27:13,211 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族一般是哪些地区
+2026-04-08 18:27:25,150 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 18:27:25,164 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族主要分布地区'}
+2026-04-08 18:27:40,257 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 18:27:40,261 - agent - INFO - middleware.py:33 - [mointor_tool]工具web_search调用成功
+2026-04-08 18:27:40,265 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:27:40,269 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"query": "侗族主要分布地区", "results": []}
+2026-04-08 18:31:06,465 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:31:06,466 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族一般是哪些地区
+2026-04-08 18:31:17,841 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 18:31:17,841 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族主要分布地区'}
+2026-04-08 18:31:32,848 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 18:31:32,851 - agent - INFO - middleware.py:33 - [mointor_tool]工具web_search调用成功
+2026-04-08 18:31:32,854 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:31:32,855 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"query": "侗族主要分布地区", "results": []}
+2026-04-08 18:46:05,889 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:46:05,895 - agent - INFO - middleware.py:50 - [log_before_model][HumanMessage]: 侗族纹样有什么特点
+2026-04-08 18:46:18,790 - agent - INFO - middleware.py:28 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 18:46:18,792 - agent - INFO - middleware.py:29 - [mointor_tool]工具调用参数: {'query': '侗族织绣刺绣纹样特点'}
+2026-04-08 18:46:49,117 - agent - INFO - middleware.py:33 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 18:46:49,119 - agent - INFO - middleware.py:49 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:46:49,120 - agent - INFO - middleware.py:50 - [log_before_model][ToolMessage]: {"answer": "侗族织绣刺绣纹样主要包括动物纹样、植物纹样和几何纹样三类。动物纹样如十二生肖、螃蟹、蜘蛛、蝴蝶等，常将动物形态抽象为图案，寄托美好愿望并发展为图腾崇拜；植物纹样包括榕树花等常见植物。纹样造型具有稚拙单纯的特点，多由普通妇女在日常生活中制作，强调实用而非艺术展示。构图上常用单独纹样、连续纹样、适合纹样和综合纹样，多采用左右或上下对称布局，并运用绕针等针法增强龙、凤、花、草等图案的立体感。", "citations": [{"index": 1, "source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "snippet": "侗族刺绣纹样分析\n通过实地调查发现\n，\n侗绣纹样有动物纹样\n、\n植 物\n纹样\n、\n几何纹样\n3\n种类别\n。 （\n1\n）\n动物纹样将特定动物形\n态抽象成特殊图案\n，\n如十二生肖\n、\n螃蟹\n、\n蜘蛛\n、\n蝴蝶 等\n。\n在 古 代 传 说 中\n，\n侗族人民与动物感情特殊\n，\n动 物 寄 托\n了侗族人民的美好愿望\n，\n这种美好愿望后来发展为图\n腾崇拜\n。 （\n2\n）\n植物纹样有榕树花等常见植物的纹样\n。", "metadata": {"source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "page_label": "2", "total_pages": 3, "author": "CNKI"}}, {"index": 2, "source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 56, "snippet": "自然生动，耐人寻味。总的来说从江侗族刺绣纹样造型主要有以下三个特征： \n⑴稚拙单纯 \n 从江侗族的刺绣是由大都目不识丁的妇女们而非少数天才制作的；是在农\n闲或是劳动间隙，而非专职自由的时间里产生的；她们从来没有认为自己的刺绣\n物品是值得夸耀的艺术品，亦未想到过要将自己的名号标示于物品上，以此来流\n芳百世，她们只是单纯的刺绣来自用或送人，正因为她们的“无心”和“无欲”，", "metadata": {"source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 56, "page_label": "57", "total_pages": 91, "author": "CNKI"}}, {"index": 3, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "13\n串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平", "metadata": {"source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "page_label": "20", "total_pages": 60, "author": "CNKI"}}]}
+2026-04-08 18:53:10,964 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 18:53:10,967 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 侗族纹样有什么特点
+2026-04-08 18:53:25,423 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 18:53:25,425 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族织绣刺绣纹样特点 构图 元素 寓意'}
+2026-04-08 18:53:52,367 - agent - INFO - middleware.py:39 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 18:53:52,370 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 18:53:52,372 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"answer": "侗族织绣刺绣纹样主要包括动物纹样（如十二生肖、螃蟹、蜘蛛、蝴蝶等）、植物纹样（如榕树花）和几何纹样三类，动物纹样常寄托美好愿望并发展为图腾崇拜。构图方式采用单独纹样、连续纹样、适合纹样和综合纹样，常见于包头帕、床单、被面等载体上，多呈左右或上下对称布局。刺绣以盘绣为主，绣线粗壮、绣面凸起，色彩以红、蓝、粉、绿为主，具有立体感和民族标识性。", "citations": [{"index": 1, "source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "snippet": "侗族刺绣纹样分析\n通过实地调查发现\n，\n侗绣纹样有动物纹样\n、\n植 物\n纹样\n、\n几何纹样\n3\n种类别\n。 （\n1\n）\n动物纹样将特定动物形\n态抽象成特殊图案\n，\n如十二生肖\n、\n螃蟹\n、\n蜘蛛\n、\n蝴蝶 等\n。\n在 古 代 传 说 中\n，\n侗族人民与动物感情特殊\n，\n动 物 寄 托\n了侗族人民的美好愿望\n，\n这种美好愿望后来发展为图\n腾崇拜\n。 （\n2\n）\n植物纹样有榕树花等常见植物的纹样\n。", "metadata": {"source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "page_label": "2", "total_pages": 3, "author": "CNKI"}}, {"index": 2, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "13\n串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平", "metadata": {"source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "page_label": "20", "total_pages": 60, "author": "CNKI"}}, {"index": 3, "source": "贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf", "page": 3, "snippet": "功能。从针法上看，侗族刺绣以盘绣为主，不同于\n苗族的破线绣、瑶族的挑花绣，以及水族的马尾绣，\n盘绣需要多根绣线环合而成一根较为粗的绣线，利\n用针头在绣线根部环绕形成盘状，绣面凸起、绣线\n粗壮是侗族盘绣的特点，侗族的盘绣是本民族特有\n的绣法，是其民族身份的外在物化标志 ； 从绣线色\n彩搭配上看， 侗族所绣制的纹样中绣线大体以红色、\n蓝色、粉色、绿色为主，运用独特的颜色搭配来呈", "metadata": {"source": "贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf", "page": 3, "page_label": "4", "total_pages": 5, "author": "CNKI"}}]}
+2026-04-08 19:01:24,911 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 19:01:24,912 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 侗族纹样有什么特点
+2026-04-08 19:01:49,534 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 19:01:49,535 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族织绣刺绣纹样特点'}
+2026-04-08 19:02:22,023 - agent - INFO - middleware.py:39 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 19:02:22,024 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 19:02:22,025 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"answer": "侗族织绣刺绣纹样主要包括动物纹样、植物纹样和几何纹样三类。动物纹样如十二生肖、螃蟹、蜘蛛、蝴蝶等，常将动物形态抽象为图案，寄托美好愿望并发展为图腾崇拜；植物纹样包括榕树花等常见植物。纹样造型具有稚拙单纯的特点，由普通妇女在日常劳作间隙制作，强调实用而非艺术展示。构图上多采用单独纹样、连续纹样、适合纹样和综合纹样，常见于胸兜、包头帕、床单等载体，并通过绕针等针法增强龙、凤、花草等图案的立体感。", "citations": [{"index": 1, "source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "snippet": "侗族刺绣纹样分析\n通过实地调查发现\n，\n侗绣纹样有动物纹样\n、\n植 物\n纹样\n、\n几何纹样\n3\n种类别\n。 （\n1\n）\n动物纹样将特定动物形\n态抽象成特殊图案\n，\n如十二生肖\n、\n螃蟹\n、\n蜘蛛\n、\n蝴蝶 等\n。\n在 古 代 传 说 中\n，\n侗族人民与动物感情特殊\n，\n动 物 寄 托\n了侗族人民的美好愿望\n，\n这种美好愿望后来发展为图\n腾崇拜\n。 （\n2\n）\n植物纹样有榕树花等常见植物的纹样\n。", "metadata": {"source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "page_label": "2", "total_pages": 3, "author": "CNKI"}}, {"index": 2, "source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 56, "snippet": "自然生动，耐人寻味。总的来说从江侗族刺绣纹样造型主要有以下三个特征： \n⑴稚拙单纯 \n 从江侗族的刺绣是由大都目不识丁的妇女们而非少数天才制作的；是在农\n闲或是劳动间隙，而非专职自由的时间里产生的；她们从来没有认为自己的刺绣\n物品是值得夸耀的艺术品，亦未想到过要将自己的名号标示于物品上，以此来流\n芳百世，她们只是单纯的刺绣来自用或送人，正因为她们的“无心”和“无欲”，", "metadata": {"source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 56, "page_label": "57", "total_pages": 91, "author": "CNKI"}}, {"index": 3, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "13\n串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平", "metadata": {"source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "page_label": "20", "total_pages": 60, "author": "CNKI"}}]}
+2026-04-08 19:25:46,537 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 19:25:46,542 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 侗族纹样有什么特点
+2026-04-08 19:25:59,534 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 19:25:59,534 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族织绣刺绣纹样特点'}
+2026-04-08 19:26:27,891 - agent - INFO - middleware.py:39 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 19:26:27,901 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 19:26:27,902 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"answer": "侗族织绣刺绣纹样主要包括动物纹样、植物纹样和几何纹样三类。动物纹样如十二生肖、螃蟹、蜘蛛、蝴蝶等，常将动物形态抽象为图案，寄托美好愿望并发展为图腾崇拜；植物纹样包括榕树花等常见植物。纹样造型具有稚拙单纯的特点，多由普通妇女在日常生活中制作，强调实用性而非艺术展示。构图上采用单独纹样、连续纹样、适合纹样和综合纹样四种传统方式，常在大面积载体上以左右或上下对称布局呈现，并运用绕针等针法增强龙、凤、花、草等图案的立体感。", "citations": [{"index": 1, "source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "snippet": "侗族刺绣纹样分析\n通过实地调查发现\n，\n侗绣纹样有动物纹样\n、\n植 物\n纹样\n、\n几何纹样\n3\n种类别\n。 （\n1\n）\n动物纹样将特定动物形\n态抽象成特殊图案\n，\n如十二生肖\n、\n螃蟹\n、\n蜘蛛\n、\n蝴蝶 等\n。\n在 古 代 传 说 中\n，\n侗族人民与动物感情特殊\n，\n动 物 寄 托\n了侗族人民的美好愿望\n，\n这种美好愿望后来发展为图\n腾崇拜\n。 （\n2\n）\n植物纹样有榕树花等常见植物的纹样\n。", "metadata": {"source": "三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf", "page": 1, "page_label": "2", "total_pages": 3, "author": "CNKI"}}, {"index": 2, "source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 56, "snippet": "自然生动，耐人寻味。总的来说从江侗族刺绣纹样造型主要有以下三个特征： \n⑴稚拙单纯 \n 从江侗族的刺绣是由大都目不识丁的妇女们而非少数天才制作的；是在农\n闲或是劳动间隙，而非专职自由的时间里产生的；她们从来没有认为自己的刺绣\n物品是值得夸耀的艺术品，亦未想到过要将自己的名号标示于物品上，以此来流\n芳百世，她们只是单纯的刺绣来自用或送人，正因为她们的“无心”和“无欲”，", "metadata": {"source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 56, "page_label": "57", "total_pages": 91, "author": "CNKI"}}, {"index": 3, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "13\n串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平", "metadata": {"source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "page_label": "20", "total_pages": 60, "author": "CNKI"}}]}
+2026-04-08 19:29:14,086 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 19:29:14,087 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 有没有侗族的官方介绍网站
+2026-04-08 19:29:27,624 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 19:29:27,625 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族 官方介绍网站 文化遗产'}
+2026-04-08 19:29:32,710 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 19:29:32,714 - agent - INFO - middleware.py:39 - [mointor_tool]工具web_search调用成功
+2026-04-08 19:29:32,716 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 19:29:32,718 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"query": "侗族 官方介绍网站 文化遗产", "results": []}
+2026-04-08 19:31:48,050 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 19:31:48,051 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 帮我写一段介绍侗族几何纹样的展签
+2026-04-08 19:32:01,287 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 19:32:01,291 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族织绣 几何纹样 元素 技法 文化意涵'}
+2026-04-08 19:32:18,861 - agent - INFO - middleware.py:39 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 19:32:18,863 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-08 19:32:18,863 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"answer": "侗族织绣中的几何纹样元素包括圆形、方形、正方形、三角形、菱形、直线、折线和曲线等，这些抽象图案由具象写实演变而来，常用于衬托主图案，在丰富构图变化的同时强化视觉语言特征。其技法体现为对典型纹样的形意解构与创新设计，文化意涵则反映了侗族人民的生活、生产、信仰与民族文化，具有深厚的精神与符号学意义。", "citations": [{"index": 1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 27, "snippet": "括不仅是侗族妇女对织绣的概括，更是织绣纹样符号语言的表达。\n§3.2.3 构图特征\n三侗族织绣纹样符号艺术中有大量的几何形纹样，即以圆形、方型、正方形、\n三角形、菱形、直线、折线、曲线等都是侗族织绣视觉语言特征的代表之一。它\n是由其具象写实演变而来的抽象图案，织绣中的几何纹样通常用来衬托主图案，\n这些几何图案在丰富构图变化的同时，增加了视觉语言特征的表现。织绣的图案", "metadata": {"source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 27, "page_label": "28", "total_pages": 89, "author": "CNKI"}}, {"index": 2, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 6, "snippet": "江县侗族织绣不仅图案精美、色彩多样，更是拥有深厚底蕴和丰富的民族文化。\n侗族织绣纹样在现代发展中慢慢流失，如何传承与发展侗族织绣文化，如何让侗\n族织绣艺术与现代文化相结合是当务之急的。基于该状况，针对广西三江侗族织\n绣纹样展开深入的探讨与研究，对其纹样形意解构创新设计演化逻辑进行梳理，\n达到对侗族织绣纹样的传承和应用。", "metadata": {"source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 6, "page_label": "7", "total_pages": 89, "author": "CNKI"}}, {"index": 3, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 7, "snippet": "第一章 绪论\n2\n从符号学的角度去探究侗族织绣艺术中文化内涵和民族特色。通过对区域民\n族纹样的采集、提取与选取，把典型纹样作为原始形状通过形意解构进行创新设\n计。寻找出一种适用三江侗族本土化特色纹样的演化设计方法，使其更好满足现\n代特征的审美需求，使传统与现代趋势相结合。侗族织绣纹样的色彩特征、造型\n特征、构图特征，反应了侗族人民生活、生产、信仰、文化等，具有文化和精神", "metadata": {"source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 7, "page_label": "8", "total_pages": 89, "author": "CNKI"}}]}
+2026-04-08 19:33:45,860 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 19:33:45,870 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 可以详细一点给我介绍侗族刺绣纹样分类吗还有名称布局
+2026-04-08 19:34:00,885 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 19:34:00,887 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族刺绣纹样分类与名称布局'}
+2026-04-08 19:34:00,888 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 19:34:00,899 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族刺绣纹样类型与命名方式'}
+2026-04-08 19:34:06,019 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 19:34:06,021 - agent - INFO - middleware.py:39 - [mointor_tool]工具web_search调用成功
+2026-04-08 19:34:31,100 - agent - INFO - middleware.py:39 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 19:34:31,104 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有4条消息，消息如下：
+2026-04-08 19:34:31,104 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"query": "侗族刺绣纹样类型与命名方式", "results": []}
+2026-04-08 19:37:07,392 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-08 19:37:07,393 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 可以详细一点给我介绍侗族刺绣纹样分类吗还有名称布局
+2026-04-08 19:37:21,639 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-08 19:37:21,640 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族刺绣纹样分类与名称布局'}
+2026-04-08 19:37:21,645 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: web_search
+2026-04-08 19:37:21,648 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族刺绣纹样分类 名称 布局结构'}
+2026-04-08 19:37:26,750 - agent - WARNING - agent_tools.py:105 - [web_search]联网检索失败: <urlopen error timed out>
+2026-04-08 19:37:26,752 - agent - INFO - middleware.py:39 - [mointor_tool]工具web_search调用成功
+2026-04-08 19:37:41,114 - agent - INFO - middleware.py:39 - [mointor_tool]工具rag_summarize调用成功
+2026-04-08 19:37:41,116 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有4条消息，消息如下：
+2026-04-08 19:37:41,117 - agent - INFO - middleware.py:58 - [log_before_model][ToolMessage]: {"query": "侗族刺绣纹样分类 名称 布局结构", "results": []}
