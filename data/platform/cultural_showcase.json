@@ -1,0 +1,29 @@
+{
+  "hero_board": "assets/workflow/boards/board_1.png",
+  "metrics": [
+    ["展示重点", "文创样机"],
+    ["产品方向", "明信片 / 包装 / 穿戴"],
+    ["来源", "侗绣纹样"],
+    ["延展方式", "AIGC + 样机"]
+  ],
+  "postcards": [
+    ["八角花纹明信片", "assets/showcase/postcards/bajiaohua_postcard.png"],
+    ["龙纹明信片", "assets/showcase/postcards/longwen_postcard.png"],
+    ["太阳花明信片", "assets/showcase/postcards/taiyanghua_postcard.png"],
+    ["植物纹明信片", "assets/showcase/postcards/zhiwuwen_postcard.png"]
+  ],
+  "mockups": [
+    ["手机壳龙纹样机", "assets/showcase/mockups/phonecase_longwen.png"],
+    ["冰箱贴样机", "assets/showcase/mockups/fridge_magnet.png"],
+    ["黑色样机", "assets/showcase/mockups/black_mockup.png"],
+    ["蓝色样机", "assets/showcase/mockups/blue_mockup.png"]
+  ],
+  "generated": [
+    ["八角花纹生成", "assets/showcase/generated/bajiaohua_generated.png"],
+    ["龙纹二次生成", "assets/showcase/generated/longwen_generated.png"],
+    ["太阳花二次生成", "assets/showcase/generated/taiyanghua_generated.png"],
+    ["太阳花龙花卉融合", "assets/showcase/generated/fusion_generated.png"],
+    ["龙纹冰箱贴延展", "assets/showcase/generated/longwen_fridge_generated.png"],
+    ["太阳纹基础算法", "assets/showcase/generated/taiyangwen_base.png"]
+  ]
+}
