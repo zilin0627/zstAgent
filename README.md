@@ -1,93 +1,195 @@
-# 侗族织绣纹样 · 非遗数字导览员（RAG）
+# wxyagent
 
-## 项目介绍
+一个基于 `Streamlit + LangChain + RAG` 的侗族织绣纹样数字体验项目，包含纹样展示、文化导览、RAG 检索问答和设计应用等功能。
 
-一个基于 Streamlit + LangChain 的“非遗数字导览员”，围绕 **侗族织绣/刺绣纹样**进行检索式讲解。
+## 环境要求
 
-项目采用 RAG（Retrieval-Augmented Generation）增强检索能力：从你的 PDF/文本资料中检索相关段落，再生成讲解内容，并提供“参考资料与出处”用于溯源展示。
+- Python 3.12+
+- uv
 
-## 项目启动
+检查是否安装成功：
 
-### 配置系统环境变量
+```bash
+python --version
+uv --version
+```
+
+## 安装 Python
+
+### Windows
+到官网下载安装 Python 3.12：<https://www.python.org/downloads/>
+
+安装时记得勾选：
+
+```text
+Add python.exe to PATH
+```
+
+### macOS
+
+```bash
+brew install python@3.12
+```
+
+### Linux
+
+```bash
+sudo apt update
+sudo apt install python3.12 python3.12-venv -y
+```
+
+## 安装 uv
+
+### Windows PowerShell
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+### macOS / Linux
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+## 获取项目
+
+```bash
+git clone <your_repo_url>
+cd wxyAgent
+```
+
+## 配置环境变量
+
+需要配置：
 
 - `OPENAI_API_KEY`
-- `DASHSCOPE_API_KEY`: DashScope API 密钥，用于访问模型服务。
+- `DASHSCOPE_API_KEY`
 
-### 安装依赖和启动项目
+Windows PowerShell 临时设置：
 
+```powershell
+$env:OPENAI_API_KEY="your_openai_api_key"
+$env:DASHSCOPE_API_KEY="your_dashscope_api_key"
 ```
-uv sync   # 安装依赖
-uv run streamlit run app.py  # 启动项目
+
+macOS / Linux：
+
+```bash
+export OPENAI_API_KEY="your_openai_api_key"
+export DASHSCOPE_API_KEY="your_dashscope_api_key"
 ```
 
-### 构建/更新知识库（首次或新增资料后）
+## 安装依赖
 
-将侗族织绣相关资料放入 `data/dong_embroidery/`（支持 `.txt` / `.pdf`），然后执行：
-
+```bash
+uv sync
 ```
+
+## 启动项目
+
+推荐方式：
+
+```bash
+uv run streamlit run app.py
+```
+
+如果 `uv` 临时联网失败，可用本地环境直接启动：
+
+### Windows
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+### macOS / Linux
+
+```bash
+python -m streamlit run app.py
+```
+
+## 构建 / 更新知识库
+
+首次运行或更新 `data/dong_embroidery/` 里的资料后，执行：
+
+```bash
 uv run python rag/vector_store.py
+```
+
+兜底方式：
+
+### Windows
+
+```powershell
+.\.venv\Scripts\python.exe rag/vector_store.py
+```
+
+### macOS / Linux
+
+```bash
+python rag/vector_store.py
 ```
 
 ## 项目结构
 
 ```text
-zstAgent/
-├── app.py                    # Streamlit 入口，负责启动 Web 应用
-├── agent/                    # 智能体核心逻辑
-│   ├── react_agent.py        # ReAct 智能体构建与流程编排
-│   └── tools/                # 智能体可调用工具
-├── rag/                      # RAG 检索增强模块
-│   ├── rag_service.py        # 检索与回答生成服务
-│   └── vector_store.py       # 向量库读写与检索封装
-├── model/                    # 模型创建与管理
-│   └── factory.py            # LLM/Embedding 模型工厂
-├── prompts/                  # 提示词模板
-│   ├── main_prompt.txt       # 主对话提示词
-│   ├── rag_summarize.txt     # RAG 摘要提示词
-│   ├── guide_prompt.txt      # 导览讲解口径
-│   ├── label_prompt.txt      # 展签文案口径（100-150字）
-│   ├── research_prompt.txt   # 深度研究口径
-│   ├── faq_prompt.txt        # FAQ 生成口径
-│   └── report_prompt.txt     # 历史文件（当前不再使用）
-├── config/                   # 配置文件目录（智能体、RAG、提示词等）
-│   ├── agent.yml             # 智能体配置
-│   ├── chroma.yml            # 向量库配置
-│   ├── prompts.yml           # 提示词配置
-│   └── rag.yml               # RAG 参数配置
-├── utils/                    # 通用工具函数（配置、日志、文件、路径等）
-│   ├── config_handler.py     # 配置读取与解析
-│   ├── file_handler.py       # 文件处理工具
-│   ├── logger_handler.py     # 日志工具
-│   ├── path_tool.py          # 路径处理工具
-│   └── prompt_loader.py      # 提示词加载工具
-├── data/                     # 知识库与业务数据
-└── pyproject.toml            # Python 项目依赖与元信息配置
+wxyAgent/
+├── app.py
+├── pyproject.toml
+├── uv.lock
+├── README.md
+├── agent/
+├── rag/
+├── model/
+├── prompts/
+├── config/
+├── modules/
+├── pages/
+├── assets/
+├── data/
+├── chroma_db/
+└── utils/
 ```
 
-## 系统架构
+## 给别人运行
 
-```mermaid
-flowchart LR
-    U[用户] --> S[Streamlit 页面 app.py]
-    S --> A[ReAct 智能体 agent/react_agent.py]
+别人本地运行时，按这个顺序即可：
 
-    A --> T[工具层 agent/tools]
-    T --> R[RAG 服务 rag/rag_service.py]
-    R --> V[向量检索 rag/vector_store.py]
-    V --> C[ChromaDB]
-    V --> D[知识库数据 data/dong_embroidery/...]
-
-    A --> M[模型工厂 model/factory.py]
-    M --> LLM[大模型服务 DashScope/OpenAI]
-
-    A --> P[prompts/ 提示词]
-    A --> CFG[config/ 配置]
-    A --> UTL[utils/ 通用能力]
-
+```bash
+git clone <your_repo_url>
+cd wxyAgent
+uv sync
+uv run streamlit run app.py
 ```
 
-## 补充说明
+如果知识库需要重建：
 
-- 配置入口在 `config/`，可按需调整模型、RAG 与提示词参数
-- 当前知识库路径由 `config/chroma.yml` 的 `data_path` 指定（默认 `data/dong_embroidery`）
-- 核心对话流程：`app.py` → `agent/react_agent.py` → `rag/rag_service.py` → `model/factory.py`
+```bash
+uv run python rag/vector_store.py
+```
+
+## 部署建议
+
+更适合：
+
+- 云服务器 / VPS
+- Docker
+
+不太适合直接无改造部署到 Streamlit Community Cloud，因为项目依赖本地知识库和数据文件。
+
+## 常见问题
+
+### 为什么 `uv run` 有时失败？
+通常是 `uv` 在运行前检查依赖时联网超时，不一定是代码有问题。这时可先用：
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run app.py
+```
+
+### `chroma_db/chroma.sqlite3` 要不要提交？
+- 想共享现成知识库：可以提交
+- 想让别人自己生成：不提交，并让对方执行
+
+```bash
+uv run python rag/vector_store.py
+```
