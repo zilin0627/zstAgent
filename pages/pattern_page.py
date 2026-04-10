@@ -92,6 +92,7 @@ def render_pattern_page(
     ]
     scan_cols = st.columns(3, gap="large")
     for idx, item in enumerate(visible_scan_items):
+        scan_key = f"{idx}-{item['name']}-{item['related_pattern']}"
         with scan_cols[idx % 3]:
             st.image(item["image"], width="stretch")
             st.markdown(f"#### {item['name']}")
@@ -99,12 +100,12 @@ def render_pattern_page(
             st.write(item["caption"])
             scan_action_col1, scan_action_col2 = st.columns(2)
             with scan_action_col1:
-                if st.button(f"查看关联纹样：{item['related_pattern']}", key=f"scan-link-{item['name']}", width="stretch"):
+                if st.button(f"查看关联纹样：{item['related_pattern']}", key=f"scan-link-{scan_key}", width="stretch"):
                     st.session_state["preset_prompt"] = f"请介绍侗族刺绣中的{item['related_pattern']}，并结合真实绣片说明它在构图和工艺表现上的特点。"
                     st.session_state["current_page"] = guide_page
                     st.rerun()
             with scan_action_col2:
-                if st.button(f"以这张扫图进入共创", key=f"scan-cocreate-{item['name']}", width="stretch"):
+                if st.button(f"以这张扫图进入共创", key=f"scan-cocreate-{scan_key}", width="stretch"):
                     apply_cocreate_preset(
                         item["related_pattern"],
                         f"围绕{item['name']}展开当代转化",

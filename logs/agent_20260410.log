@@ -1,0 +1,5 @@
+2026-04-10 14:18:12,622 - agent - INFO - middleware.py:57 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-10 14:18:12,671 - agent - INFO - middleware.py:58 - [log_before_model][HumanMessage]: 请介绍侗族刺绣中的太阳花纹，重点说明构成特点、视觉特征和常见应用。
+2026-04-10 14:18:27,342 - agent - INFO - middleware.py:34 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-10 14:18:27,342 - agent - INFO - middleware.py:35 - [mointor_tool]工具调用参数: {'query': '侗族刺绣 太阳花纹 构成特点 视觉特征 应用'}
+2026-04-10 14:18:32,871 - agent - ERROR - middleware.py:48 - [mointor_tool]工具rag_summarize调用失败: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
