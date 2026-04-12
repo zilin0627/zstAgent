@@ -96,6 +96,10 @@ def _inject_global_styles():
             background: linear-gradient(180deg, #eef3f1 0%, #e8eeeb 100%);
             border-right: 1px solid rgba(46, 91, 102, 0.08);
         }
+        [data-testid="stSidebarNav"],
+        [data-testid="stSidebarNavSeparator"] {
+            display: none;
+        }
         div[data-testid="stMetric"] {
             background: transparent;
             border: 1px solid var(--xiu-line);
