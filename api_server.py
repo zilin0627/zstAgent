@@ -10,17 +10,15 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-PAGES_DIR = PROJECT_ROOT / "pages"
-for path in (PROJECT_ROOT, PAGES_DIR):
-    path_str = str(path)
-    if path_str not in sys.path:
-        sys.path.insert(0, path_str)
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
+from agent.tools.agent_tools import classify_intent
 from agent.react_agent import ReactAgent
 from rag.rag_service import RagSummarizeService
-from cocreate_page import build_cocreate_query
-from scenario_page import SCENARIO_APPLICATIONS, B_SIDE_USERS, C_SIDE_USERS, BUSINESS_MODELS
-from guide_page import GUIDE_SAMPLE_QUESTIONS, MODE_MAP
+from pages.cocreate_page import build_cocreate_query
+from pages.scenario_page import SCENARIO_APPLICATIONS, B_SIDE_USERS, C_SIDE_USERS, BUSINESS_MODELS
+from pages.guide_page import GUIDE_SAMPLE_QUESTIONS, MODE_MAP
 
 app = FastAPI(title="侗绣平台 API", version="0.1.0")
 app.add_middleware(
@@ -129,8 +127,14 @@ def _run_agent_request(prompt: str, context: dict):
     for chunk in _agent.execute_stream(prompt, context=context):
         response_message.append(chunk)
     full_text = "".join(response_message).strip()
-    answer, citations = _extract_citations(full_text)
-    answer = _clean_answer_text(answer.strip())
+    citation_payload = _extract_citations(full_text)
+    if isinstance(citation_payload, (list, tuple)):
+        answer = citation_payload[0] if len(citation_payload) >= 1 else full_text
+        citations = citation_payload[1] if len(citation_payload) >= 2 else None
+    else:
+        answer = full_text
+        citations = None
+    answer = _clean_answer_text(str(answer or "").strip())
     if not answer:
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
     if not context.get("citations_enabled", True):
@@ -157,6 +161,23 @@ def _run_direct_rag_request(prompt: str):
     return answer, citations
 
 
+def _route_mode_from_prompt(prompt: str, fallback_mode: str = "guide") -> str:
+    try:
+        raw = classify_intent.invoke(prompt)
+        data = json.loads(raw)
+        intent = data.get("intent", "guide")
+    except Exception:
+        return fallback_mode
+
+    mapping = {
+        "guide": "guide",
+        "label": "label",
+        "faq": "faq",
+        "research": "research",
+        "design": "research",
+    }
+    return mapping.get(intent, fallback_mode)
+
 def _get_pattern_item(name: str) -> dict | None:
     for item in _pattern_items:
         if item["name"] == name:
@@ -175,6 +196,7 @@ class GuideRequest(BaseModel):
     audience: str = "大众观众"
     citations_enabled: bool = True
     allow_web: bool = False
+    auto_route: bool = True
 
 
 class StudioRequest(BaseModel):
@@ -215,22 +237,30 @@ def get_platform_content():
 
 @app.post("/api/guide/query")
 def guide_query(payload: GuideRequest):
-    mode = MODE_MAP.get(payload.mode, "guide")
-    use_direct_rag = payload.strategy == "快速导览（直连RAG）"
-    use_agent = (not use_direct_rag) or mode != "guide"
+    requested_mode = MODE_MAP.get(payload.mode, "guide")
+    actual_mode = _route_mode_from_prompt(payload.prompt, requested_mode) if payload.auto_route else requested_mode
 
-    if use_agent:
+    use_direct_rag = payload.strategy == "快速导览（直连RAG）"
+    if actual_mode != "guide":
+        use_direct_rag = False
+
+    if use_direct_rag:
+        answer, rag_payload = _run_direct_rag_request(payload.prompt)
+        citations = rag_payload.get("citations") if isinstance(rag_payload, dict) else None
+        retrieval = rag_payload.get("retrieval") if isinstance(rag_payload, dict) else None
+        confidence = rag_payload.get("confidence") if isinstance(rag_payload, dict) else None
+    else:
         answer, citations = _run_agent_request(
             payload.prompt,
             {
-                "mode": mode,
+                "mode": actual_mode,
                 "audience": payload.audience,
                 "citations_enabled": payload.citations_enabled,
                 "allow_web": payload.allow_web,
             },
         )
-    else:
-        answer, citations = _run_direct_rag_request(payload.prompt)
+        retrieval = None
+        confidence = None
 
     if not payload.citations_enabled:
         citations = None
@@ -238,6 +268,9 @@ def guide_query(payload: GuideRequest):
     return {
         "answer": answer,
         "citations": citations,
+        "mode": actual_mode,
+        "retrieval": retrieval,
+        "confidence": confidence,
     }
 
 

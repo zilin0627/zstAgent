@@ -1,26 +1,27 @@
 import json
 import re
 import sys
+import pandas as pd
+import requests
+from collections import Counter
 from json import JSONDecoder
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-PAGES_DIR = PROJECT_ROOT / "pages"
-for path in (PROJECT_ROOT, PAGES_DIR):
-    path_str = str(path)
-    if path_str not in sys.path:
-        sys.path.insert(0, path_str)
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 import streamlit as st
 
 from agent.react_agent import ReactAgent
-from ai_workflow_page import render_ai_workflow_page
-from cocreate_page import render_cocreate_page
-from cultural_page import render_cultural_page
-from guide_page import render_guide_page, render_guide_sidebar
-from pattern_page import render_pattern_page
-from scenario_page import render_scenario_page
+from pages.ai_workflow_page import render_ai_workflow_page
+from pages.cocreate_page import render_cocreate_page
+from pages.cultural_page import render_cultural_page
+from pages.guide_page import render_guide_page, render_guide_sidebar
+from pages.pattern_page import render_pattern_page
+from pages.scenario_page import render_scenario_page
 from rag.rag_service import RagSummarizeService
+from utils.logger_handler import logger
 
 
 HOME_PAGE = "首页"
@@ -28,7 +29,7 @@ GUIDE_PAGE = "文化导览"
 PATTERN_PAGE = "纹样图谱"
 CULTURAL_PAGE = "文创展陈"
 COCREATE_PAGE = "设计工作台"
-AI_WORKFLOW_PAGE = "幕后方法"
+AI_WORKFLOW_PAGE = "AI 工作流"
 SCENARIO_PAGE = "场景落地"
 
 NAV_PAGES = [
@@ -41,22 +42,11 @@ NAV_PAGES = [
     SCENARIO_PAGE,
 ]
 
-PROJECT_ROOT = Path(__file__).resolve().parent
-
-
-HERO_IMAGE = "assets/workflow/boards/board_1.png"
 HOME_HIGHLIGHTS = [
     ("路径一", "看纹样", "先从典型图样、关键词和扫图观察中建立第一印象。"),
     ("路径二", "听讲解", "通过文化导览理解图样背后的构成特点、寓意和使用场景。"),
     ("路径三", "做转化", "进入设计工作台和文创展陈，继续完成设计延展与展示表达。"),
 ]
-HOME_SCENARIOS = [
-    ("展馆导览", "适合展览讲解、展签说明和观众互动问答。"),
-    ("文创设计", "适合浏览纹样如何被转化为明信片、包装与周边。"),
-    ("课程体验", "适合课堂展示、研学活动和创意工作坊使用。"),
-]
-HOME_BUSINESS_CHAIN = ["纹样整理", "导览理解", "创意生成", "设计转化", "场景应用"]
-
 
 def _load_json(relative_path: str):
     return json.loads((PROJECT_ROOT / relative_path).read_text(encoding="utf-8"))
@@ -96,10 +86,28 @@ def _inject_global_styles():
             background: linear-gradient(180deg, #eef3f1 0%, #e8eeeb 100%);
             border-right: 1px solid rgba(46, 91, 102, 0.08);
         }
+
+        [data-testid="stSidebar"] label,
+        [data-testid="stSidebar"] .stMarkdown,
+        [data-testid="stSidebar"] p,
+        [data-testid="stSidebar"] span,
+        [data-testid="stSidebar"] [data-baseweb="radio"] *,
+        [data-testid="stSidebar"] [role="radiogroup"] * {
+            color: var(--xiu-ink) !important;
+        }
+        [data-testid="stSidebar"] .stCaption {
+            color: var(--xiu-muted) !important;
+        }
+        [data-testid="stSidebar"] [data-baseweb="radio"] > div,
+        [data-testid="stSidebar"] [data-baseweb="radio"] label {
+            color: var(--xiu-ink) !important;
+        }
+
         [data-testid="stSidebarNav"],
         [data-testid="stSidebarNavSeparator"] {
             display: none;
         }
+
         div[data-testid="stMetric"] {
             background: transparent;
             border: 1px solid var(--xiu-line);
@@ -213,44 +221,6 @@ def _inject_global_styles():
     )
 
 
-HOME_MODULES = [
-    {
-        "title": PATTERN_PAGE,
-        "tag": "纹样内容",
-        "desc": "查看典型侗绣纹样的分类、图像特征与少量关键词。",
-        "highlight": "先看图，再决定要不要展开细节。",
-    },
-    {
-        "title": GUIDE_PAGE,
-        "tag": "文化理解",
-        "desc": "通过预设问题、导览结果和展签式内容理解纹样背景。",
-        "highlight": "更像导览机和展签助手，而不是聊天工具。",
-    },
-    {
-        "title": COCREATE_PAGE,
-        "tag": "设计转化",
-        "desc": "选择纹样、方向和风格，快速生成更适合方案讨论的设计提案。",
-        "highlight": "低输入、高选择，减少提示词表单感。",
-    },
-    {
-        "title": CULTURAL_PAGE,
-        "tag": "文创展陈",
-        "desc": "按平面、产品和生成延展分组浏览作品，强化展陈感与作品感。",
-        "highlight": "更像作品浏览页，而不是模块说明页。",
-    },
-    {
-        "title": SCENARIO_PAGE,
-        "tag": "应用展示",
-        "desc": "展示平台如何进入展馆、课堂、品牌和传播等真实场景。",
-        "highlight": "强调落地方式，不强调功能罗列。",
-    },
-    {
-        "title": AI_WORKFLOW_PAGE,
-        "tag": "方法说明",
-        "desc": "解释为什么做、如何整理、AI 做了什么，以及最终输出了什么。",
-        "highlight": "服务于答辩表达与项目讲述。",
-    },
-]
 
 PATTERN_ATLAS_ITEMS = _load_json("data/platform/pattern_atlas.json")
 PATTERN_SCAN_ITEMS = _load_json("data/platform/pattern_scans.json")
@@ -258,15 +228,11 @@ CULTURAL_SHOWCASE = _load_json("data/platform/cultural_showcase.json")
 AI_WORKFLOW_CONTENT = _load_json("data/platform/ai_workflow.json")
 
 
-def _go_to(page: str):
-    st.session_state.current_page = page
-
-
 if "current_page" not in st.session_state:
     st.session_state.current_page = HOME_PAGE
 
 
-st.set_page_config(page_title="侗族织绣纹样平台", page_icon="🧵", layout="wide")
+st.set_page_config(page_title="侗绣 AI 辅助设计平台", page_icon="🧵", layout="wide")
 _inject_global_styles()
 
 
@@ -322,6 +288,7 @@ def _clean_answer_text(answer: str) -> str:
         return answer
 
     cleaned = answer
+    cleaned = re.sub(r"\[\[THOUGHT\]\].*", " ", cleaned)
 
     # 去掉残留的引用区块与异常标签，避免直接显示在页面正文中
     cleaned = re.sub(r"\[\[?/?CITATIONS\]?\]", " ", cleaned, flags=re.I)
@@ -340,6 +307,16 @@ def _clean_answer_text(answer: str) -> str:
     cleaned = cleaned.replace("## 网络补充来源", "网络补充来源")
 
     cleaned = re.sub(r"（?注：此为示意链接，实际搜索未返回具体结果）?", "", cleaned)
+
+    filtered_lines = []
+    for line in cleaned.splitlines():
+        stripped = line.strip()
+        if re.search(r"https?://|www\.", stripped, flags=re.I):
+            continue
+        filtered_lines.append(line)
+    cleaned = "\n".join(filtered_lines)
+    cleaned = re.sub(r"(?m)^\s*[\-•]\s*$", "", cleaned)
+    cleaned = re.sub(r"(?m)^\s*网络补充来源\s*$\n?", "", cleaned)
 
     lines = [line.rstrip() for line in cleaned.splitlines()]
     normalized_lines = []
@@ -364,8 +341,77 @@ def _clean_answer_text(answer: str) -> str:
     return cleaned
 
 
-def _render_metric(label: str, value: str, help_text: str):
-    st.metric(label, value, help=help_text)
+def _extract_web_results_from_tool_text(tool_text: str) -> list[dict]:
+    if not tool_text:
+        return []
+    try:
+        payload = json.loads(tool_text)
+    except Exception:
+        return []
+
+    if not isinstance(payload, dict):
+        return []
+
+    results = payload.get("results", []) or []
+    web_citations = []
+    seen_urls = set()
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+        url = str(item.get("url", "")).strip()
+        title = str(item.get("title", "")).strip() or "网页结果"
+        snippet = str(item.get("snippet", "")).strip()
+        if not url or url in seen_urls:
+            continue
+        if not re.match(r"^https?://", url, flags=re.I):
+            continue
+        if re.search(r"(^|://)(www\.)?gzsich\.gov\.cn/?$", url, flags=re.I):
+            continue
+        seen_urls.add(url)
+        web_citations.append(
+            {
+                "index": len(web_citations) + 1,
+                "source": title,
+                "page": None,
+                "snippet": snippet[:220],
+                "url": url,
+                "metadata": {"source_type": "web"},
+            }
+        )
+    return web_citations
+
+
+def _merge_citations(base_citations, web_citations: list[dict]):
+    if not web_citations:
+        return base_citations
+
+    if isinstance(base_citations, dict):
+        payload = dict(base_citations)
+        existing = payload.get("citations", []) or []
+        payload["citations"] = existing + web_citations
+        return payload
+
+    if isinstance(base_citations, list):
+        return base_citations + web_citations
+
+    return {"citations": web_citations}
+
+
+def _normalize_thought_label(tool_name: str, tool_text: str) -> str:
+    if tool_name == "classify_intent":
+        return "正在判断问题类型与回答路径…"
+    if tool_name == "rag_summarize":
+        return "正在检索本地知识库并提取相关资料…"
+    if tool_name == "fetch_exhibit":
+        return "正在匹配相关展品或纹样条目…"
+    if tool_name == "web_search":
+        results = _extract_web_results_from_tool_text(tool_text)
+        if results:
+            return f"正在补充联网资料，已找到 {len(results)} 条网页线索…"
+        return "正在补充联网资料并整理网页来源…"
+    if tool_name == "handoff_to_human":
+        return "当前资料置信度不足，正在给出保守建议…"
+    return "正在整理回答思路…"
 
 
 def _render_section_heading(title: str, subtitle: str):
@@ -388,6 +434,25 @@ def _get_related_scan_items(pattern_name: str) -> list[dict]:
     return [item for item in PATTERN_SCAN_ITEMS if item.get("related_pattern") == pattern_name]
 
 
+def _get_pattern_category_counts() -> dict[str, int]:
+    counter = Counter()
+    for item in PATTERN_ATLAS_ITEMS:
+        category = item.get("category", "未分类")
+        counter[category] += 1
+    return dict(counter)
+
+
+def _get_pattern_carrier_counts() -> dict[str, int]:
+    counter = Counter()
+    for item in PATTERN_ATLAS_ITEMS:
+        carrier_text = item.get("carrier", "")
+        for part in carrier_text.split("、"):
+            name = part.strip()
+            if name:
+                counter[name] += 1
+    return dict(counter)
+
+
 def _apply_cocreate_preset(pattern_name: str, theme: str, target: str, tone: str, extra: str):
     st.session_state["pending_cocreate_preset"] = {
         "pattern": pattern_name,
@@ -400,37 +465,23 @@ def _apply_cocreate_preset(pattern_name: str, theme: str, target: str, tone: str
 
 def _render_homepage():
     st.title("绣见侗韵")
-    st.caption("侗绣文化体验与设计转化平台")
+    st.caption("以侗绣为首个落地场景的 AI 辅助设计平台")
     st.divider()
 
     st.markdown(
         """
         <div class="xiu-hero">
-            <div class="xiu-eyebrow">侗绣文化体验与设计转化平台</div>
+            <div class="xiu-eyebrow">AI 辅助设计平台</div>
             <div class="xiu-title">看见纹样，听懂文化，再走向设计转化</div>
             <div class="xiu-desc">
-                这里不是功能堆叠式工具页，而是一个以侗绣纹样为线索展开的文化体验入口。
-                你可以先看纹样、再听讲解，也可以继续进入设计工作台和文创展陈，理解传统图样如何被转化为今天可展示、可传播的内容。
+                这里是一个以侗绣为首个落地场景的 AI 辅助设计平台。
+                平台把纹样整理、文化导览、知识增强、设计提案与场景应用串成一条连续工作流，
+                尝试让传统侗绣从“能被看见”进一步走向“能被理解、能被策划、能被继续设计与传播”。
             </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-
-    st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
-    action_col1, action_col2, action_col3 = st.columns(3)
-    with action_col1:
-        if st.button("进入纹样图谱", key="hero-pattern", width="stretch"):
-            _go_to(PATTERN_PAGE)
-            st.rerun()
-    with action_col2:
-        if st.button("进入文化导览", key="hero-guide", width="stretch"):
-            _go_to(GUIDE_PAGE)
-            st.rerun()
-    with action_col3:
-        if st.button("进入设计工作台", key="hero-studio", width="stretch"):
-            _go_to(COCREATE_PAGE)
-            st.rerun()
 
     st.divider()
     _render_section_heading("体验路径", "")
@@ -453,9 +504,9 @@ def _render_homepage():
     _render_section_heading("平台价值", "")
     value_cols = st.columns(3, gap="large")
     value_items = [
-        ("整理纹样内容", "把典型纹样、扫图观察和图像特征组织成更容易浏览的内容结构。"),
-        ("帮助观众理解", "用导览、问答和展签式表达降低理解门槛，让观众先看懂再深入。"),
-        ("支持设计转化", "把纹样进一步带到设计工作台、文创展陈和真实应用场景中。"),
+        ("整理纹样内容", "把典型纹样、扫图观察、构图特征和关键词组织成更容易浏览的内容结构。"),
+        ("帮助观众理解", "用导览、问答和展签式表达降低理解门槛，让观众先看懂纹样，再理解文化背景。"),
+        ("支持设计转化", "把纹样进一步带到设计工作台、文创展陈和真实应用场景中，形成连续展示链路。"),
     ]
     for col, item in zip(value_cols, value_items):
         title, desc = item
@@ -471,77 +522,276 @@ def _render_homepage():
             )
 
     st.divider()
-    _render_section_heading("页面入口", "")
-    for module in HOME_MODULES:
-        left, right = st.columns([0.78, 0.22], gap="large")
-        with left:
+    _render_section_heading("历史、现状与未来", "把侗绣从文化源流、传承处境和数字化转化三个维度串起来")
+    insight_cols = st.columns(3, gap="large")
+    insight_items = [
+        (
+            "历史背景",
+            "侗绣长期依附于服饰、礼俗和家庭手工传承，不只是装饰图案，也承载身份表达、生活经验与地方审美。"
+        ),
+        (
+            "现实处境",
+            "传统技艺面临传承人减少、使用场景收缩与市场表达单一等问题，很多纹样内容仍分散在实物、文献和口述经验中。"
+        ),
+        (
+            "未来方向",
+            "数字化整理、纹样图谱、智能导览与设计转化，可以让侗绣从静态资料走向更易理解、可传播、可再设计的文化内容。"
+        ),
+    ]
+    for col, item in zip(insight_cols, insight_items):
+        title, desc = item
+        with col:
             st.markdown(
                 f"""
-                <div class="xiu-module-row">
-                    <div class="xiu-eyebrow">{module['tag']}</div>
-                    <h4>{module['title']}</h4>
-                    <div class="xiu-desc">{module['desc']}</div>
+                <div class="xiu-strip">
+                    <h4>{title}</h4>
+                    <div class="xiu-desc">{desc}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
-        with right:
-            if st.button("进入", key=f"home-{module['title']}", width="stretch"):
-                _go_to(module["title"])
-                st.rerun()
+
+    st.divider()
+    _render_section_heading("平台里可以看到什么", "从纹样内容、结构特征到设计延展，形成一条连续的理解路径")
+    content_left, content_right = st.columns([1.1, 0.9], gap="large")
+
+    with content_left:
+        st.markdown(
+            """
+            <div class="xiu-strip">
+                <h4>看得见的内容</h4>
+                <div class="xiu-desc">
+                    平台整理了典型纹样分类、真实扫图样本、常见载体、构图特征和视觉关键词，
+                    帮助观众先从图像出发建立对侗绣纹样的整体印象。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            """
+            <div class="xiu-strip" style="margin-top:0.85rem;">
+                <h4>看得懂的内容</h4>
+                <div class="xiu-desc">
+                    通过文化导览、展签式表达和案例转化，平台继续解释纹样背后的寓意、
+                    结构规律与适用场景，让理解过程不只停留在“看图识物”。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            """
+            <div class="xiu-strip" style="margin-top:0.85rem;">
+                <h4>可以继续延展的内容</h4>
+                <div class="xiu-desc">
+                    从纹样图谱进入设计工作台、文创展陈与场景落地，能进一步看到传统图样如何被转化为
+                    明信片、包装、样机和传播展示内容。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with content_right:
+        st.markdown(
+            """
+            <div class="xiu-strip">
+                <h4>内容概览</h4>
+                <div class="xiu-desc">用轻量数据把平台当前已整理的内容范围先展示出来。</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        metric_row_1 = st.columns(2, gap="medium")
+        with metric_row_1[0]:
+            st.metric("纹样卡片", str(len(PATTERN_ATLAS_ITEMS)), help="当前图谱页已整理的典型纹样卡片数量")
+        with metric_row_1[1]:
+            st.metric("扫图样本", str(len(PATTERN_SCAN_ITEMS)), help="当前平台收录的真实绣片扫描样本数量")
+
+        metric_row_2 = st.columns(2, gap="medium")
+        with metric_row_2[0]:
+            st.metric(
+                "展示作品",
+                str(
+                    len(CULTURAL_SHOWCASE.get("postcards", []))
+                    + len(CULTURAL_SHOWCASE.get("mockups", []))
+                    + len(CULTURAL_SHOWCASE.get("generated", []))
+                ),
+                help="文创展陈页中的明信片、样机与生成延展内容总数",
+            )
+        with metric_row_2[1]:
+            st.metric("纹样类别", "5 类", help="动物、人物、植物/天体、组合、几何/花卉")
+
+        st.markdown(
+            """
+            <div class="xiu-strip" style="margin-top:0.85rem;">
+                <h4>结构关键词</h4>
+                <div class="xiu-desc">
+                    对称、放射、围合、盘旋、呼应、生长、层级、节奏 —— 这些词帮助把图样观察转成更容易讲述的视觉语言。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.divider()
+    _render_section_heading("内容概览图表", "把平台里已经整理的纹样类别与常见载体做成更直观的展示")
+
+    category_counts = _get_pattern_category_counts()
+    carrier_counts = _get_pattern_carrier_counts()
+
+    category_df = pd.DataFrame(
+        {
+            "类别": list(category_counts.keys()),
+            "数量": list(category_counts.values()),
+        }
+    ).set_index("类别")
+
+    carrier_df = pd.DataFrame(
+        {
+            "载体": list(carrier_counts.keys()),
+            "数量": list(carrier_counts.values()),
+        }
+    ).sort_values("数量", ascending=False).set_index("载体")
+
+    chart_left, chart_right = st.columns(2, gap="large")
+
+    with chart_left:
+        st.markdown(
+            """
+            <div class="xiu-strip">
+                <h4>纹样类别分布</h4>
+                <div class="xiu-desc">
+                    当前平台已整理的纹样主要覆盖动物纹、人物纹、植物/天体纹、组合纹与几何/花卉纹。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.bar_chart(category_df, height=320)
+
+    with chart_right:
+        st.markdown(
+            """
+            <div class="xiu-strip">
+                <h4>常见载体分布</h4>
+                <div class="xiu-desc">
+                    纹样并不是孤立存在的，它们通常依附在背带盖片、边饰、胸饰、礼仪性服饰等具体载体上。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.bar_chart(carrier_df, height=320)
 
 
+def _build_network_error_notice(error: Exception) -> dict[str, str]:
+    message = str(error).strip()
+    lower_message = message.lower()
 
-def _run_agent_request(prompt: str, context: dict):
+    if isinstance(error, requests.exceptions.SSLError) or "ssl" in lower_message:
+        user_message = "当前大模型服务的 HTTPS 连接异常，请检查网络、代理或稍后重试。"
+    elif isinstance(error, requests.exceptions.Timeout) or "timed out" in lower_message or "timeout" in lower_message:
+        user_message = "当前大模型服务响应超时，请稍后重试。"
+    elif isinstance(error, requests.exceptions.ConnectionError) or any(keyword in lower_message for keyword in ["connection aborted", "connection reset", "max retries exceeded", "name resolution"]):
+        user_message = "当前无法连接到大模型服务，请检查网络连接或稍后重试。"
+    else:
+        user_message = "当前大模型服务暂时不可用，请稍后重试。"
+
+    return {
+        "code": "model_network_error",
+        "message": user_message,
+        "detail": message[:300],
+    }
+
+
+def _run_agent_request_streaming(prompt: str, context: dict, placeholder, thought_placeholder=None):
     response_message = []
-    response_stream = st.session_state.agent.execute_stream(prompt, context=context)
+    web_citations = []
 
-    for chunk in response_stream:
-        response_message.append(chunk)
+    try:
+        response_stream = st.session_state.agent.execute_stream(prompt, context=context)
+        for chunk in response_stream:
+            if chunk.startswith("[[THOUGHT]]"):
+                thought_text = chunk[len("[[THOUGHT]]") :].strip()
+                if thought_text.startswith("TOOL::"):
+                    _, tool_name, tool_text = thought_text.split("::", 2)
+                    if thought_placeholder is not None:
+                        thought_placeholder.info(_normalize_thought_label(tool_name, tool_text))
+                    if tool_name == "web_search":
+                        web_citations = _extract_web_results_from_tool_text(tool_text)
+                else:
+                    if thought_placeholder is not None:
+                        thought_placeholder.info(thought_text)
+                continue
+
+            response_message.append(chunk)
+            partial_text = _clean_answer_text("".join(response_message).strip())
+            if partial_text:
+                placeholder.markdown(partial_text)
+    except Exception as error:
+        logger.warning("[Agent] 模型调用失败，返回友好提示", exc_info=True)
+        notice = _build_network_error_notice(error)
+        fallback_answer = notice["message"]
+        placeholder.markdown(fallback_answer)
+        if thought_placeholder is not None:
+            thought_placeholder.warning("本次未能连通模型服务，已返回诊断提示。")
+        if not context.get("citations_enabled", True):
+            return fallback_answer, None, notice
+        return fallback_answer, [], notice
+
+    if thought_placeholder is not None:
+        thought_placeholder.success("回答生成完成")
 
     full_text = "".join(response_message).strip()
-    answer, citations = _extract_citations(full_text)
-    answer = _clean_answer_text(answer.strip())
+    citation_payload = _extract_citations(full_text)
+    if isinstance(citation_payload, (list, tuple)):
+        answer = citation_payload[0] if len(citation_payload) >= 1 else full_text
+        citations = citation_payload[1] if len(citation_payload) >= 2 else None
+    else:
+        answer = full_text
+        citations = None
+    answer = _clean_answer_text(str(answer or "").strip())
+    citations = _merge_citations(citations, web_citations)
     if not answer:
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
     if not context.get("citations_enabled", True):
         citations = None
-    return answer, citations
-
-
-def _run_agent_request_streaming(prompt: str, context: dict, placeholder):
-    response_message = []
-    response_stream = st.session_state.agent.execute_stream(prompt, context=context)
-
-    for chunk in response_stream:
-        response_message.append(chunk)
-        partial_text = _clean_answer_text("".join(response_message).strip())
-        if partial_text:
-            placeholder.markdown(partial_text)
-
-    full_text = "".join(response_message).strip()
-    answer, citations = _extract_citations(full_text)
-    answer = _clean_answer_text(answer.strip())
-    if not answer:
-        answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
-    if not context.get("citations_enabled", True):
-        citations = None
-    return answer, citations
+    return answer, citations, None
 
 
 def _run_direct_rag_request(prompt: str):
-    raw_result = st.session_state.rag_service.rag_summarize_with_citations(prompt)
+    try:
+        raw_result = st.session_state.rag_service.rag_summarize_with_citations(prompt)
+    except Exception as error:
+        logger.warning("[RAG] 模型调用失败，返回友好提示", exc_info=True)
+        notice = _build_network_error_notice(error)
+        return notice["message"], [], None, None, notice
+
     try:
         payload = json.loads(raw_result)
     except Exception:
         cleaned = _clean_answer_text(str(raw_result).strip())
-        return cleaned or "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。", None
+        return (
+            cleaned or "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。",
+            None,
+            None,
+            None,
+            None,
+        )
 
     answer = _clean_answer_text(str(payload.get("answer", "")).strip())
     citations = payload.get("citations", [])
+    retrieval = payload.get("retrieval", [])
+    confidence = payload.get("confidence", "low")
+    system_notice = payload.get("system_notice")
+
     if not answer:
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
-    return answer, citations
+
+    return answer, citations, retrieval, confidence, system_notice
 
 
 if "rag_service" not in st.session_state:
@@ -574,7 +824,7 @@ if st.session_state.current_page == HOME_PAGE:
     _render_homepage()
 elif st.session_state.current_page == GUIDE_PAGE:
     render_guide_page(
-        run_agent_request=_run_agent_request,
+        run_agent_request_streaming=_run_agent_request_streaming,
         run_direct_rag_request=_run_direct_rag_request,
     )
 
@@ -609,3 +859,4 @@ elif st.session_state.current_page == AI_WORKFLOW_PAGE:
 
 elif st.session_state.current_page == SCENARIO_PAGE:
     render_scenario_page(render_section_heading=_render_section_heading)
+

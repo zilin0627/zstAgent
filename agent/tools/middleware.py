@@ -25,39 +25,51 @@ def _runtime_context_dict(raw_context: Any) -> dict:
         return raw_context
     return {}
 
+
 # 工具执行的监控
 @wrap_tool_call
 def mointor_tool(
-        request: ToolCallRequest,  # 工具调用请求
-        handler: Callable[[ToolCallRequest], ToolMessage | Command],  # 工具调用处理函数
-    ) -> ToolMessage | Command:
-    logger.info(f"[mointor_tool]开始监控工具调用: {request.tool_call['name']}")
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage | Command],
+) -> ToolMessage | Command:
+    tool_name = request.tool_call["name"]
+    logger.info(f"[mointor_tool]开始监控工具调用: {tool_name}")
     logger.info(f"[mointor_tool]工具调用参数: {request.tool_call['args']}")
+
+    context = _runtime_context_dict(request.runtime.context)
+    trace = context.get("progress_trace")
+    if isinstance(trace, list):
+        trace.append({"type": "tool_start", "tool": tool_name, "args": request.tool_call["args"]})
 
     try:
         result = handler(request)
-        logger.info(f"[mointor_tool]工具{request.tool_call['name']}调用成功")
+        logger.info(f"[mointor_tool]工具{tool_name}调用成功")
 
-        if request.tool_call['name'] == 'fill_context_for_report':
-            logger.info(f"[mointor_tool]fill_context_for_report工具被调用, 注入上下文 report=True")
-            context = _runtime_context_dict(request.runtime.context)
+        if isinstance(trace, list):
+            trace.append({"type": "tool_end", "tool": tool_name, "content": str(getattr(result, 'content', '') or '')[:1600]})
+
+        if tool_name == "fill_context_for_report":
+            logger.info("[mointor_tool]fill_context_for_report工具被调用, 注入上下文 report=True")
             context["report"] = True
             request.runtime.context = context
         return result
     except Exception as e:
-        logger.error(f"[mointor_tool]工具{request.tool_call['name']}调用失败: {e}")
-        raise e  
+        logger.error(f"[mointor_tool]工具{tool_name}调用失败: {e}")
+        if isinstance(trace, list):
+            trace.append({"type": "tool_error", "tool": tool_name, "content": str(e)})
+        raise e
 
- # 在模型调用前记录日志
+
+# 在模型调用前记录日志
 @before_model
 def log_before_model(
-    state: AgentState,     # 整个agent的状态记录
-    runtime: Runtime,      # 记录执行过程的上下文信息
+    state: AgentState,
+    runtime: Runtime,
 ):
     logger.info(f"[log_before_model]: 即将调用模型，带有{len(state['messages'])}条消息，消息如下：")
     logger.info(f"[log_before_model][{type(state['messages'][-1]).__name__}]: {state['messages'][-1].content.strip()}")
-    
     return None
+
 
 # 动态切换提示词（按模式）
 @dynamic_prompt
@@ -74,5 +86,4 @@ def mode_prompt_switch(request: ModelRequest):
     if mode == "faq":
         return load_faq_prompt()
 
-    # 兜底
     return load_system_prompt()

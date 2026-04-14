@@ -4,6 +4,10 @@ import hashlib
 from utils.logger_handler import logger
 from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
+from pypdf import PdfReader
+import pymupdf
+from docx import Document as DocxDocument
+
 
 def get_file_md5_hex(file_path: str) -> str:
     """
@@ -53,6 +57,63 @@ def listdir_with_allowed_type(dir_path: str, allowed_types: tuple[str]):
     return allowed_files
 
 
+def _fallback_pdf_reader(file_path: str, password: str = None) -> list[Document]:
+    reader = PdfReader(file_path)
+    if reader.is_encrypted:
+        try:
+            decrypt_result = reader.decrypt(password or "")
+            if decrypt_result == 0:
+                logger.warning(f"[pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: {file_path}")
+        except Exception as decrypt_error:
+            logger.warning(f"[pdf_loader]PDF解密尝试失败，继续尝试直接读取: {file_path} | {str(decrypt_error)}")
+
+    docs: list[Document] = []
+    for page_index, page in enumerate(reader.pages):
+        try:
+            text = page.extract_text() or ""
+        except Exception as page_error:
+            logger.warning(f"[pdf_loader]PDF第 {page_index + 1} 页提取失败，跳过: {file_path} | {str(page_error)}")
+            text = ""
+        if not text.strip():
+            continue
+        docs.append(
+            Document(
+                page_content=text,
+                metadata={"source": file_path, "page": page_index},
+            )
+        )
+    return docs
+
+
+def _fallback_pymupdf_reader(file_path: str) -> list[Document]:
+    pdf = pymupdf.open(file_path)
+    docs: list[Document] = []
+    try:
+        if pdf.needs_pass:
+            auth_ok = pdf.authenticate("")
+            if not auth_ok:
+                logger.warning(f"[pdf_loader]PyMuPDF空密码认证失败，继续尝试直接读取: {file_path}")
+
+        for page_index in range(pdf.page_count):
+            try:
+                page = pdf.load_page(page_index)
+                text = page.get_text("text") or ""
+            except Exception as page_error:
+                logger.warning(f"[pdf_loader]PyMuPDF第 {page_index + 1} 页提取失败，跳过: {file_path} | {str(page_error)}")
+                text = ""
+            if not text.strip():
+                continue
+            docs.append(
+                Document(
+                    page_content=text,
+                    metadata={"source": file_path, "page": page_index},
+                )
+            )
+    finally:
+        pdf.close()
+    return docs
+
+
 def pdf_loader(file_path: str, password: str = None) -> list[Document]:
     """
     加载PDF文件
@@ -61,7 +122,25 @@ def pdf_loader(file_path: str, password: str = None) -> list[Document]:
     try:
         return PyPDFLoader(file_path, password=password).load()
     except Exception as e:
-        logger.error(f"[pdf_loader]加载PDF文件 {file_path} 时出错: {str(e)}")
+        logger.warning(f"[pdf_loader]PyPDFLoader加载失败，尝试回退读取: {file_path} | {str(e)}")
+
+    try:
+        docs = _fallback_pdf_reader(file_path, password=password)
+        if docs:
+            logger.info(f"[pdf_loader]pypdf回退读取成功: {file_path}，共 {len(docs)} 页")
+            return docs
+    except Exception as fallback_error:
+        logger.warning(f"[pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: {file_path} | {str(fallback_error)}")
+
+    try:
+        docs = _fallback_pymupdf_reader(file_path)
+        if docs:
+            logger.info(f"[pdf_loader]PyMuPDF回退读取成功: {file_path}，共 {len(docs)} 页")
+            return docs
+        logger.error(f"[pdf_loader]回退读取后仍无可用内容: {file_path}")
+        return None
+    except Exception as pymupdf_error:
+        logger.error(f"[pdf_loader]加载PDF文件 {file_path} 时出错: {str(pymupdf_error)}")
         return None
 
 
@@ -75,3 +154,47 @@ def txt_loader(file_path: str) -> list[Document]:
     except Exception as e:
         logger.error(f"[txt_loader]加载TXT文件 {file_path} 时出错: {str(e)}")
         return None
+
+
+def docx_loader(file_path: str) -> list[Document]:
+    try:
+        doc = DocxDocument(file_path)
+        text = "\n".join(p.text for p in doc.paragraphs if p.text and p.text.strip())
+        if not text.strip():
+            return []
+        return [Document(page_content=text, metadata={"source": file_path, "page": 0})]
+    except Exception as e:
+        logger.error(f"[docx_loader]加载DOCX文件 {file_path} 时出错: {str(e)}")
+        return None
+
+
+def load_with_txt_fallback(file_path: str, password: str = None) -> tuple[list[Document], str]:
+    if file_path.endswith(".txt"):
+        docs = txt_loader(file_path) or []
+        return docs, file_path if docs else ""
+
+    if file_path.endswith(".docx"):
+        docs = docx_loader(file_path) or []
+        return docs, file_path if docs else ""
+
+    if file_path.endswith(".pdf"):
+        docs = pdf_loader(file_path, password=password) or []
+        if docs:
+            return docs, file_path
+
+        txt_path = os.path.splitext(file_path)[0] + ".txt"
+        if os.path.exists(txt_path):
+            logger.warning(f"[pdf_loader]PDF读取失败，使用同名TXT兜底: {txt_path}")
+            txt_docs = txt_loader(txt_path) or []
+            if txt_docs:
+                return txt_docs, txt_path
+
+        docx_path = os.path.splitext(file_path)[0] + ".docx"
+        if os.path.exists(docx_path):
+            logger.warning(f"[pdf_loader]PDF读取失败，使用同名DOCX兜底: {docx_path}")
+            docx_docs = docx_loader(docx_path) or []
+            if docx_docs:
+                return docx_docs, docx_path
+        return [], ""
+
+    return [], ""

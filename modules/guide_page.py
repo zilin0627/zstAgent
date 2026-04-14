@@ -121,7 +121,7 @@ def _render_message_block(message: dict, *, highlight_latest: bool):
                     header += f" (page {page})"
                 st.markdown(f"**{header}**")
                 st.write(snippet)
-            st.caption("以上为检索到的关键片段，已做截断展示。")
+            st.caption("以上为检索到的关键片段。")
 
 
 

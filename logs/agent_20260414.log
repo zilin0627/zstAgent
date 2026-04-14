@@ -1,0 +1,179 @@
+2026-04-14 12:27:14,040 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-14 12:27:14,053 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：侗族织绣纹样通常有哪些构成元素？
+
+当前问题：侗族织绣纹样通常有哪些构成元素？
+2026-04-14 12:37:09,122 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-14 12:37:09,126 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：侗族织绣纹样通常有哪些构成元素？
+用户：侗族织绣纹样通常有哪些构成元素？
+
+当前问题：侗族织绣纹样通常有哪些构成元素？
+2026-04-14 12:37:21,218 - agent - INFO - middleware.py:36 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-14 12:37:21,218 - agent - INFO - middleware.py:37 - [mointor_tool]工具调用参数: {'query': '侗族织绣纹样的构成元素有哪些'}
+2026-04-14 12:37:38,277 - agent - INFO - middleware.py:46 - [mointor_tool]工具rag_summarize调用成功
+2026-04-14 12:37:38,283 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-14 12:37:38,284 - agent - INFO - middleware.py:70 - [log_before_model][ToolMessage]: {"task_type": "knowledge_qa", "answer": "根据广西三江侗族本地研究资料，侗族织绣纹样的构成元素主要分为四大类型：植物纹样、景观纹样、动物纹样和几何纹样。这些分类明确见于对三江侗族织绣的实地调查与纹样整理。\n\n其中，几何纹样在三江地区尤为突出，具体包括“#”形井纹（常用于织锦挎包和背带，以单双叠加形式出现）、八角花纹（多用于织锦，常与其他纹样搭配并以连续构图排列），以及由直线、折线、曲线、方形、三角形、菱形等构成的抽象图案。这类几何纹样多由具象写实演变而来，在构图中既可作为主纹，也常用于衬托主图案，增强视觉层次。\n\n植物、动物与景观纹样则多源于侗族对自然物的观察与崇拜，题材取自日常生活所见的动植物及山水环境，经绣娘主观理解与艺术处理后形成具有象征意义的文化符号。所有纹样类型均根植于三江侗族的生产生活方式、信仰体系与审美习惯，体现出物质与精神文化的双重属性。", "citations": [{"index": 1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "三江侗族织绣纹样形态种类主要有植物纹样、景观纹样、动物纹样、几何纹样。不同纹样的内涵意义、表意特征不同，所表达寓意也皆由侗族人们生活、生产、信仰、文化等组成。\n§2.2.2 当下三江侗族织绣文化的研究视角\n少数民族纹样文化是民族文化构成部分，分为外层物态形式，中层民族习俗、风俗活动，内层精神内涵三种形式。从文化角度包括了精神与物质两部分。织绣作为一种文化，不仅仅是在物质文化上体现，也在精神文化上体现，通过两者水", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、构成、几何纹、文化、寓意"}}, {"index": 2, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "水是生命之源，水是万物之本。三江侗族居民生活在依山傍水的环境中，水与侗民生活息息相关，也是侗族先民认识世界的途经。因此，其必然崇拜水，因崇拜水而爱井，故将“# ”纹融入织绣绣品中。主要用在织锦挎包和背带上，以单双“# ”纹叠加运用。（图 3-4 、3-5）\n图 3-4 井纹 图 3-5 井纹\n来源：笔者拍摄、《侗族织绣》专著\n§3.1.4 几何类纹样\n侗族织绣纹样中的几何纹样是曲线、直线、方形、三角形、菱形等，是以侗族人民的设计思想进行", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族刺绣、侗族织绣、纹样、图案、构成、几何纹"}}, {"index": 3, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "侗族是一个无文字的民族，其文化表征通过以实物形态显现。三江侗族织绣纹样来源广泛，多以自然界中的客观事物为主体，融合主观世界的理解所形成。三江侗族纹样丰富多样，侗族是一个族群民族，其风格也多以个人或少数人为基础，不同的族人对自然不同的主观反映。集体纹样艺术特征表象有观念形成，集体以周围的自然物体、动植物等具有社会学属性的集体表象所构成。其纹样种类是对自然的崇拜以及敬畏，延续至今，形成三江侗族织绣纹样生生不息的纹样特色。在侗族妇女的勾勒下，", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、构成、几何纹、文化"}}, {"index": 4, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "织绣纹样语构的独特性基于侗族文化内部与外部相互作用的结果，其所说的正是语素构成形式。根据有形之物的特性进行命名，通过绣娘的爱好、情趣、心理等主观感受进行形的创作，同时在创作使借鉴客观事物的名称形成其织绣纹样图案的构成形式。不止于纹样的构成方式，其材质，色彩、构图等是形成纹样的因素之一，这些词汇汇集了三江侗族织绣的文化符号以及意义表达。\n二、三江侗族纹样的物化载体", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、图案、构成、文化"}}, {"index": 5, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "§3.2.3 构图特征\n三侗族织绣纹样符号艺术中有大量的几何形纹样，即以圆形、方型、正方形、三角形、菱形、直线、折线、曲线等都是侗族织绣视觉语言特征的代表之一。它是由其具象写实演变而来的抽象图案，织绣中的几何纹样通常用来衬托主图案，这些几何图案在丰富构图变化的同时，增加了视觉语言特征的表现。织绣的图案分为装饰性构图和组合性构图，讲究图案的构成形式与纹样之间的协调关系。\n一、对称式构图：单独纹样形式", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "设计应用", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、图案、构成、几何纹"}}, {"index": 6, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "§2.2 关于三江侗族织绣的纹样艺术\n§2.2.1 三江侗族织绣纹样的阐释\n据《尚书》记载，远在 4000 多年前的章服制度，就规定了“衣画而裳绣 ”，其意是上衣和下裳施以绣绘，至周代就有了“绣缋共职 ”。可见我国织绣艺术历史之悠久。三江侗族织绣纹样是侗族人们长期生产生活的文化产物，以民族生活习惯方式和文化传统为依据，兼容其民族手工技艺所创造出来的。也是侗族工艺美术的重要组成部分，蕴藏着侗族人们精神文化追求。主要包括：衣服及其装饰（冠巾", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、图案、构成、文化、审美"}}], "retrieval": [{"rank": 1, "score": 16.1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "三江侗族织绣纹样形态种类主要有植物纹样、景观纹样、动物纹样、几何纹样。不同纹样的内涵意义、表意特征不同，所表达寓意也皆由侗族人们生活、生产、信仰、文化等组成。\n§2.2.2 当下三江侗族织绣文化的研究视角\n少数民族纹样文化是民族文化构成部分，分为外层物态形式，中层民族习俗、风俗活动，内层精神内涵三种形式。从文化角度包括了精神与物质两部分。织绣作为一种文化，不仅仅是在物质文化上体现，也在精神文化上体", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 2, "score": 14.7, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "水是生命之源，水是万物之本。三江侗族居民生活在依山傍水的环境中，水与侗民生活息息相关，也是侗族先民认识世界的途经。因此，其必然崇拜水，因崇拜水而爱井，故将“# ”纹融入织绣绣品中。主要用在织锦挎包和背带上，以单双“# ”纹叠加运用。（图 3-4 、3-5）\n图 3-4 井纹 图 3-5 井纹\n来源：笔者拍摄、《侗族织绣》专著\n§3.1.4 几何类纹样\n侗族织绣纹样中的几何纹样是曲线、直线、方形、三", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 3, "score": 14.1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "侗族是一个无文字的民族，其文化表征通过以实物形态显现。三江侗族织绣纹样来源广泛，多以自然界中的客观事物为主体，融合主观世界的理解所形成。三江侗族纹样丰富多样，侗族是一个族群民族，其风格也多以个人或少数人为基础，不同的族人对自然不同的主观反映。集体纹样艺术特征表象有观念形成，集体以周围的自然物体、动植物等具有社会学属性的集体表象所构成。其纹样种类是对自然的崇拜以及敬畏，延续至今，形成三江侗族织绣纹样", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 4, "score": 14.1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "织绣纹样语构的独特性基于侗族文化内部与外部相互作用的结果，其所说的正是语素构成形式。根据有形之物的特性进行命名，通过绣娘的爱好、情趣、心理等主观感受进行形的创作，同时在创作使借鉴客观事物的名称形成其织绣纹样图案的构成形式。不止于纹样的构成方式，其材质，色彩、构图等是形成纹样的因素之一，这些词汇汇集了三江侗族织绣的文化符号以及意义表达。\n二、三江侗族纹样的物化载体", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 5, "score": 14.1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "§3.2.3 构图特征\n三侗族织绣纹样符号艺术中有大量的几何形纹样，即以圆形、方型、正方形、三角形、菱形、直线、折线、曲线等都是侗族织绣视觉语言特征的代表之一。它是由其具象写实演变而来的抽象图案，织绣中的几何纹样通常用来衬托主图案，这些几何图案在丰富构图变化的同时，增加了视觉语言特征的表现。织绣的图案分为装饰性构图和组合性构图，讲究图案的构成形式与纹样之间的协调关系。\n一、对称式构图：单独纹样形式", "topic": "设计应用", "knowledge_layer": "基础事实层"}, {"rank": 6, "score": 13.1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 0, "snippet": "§2.2 关于三江侗族织绣的纹样艺术\n§2.2.1 三江侗族织绣纹样的阐释\n据《尚书》记载，远在 4000 多年前的章服制度，就规定了“衣画而裳绣 ”，其意是上衣和下裳施以绣绘，至周代就有了“绣缋共职 ”。可见我国织绣艺术历史之悠久。三江侗族织绣纹样是侗族人们长期生产生活的文化产物，以民族生活习惯方式和文化传统为依据，兼容其民族手工技艺所创造出来的。也是侗族工艺美术的重要组成部分，蕴藏着侗族人们精", "topic": "文化内涵", "knowledge_layer": "基础事实层"}], "confidence": "high", "rewritten_queries": ["侗族织绣纹样的构成元素有哪些", "侗族织绣 织绣纹样 构成元素 侗族织绣纹样的构成元素有哪些"]}
+2026-04-14 12:54:20,459 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-14 12:54:20,491 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：侗族织绣纹样通常有哪些构成元素？
+
+当前问题：侗族织绣纹样通常有哪些构成元素？
+2026-04-14 12:54:38,791 - agent - WARNING - app.py:735 - [Agent] 模型调用失败，返回友好提示
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\app.py", line 716, in _run_agent_request_streaming
+    for chunk in response_stream:
+                 ^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\agent\react_agent.py", line 42, in execute_stream
+    for chunk in runner.stream(input_dict, stream_mode="values", context=runtime_context):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\pregel\main.py", line 2727, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 167, in tick
+    run_with_retry(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 96, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\factory.py", line 1313, in model_node
+    result = wrap_model_call_handler(request, _execute_model_sync)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\factory.py", line 265, in normalized_single
+    return _to_composed_result(single_handler(request, handler))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langsmith\run_helpers.py", line 760, in wrapper
+    function_result = run_container["context"].run(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\middleware\types.py", line 1703, in wrapped
+    return handler(request)
+           ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\factory.py", line 1282, in _execute_model_sync
+    output = model_.invoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 5695, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 454, in invoke
+    self.generate_prompt(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1185, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 995, in generate
+    self._generate_with_cache(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1297, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 669, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 540, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 537, in _completion_with_retry
+    resp = self.client.call(**_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\aigc\generation.py", line 181, in call
+    response = super().call(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+During task with name 'model' and id 'bd1bc21c-2867-ab30-0e34-c324dadb7d92'

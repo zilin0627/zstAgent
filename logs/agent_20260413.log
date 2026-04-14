@@ -1,0 +1,1340 @@
+2026-04-13 10:20:16,818 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:21:00,505 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:21:05,942 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:21:17,401 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:21:21,337 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:22:07,348 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 加载时出错: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+2026-04-13 10:22:23,233 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载时出错: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+2026-04-13 10:23:12,940 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:23:39,291 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:23:43,771 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:24:37,089 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载时出错: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+2026-04-13 10:24:40,795 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:25:23,967 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:25:30,461 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:27:30,483 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:28:20,369 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载时出错: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 627, in add_texts
+    embeddings = self._embedding_function.embed_documents(texts)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 155, in embed_documents
+    embeddings = embed_with_retry(
+                 ^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 83, in embed_with_retry
+    return _embed_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 66, in _embed_with_retry
+    resp = embeddings.client.call(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\embeddings\text_embedding.py", line 52, in call
+    return super().call(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 10:28:55,192 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载时出错: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 627, in add_texts
+    embeddings = self._embedding_function.embed_documents(texts)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 155, in embed_documents
+    embeddings = embed_with_retry(
+                 ^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 83, in embed_with_retry
+    return _embed_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 66, in _embed_with_retry
+    resp = embeddings.client.call(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\embeddings\text_embedding.py", line 52, in call
+    return super().call(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 10:29:13,649 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:29:32,498 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:30:46,138 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 10:31:26,422 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 加载时出错: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+2026-04-13 10:31:31,364 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载时出错: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+2026-04-13 10:31:36,949 - agent - INFO - vector_store.py:73 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf
+2026-04-13 10:31:47,305 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:31:53,040 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 186 个 chunk
+2026-04-13 10:31:55,964 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载完成，共写入 14 个 chunk
+2026-04-13 10:32:07,995 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:32:08,165 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载完成，共写入 46 个 chunk
+2026-04-13 10:32:10,736 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:32:11,363 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载完成，共写入 20 个 chunk
+2026-04-13 10:32:15,880 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 186 个 chunk
+2026-04-13 10:32:15,902 - agent - INFO - vector_store.py:73 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-13 10:32:15,918 - agent - INFO - vector_store.py:73 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-13 10:32:15,919 - agent - INFO - vector_store.py:73 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-13 10:32:52,004 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 加载完成，共写入 200 个 chunk
+2026-04-13 10:32:53,410 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 加载完成，共写入 200 个 chunk
+2026-04-13 10:32:54,232 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载时出错: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'keywords' to be non-empty in upsert.
+2026-04-13 10:32:55,603 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 20 个 chunk
+2026-04-13 10:32:56,382 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 20 个 chunk
+2026-04-13 10:32:57,272 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:33:11,734 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 78 个 chunk
+2026-04-13 10:33:12,695 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 78 个 chunk
+2026-04-13 10:33:32,554 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:33:32,682 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 106 个 chunk
+2026-04-13 10:33:35,859 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 106 个 chunk
+2026-04-13 10:33:35,930 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 13 个 chunk
+2026-04-13 10:33:37,667 - agent - ERROR - vector_store.py:84 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载时出错: Expected metadata list value for key 'region' to be non-empty in upsert.
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 80, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 664, in add_texts
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 651, in add_texts
+    self._collection.upsert(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\Collection.py", line 504, in upsert
+    upsert_request = self._validate_and_prepare_upsert_request(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 103, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\models\CollectionCommon.py", line 441, in _validate_and_prepare_upsert_request
+    validate_insert_record_set(record_set=upsert_records)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 447, in validate_insert_record_set
+    validate_metadatas(record_set["metadatas"])
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1170, in validate_metadatas
+    validate_metadata(metadata)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1082, in validate_metadata
+    _validate_metadata_list_value(key, value)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\chromadb\api\types.py", line 1041, in _validate_metadata_list_value
+    raise ValueError(
+ValueError: Expected metadata list value for key 'region' to be non-empty in upsert.
+2026-04-13 10:33:39,015 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 13 个 chunk
+2026-04-13 10:34:23,463 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 227 个 chunk
+2026-04-13 10:34:26,010 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 227 个 chunk
+2026-04-13 10:34:26,740 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 13 个 chunk
+2026-04-13 10:34:29,723 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 13 个 chunk
+2026-04-13 10:35:03,847 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 177 个 chunk
+2026-04-13 10:35:05,925 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 177 个 chunk
+2026-04-13 10:35:09,532 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 28 个 chunk
+2026-04-13 10:35:10,399 - agent - INFO - vector_store.py:82 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 28 个 chunk
+2026-04-13 10:46:32,555 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 10:47:40,119 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 186 个 chunk
+2026-04-13 10:47:45,130 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载完成，共写入 14 个 chunk
+2026-04-13 10:47:55,671 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载完成，共写入 46 个 chunk
+2026-04-13 10:48:00,008 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载完成，共写入 20 个 chunk
+2026-04-13 10:48:55,517 - agent - WARNING - vector_store.py:108 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 第 1 次加载失败，将在 3s 后重试: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 10:50:30,065 - agent - WARNING - vector_store.py:108 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 第 2 次加载失败，将在 6s 后重试: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 10:52:28,750 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 加载完成，共写入 200 个 chunk
+2026-04-13 10:52:33,322 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 20 个 chunk
+2026-04-13 10:52:54,219 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 78 个 chunk
+2026-04-13 10:53:20,965 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 106 个 chunk
+2026-04-13 10:53:27,376 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 13 个 chunk
+2026-04-13 10:54:20,292 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 227 个 chunk
+2026-04-13 10:54:25,882 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 13 个 chunk
+2026-04-13 10:55:08,862 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 177 个 chunk
+2026-04-13 10:55:16,354 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 28 个 chunk
+2026-04-13 13:06:29,232 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-13 13:06:29,236 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：侗族织绣纹样通常有哪些构成元素？
+助手：侗族织绣纹样通常包含景观题材（如日月星辰、江河瀑布、太阳、月亮、云纹等）、借鉴客观事物名称形成的图案，以及通过绣娘主观感受创作的造型。其构成元素涵盖形式、材质、色彩和构图，广泛应用于服饰、织锦与刺绣中，如上衣、百褶裙、头帕、腰带、背带、挎包等，体现出独特的文化符号与意义表达。
+用户：侗族织绣纹样通常有哪些构成元素？
+
+当前问题：侗族织绣纹样通常有哪些构成元素？
+2026-04-13 13:06:36,886 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-13 13:06:36,889 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：侗族织绣纹样通常有哪些构成元素？
+助手：侗族织绣纹样通常包含景观题材（如日月星辰、江河瀑布、太阳、月亮、云纹等）、借鉴客观事物名称形成的图案，以及通过绣娘主观感受创作的造型。其构成元素涵盖形式、材质、色彩和构图，广泛应用于服饰、织锦与刺绣中，如上衣、百褶裙、头帕、腰带、背带、挎包等，体现出独特的文化符号与意义表达。
+用户：侗族织绣纹样通常有哪些构成元素？
+用户：侗族织绣纹样通常有哪些构成元素？
+
+当前问题：侗族织绣纹样通常有哪些构成元素？
+2026-04-13 13:06:40,346 - agent - INFO - middleware.py:36 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-13 13:06:40,348 - agent - INFO - middleware.py:37 - [mointor_tool]工具调用参数: {'query': '侗族织绣纹样的构成元素有哪些'}
+2026-04-13 13:06:43,505 - agent - INFO - middleware.py:36 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-13 13:06:43,506 - agent - INFO - middleware.py:37 - [mointor_tool]工具调用参数: {'query': '侗族织绣纹样的构成元素有哪些'}
+2026-04-13 13:06:47,099 - agent - INFO - middleware.py:46 - [mointor_tool]工具rag_summarize调用成功
+2026-04-13 13:06:51,040 - agent - INFO - middleware.py:46 - [mointor_tool]工具rag_summarize调用成功
+2026-04-13 13:06:51,043 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-13 13:06:51,044 - agent - INFO - middleware.py:70 - [log_before_model][ToolMessage]: {"task_type": "knowledge_qa", "answer": "侗族织绣纹样的构成元素包括图案、材质、色彩和构图等形式要素。其纹样多以单独纹样、适合纹样和连续纹样等组织方式综合运用，常根据织绣物品的造型（如童帽、背带、鞋面等）在边缘、角隅等位置进行适形处理，呈现圆形、弧形、桃形或扇形等变化。纹样创作源于对客观事物的观察与命名，并融入绣娘的主观情感与审美，体现出理性秩序与生动韵律相结合的装饰美感，广泛应用于服饰、织锦和刺绣等生活载体中。", "citations": [{"index": 1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 35, "snippet": "三江侗族织绣纹样依托服饰作为载体，以其独特的构图方式活跃于服饰上。\n侗族绣娘通过对织绣纹样形式的创作、感知传达其内心的想法。使其纹样的语素\n构成形成了独特的文化符号。历史上的侗族在没有文字的情况下，运用纹样形成\n了代代相传的家庭文化传承，因此孕育了侗族织绣纹样发展的各方面要素，造成\n了织绣纹样的构成形式与表征语言在内的语构的独特性。\n织绣纹样语构的独特性基于侗族文化内部与外部相互作用的结果，其所说的\n正是语素构成形式。根据有形之物的特性", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、图案、构成、服饰、文化"}}, {"index": 2, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "体井然有序，多变且富有规律，呈现理性与秩序的美感，同时又能保持生动活泼，\n让人体会到节奏与韵律的构成之美，吸引观者的注意力；童帽、背带、口水兜、\n荷包、挎包、火药袋、鞋面等用品因为面积小，形状固定，在构图时，机智的从\n江侗族绣娘会在特定的边缘、角隅等位置采用合适的纹样。\n纹样往往会经过适\n当的变形处理，或圆或方，或桃形或扇形，恰到好处地安排在一个完整外形内，\n达到构图和形象的完整性、装饰性。在侗族织绣中，更为多见的是综合纹样，结\n合多种", "metadata": {"page_label": null, "total_pages": null, "author": "李源", "topic": "设计应用", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、构成"}}, {"index": 3, "source": "侗族服饰与纹样整理.pdf", "page": 12, "snippet": "侗族纹样广泛应用于生活的方方面面，是构成侗族独特文化景观的重要元素：\n服饰：\n侗族男女老少的服饰，包括上衣、下装（百褶裙、裤子）、头帕、腰带、绑腿、鞋子等，都\n离不开纹样的装饰。尤其是女性的盛装，更是集刺绣、织锦、银饰于一身，纹样繁复精美，\n堪称艺术品。\n织锦：\n织锦是侗族纹样的重要载体。侗族人民使用古老的织机，以棉线、丝线为原料，织出各种精\n美的锦缎，用于制作服饰、被面、背带、挎包、坐垫等。\n刺绣：\n刺绣是侗族妇女必备的传统技艺，常用", "metadata": {"page_label": null, "total_pages": null, "author": "", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "纹样、构成、元素、服饰、文化"}}], "retrieval": [{"rank": 1, "score": 14.5, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 35, "snippet": "三江侗族织绣纹样依托服饰作为载体，以其独特的构图方式活跃于服饰上。\n侗族绣娘通过对织绣纹样形式的创作、感知传达其内心的想法。使其纹样的语素\n构成形成了独特的文化符号。历史上的侗族在没有文字的情况下，运用纹样形成\n了代代相传的家庭文化传承，因此孕育了侗族织绣纹样发展的各方面要素，造成\n了织绣纹样的构成形式与表征语言在内的语构的独特性。\n织绣纹样语构的独特性基于侗族文化内部与外部相互作用的结果，其所说", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 2, "score": 10.35, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "体井然有序，多变且富有规律，呈现理性与秩序的美感，同时又能保持生动活泼，\n让人体会到节奏与韵律的构成之美，吸引观者的注意力；童帽、背带、口水兜、\n荷包、挎包、火药袋、鞋面等用品因为面积小，形状固定，在构图时，机智的从\n江侗族绣娘会在特定的边缘、角隅等位置采用合适的纹样。\n纹样往往会经过适\n当的变形处理，或圆或方，或桃形或扇形，恰到好处地安排在一个完整外形内，\n达到构图和形象的完整性、装饰性。在侗族", "topic": "设计应用", "knowledge_layer": "基础事实层"}, {"rank": 3, "score": 5.2, "source": "侗族服饰与纹样整理.pdf", "page": 12, "snippet": "侗族纹样广泛应用于生活的方方面面，是构成侗族独特文化景观的重要元素：\n服饰：\n侗族男女老少的服饰，包括上衣、下装（百褶裙、裤子）、头帕、腰带、绑腿、鞋子等，都\n离不开纹样的装饰。尤其是女性的盛装，更是集刺绣、织锦、银饰于一身，纹样繁复精美，\n堪称艺术品。\n织锦：\n织锦是侗族纹样的重要载体。侗族人民使用古老的织机，以棉线、丝线为原料，织出各种精\n美的锦缎，用于制作服饰、被面、背带、挎包、坐垫等。\n刺", "topic": "文化内涵", "knowledge_layer": "基础事实层"}], "confidence": "high", "rewritten_queries": ["侗族织绣纹样的构成元素有哪些"]}
+2026-04-13 13:09:56,036 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-13 13:09:56,098 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：侗族织绣纹样通常有哪些构成元素？
+用户：侗族织绣纹样通常有哪些构成元素？
+助手：侗族织绣纹样的构成元素主要包括图案、材质、色彩与构图等形式要素。
+- **构图与元素**：常见单独纹样、适合纹样和连续纹样，常根据物品形状（如童帽、背带、鞋面）在边缘或角隅做适形处理，呈现圆形、桃形、扇形等变化；
+- **表现方式**：绣娘既借鉴自然物象（如日月、动植物），也融入主观情感进行创作，形成理性秩序与生动韵律结合的装饰风格；
+- **使用场景**：广泛用于服饰（上衣、百褶裙、头帕等）、织锦（被面、挎包）及日常用品（背带、荷包）中，兼具实用与文化表达功能。
+
+若想了解具体某类纹样（如“太阳纹”“鱼纹”）的细节，可提供名称或用途，便于精准查询。
+用户：侗族织绣纹样通常有哪些构成元素？
+
+当前问题：侗族织绣纹样通常有哪些构成元素？
+2026-04-13 13:10:10,949 - agent - INFO - middleware.py:36 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-13 13:10:10,949 - agent - INFO - middleware.py:37 - [mointor_tool]工具调用参数: {'query': '侗族织绣纹样的构成元素 包括图案类型、色彩体系、针法工艺与构图方式'}
+2026-04-13 13:10:17,704 - agent - INFO - middleware.py:46 - [mointor_tool]工具rag_summarize调用成功
+2026-04-13 13:10:17,708 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-13 13:10:17,710 - agent - INFO - middleware.py:70 - [log_before_model][ToolMessage]: {"task_type": "knowledge_qa", "answer": "侗族织绣纹样的构成元素包括：图案类型主要有单独纹样、连续纹样、适合纹样和综合纹样；色彩体系依托服饰载体，结合材质与文化符号进行表达；针法工艺包含串针、辫针、绕针等20余种，用于形成具有立体感的龙、凤、花、草等纹样；构图方式多采用对称式（如左右、上下对称）或均衡式（如涡形、S形、折线布局），以传达庄重稳定或有序活泼的视觉效果。", "citations": [{"index": 1, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 35, "snippet": "三江侗族织绣纹样依托服饰作为载体，以其独特的构图方式活跃于服饰上。\n侗族绣娘通过对织绣纹样形式的创作、感知传达其内心的想法。使其纹样的语素\n构成形成了独特的文化符号。历史上的侗族在没有文字的情况下，运用纹样形成\n了代代相传的家庭文化传承，因此孕育了侗族织绣纹样发展的各方面要素，造成\n了织绣纹样的构成形式与表征语言在内的语构的独特性。\n织绣纹样语构的独特性基于侗族文化内部与外部相互作用的结果，其所说的\n正是语素构成形式。根据有形之物的特性", "metadata": {"page_label": null, "total_pages": null, "author": "吴婷婷", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、图案、构成、服饰、文化"}}, {"index": 2, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平\n面构成的知识将其划分为对称式，这样的形式可以传达出庄重", "metadata": {"page_label": null, "total_pages": null, "author": "李源", "topic": "设计应用", "knowledge_layer": "基础事实层", "keywords": "侗族织绣、纹样、图案、构成、元素"}}, {"index": 3, "source": "侗族服饰与纹样整理.pdf", "page": 12, "snippet": "侗族纹样广泛应用于生活的方方面面，是构成侗族独特文化景观的重要元素：\n服饰：\n侗族男女老少的服饰，包括上衣、下装（百褶裙、裤子）、头帕、腰带、绑腿、鞋子等，都\n离不开纹样的装饰。尤其是女性的盛装，更是集刺绣、织锦、银饰于一身，纹样繁复精美，\n堪称艺术品。\n织锦：\n织锦是侗族纹样的重要载体。侗族人民使用古老的织机，以棉线、丝线为原料，织出各种精\n美的锦缎，用于制作服饰、被面、背带、挎包、坐垫等。\n刺绣：\n刺绣是侗族妇女必备的传统技艺，常用", "metadata": {"page_label": null, "total_pages": null, "author": "", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "纹样、构成、元素、服饰、文化"}}], "retrieval": [{"rank": 1, "score": 14.5, "source": "广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf", "page": 35, "snippet": "三江侗族织绣纹样依托服饰作为载体，以其独特的构图方式活跃于服饰上。\n侗族绣娘通过对织绣纹样形式的创作、感知传达其内心的想法。使其纹样的语素\n构成形成了独特的文化符号。历史上的侗族在没有文字的情况下，运用纹样形成\n了代代相传的家庭文化传承，因此孕育了侗族织绣纹样发展的各方面要素，造成\n了织绣纹样的构成形式与表征语言在内的语构的独特性。\n织绣纹样语构的独特性基于侗族文化内部与外部相互作用的结果，其所说", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 2, "score": 9.35, "source": "从江侗绣传统纹样数字化应用研究_李源.pdf", "page": 19, "snippet": "串针、辫针等 20 余种针法，在织物上连缀成各种纹样。以从江贯洞，黎平龙额\n一带胸兜上的胸花为例，分成两个三角形，直接采用绕针刺绣，使所绣的龙、凤、\n花、草有很强的立体感。\n在具体构图时，从江侗族织绣图案纹样一般采用单独纹样、连续纹样、适合\n纹样和综合纹样四类传统构图方式。通常情况下，从江侗族在包头帕、床单、被\n面等大面积的刺绣载体上多用独立的纹样元素进行左右、上下对称，可以按照平\n面构成的知识将", "topic": "设计应用", "knowledge_layer": "基础事实层"}, {"rank": 3, "score": 5.2, "source": "侗族服饰与纹样整理.pdf", "page": 12, "snippet": "侗族纹样广泛应用于生活的方方面面，是构成侗族独特文化景观的重要元素：\n服饰：\n侗族男女老少的服饰，包括上衣、下装（百褶裙、裤子）、头帕、腰带、绑腿、鞋子等，都\n离不开纹样的装饰。尤其是女性的盛装，更是集刺绣、织锦、银饰于一身，纹样繁复精美，\n堪称艺术品。\n织锦：\n织锦是侗族纹样的重要载体。侗族人民使用古老的织机，以棉线、丝线为原料，织出各种精\n美的锦缎，用于制作服饰、被面、背带、挎包、坐垫等。\n刺", "topic": "文化内涵", "knowledge_layer": "基础事实层"}], "confidence": "high", "rewritten_queries": ["侗族织绣纹样的构成元素 包括图案类型、色彩体系、针法工艺与构图方式"]}
+2026-04-13 13:17:22,649 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:17:31,391 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:18:14,118 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:19:12,456 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:51:15,797 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:51:16,015 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:55:58,913 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 13:55:59,117 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 14:01:02,691 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成，共写入 36 个 chunk
+2026-04-13 14:02:45,030 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 370 个 chunk
+2026-04-13 14:02:54,385 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载完成，共写入 28 个 chunk
+2026-04-13 14:03:25,179 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载完成，共写入 53 个 chunk
+2026-04-13 14:03:29,759 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载完成，共写入 22 个 chunk
+2026-04-13 14:03:30,360 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 时出错: File has not been decrypted
+2026-04-13 14:03:30,360 - agent - WARNING - vector_store.py:95 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 清洗后没有有效内容，跳过
+2026-04-13 14:03:34,244 - agent - INFO - vector_store.py:87 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf
+2026-04-13 14:03:34,259 - agent - INFO - vector_store.py:87 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf
+2026-04-13 14:03:34,261 - agent - INFO - vector_store.py:87 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-13 14:03:34,272 - agent - INFO - vector_store.py:87 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-13 14:03:34,275 - agent - INFO - vector_store.py:87 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-13 14:03:34,852 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 时出错: File has not been decrypted
+2026-04-13 14:03:34,852 - agent - WARNING - vector_store.py:95 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 清洗后没有有效内容，跳过
+2026-04-13 14:03:39,145 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 24 个 chunk
+2026-04-13 14:03:41,588 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 24 个 chunk
+2026-04-13 14:04:25,502 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 14:04:32,276 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 14:05:13,529 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 14:05:19,171 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 14:05:25,996 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 40 个 chunk
+2026-04-13 14:05:30,589 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 40 个 chunk
+2026-04-13 14:06:37,475 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 256 个 chunk
+2026-04-13 14:06:40,705 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 256 个 chunk
+2026-04-13 14:06:46,512 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 38 个 chunk
+2026-04-13 14:06:47,307 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 14:06:47,307 - agent - WARNING - vector_store.py:95 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 清洗后没有有效内容，跳过
+2026-04-13 14:06:49,738 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 38 个 chunk
+2026-04-13 14:06:50,101 - agent - ERROR - file_handler.py:64 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 14:06:50,103 - agent - WARNING - vector_store.py:95 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 清洗后没有有效内容，跳过
+2026-04-13 14:06:56,849 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 14:06:59,761 - agent - INFO - vector_store.py:100 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 14:12:10,345 - agent - WARNING - file_handler.py:93 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf | File has not been decrypted
+2026-04-13 14:12:10,542 - agent - WARNING - file_handler.py:63 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf
+2026-04-13 14:12:10,542 - agent - ERROR - file_handler.py:102 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 时出错: File has not been decrypted
+2026-04-13 14:12:12,585 - agent - WARNING - file_handler.py:93 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 14:12:13,376 - agent - WARNING - file_handler.py:63 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 14:12:13,376 - agent - ERROR - file_handler.py:102 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 14:15:20,661 - agent - WARNING - file_handler.py:93 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf | File has not been decrypted
+2026-04-13 14:15:20,882 - agent - WARNING - file_handler.py:63 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf
+2026-04-13 14:15:20,884 - agent - ERROR - file_handler.py:102 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 时出错: File has not been decrypted
+2026-04-13 14:15:22,252 - agent - WARNING - file_handler.py:93 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 14:15:22,985 - agent - WARNING - file_handler.py:63 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 14:15:22,985 - agent - ERROR - file_handler.py:102 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: File has not been decrypted
+2026-04-13 14:17:38,885 - agent - WARNING - file_handler.py:123 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf | File has not been decrypted
+2026-04-13 14:17:39,078 - agent - WARNING - file_handler.py:64 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf
+2026-04-13 14:17:39,079 - agent - WARNING - file_handler.py:131 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf | File has not been decrypted
+2026-04-13 14:17:39,457 - agent - ERROR - file_handler.py:141 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 时出错: Failed to open file 'e:\\github project\\wxyAgent\\data\\dong_embroidery\\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf'.
+2026-04-13 14:17:40,510 - agent - WARNING - file_handler.py:123 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 14:17:41,217 - agent - WARNING - file_handler.py:64 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 14:17:41,218 - agent - WARNING - file_handler.py:131 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 14:17:41,702 - agent - ERROR - file_handler.py:141 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'e:\\github project\\wxyAgent\\data\\dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 15:00:45,992 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 15:00:46,810 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 15:00:46,811 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 15:00:47,281 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'e:\\github project\\wxyAgent\\data\\dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 15:00:47,283 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: e:\github project\wxyAgent\data\dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 15:00:49,932 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf | File has not been decrypted
+2026-04-13 15:00:50,118 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf
+2026-04-13 15:00:50,118 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf | File has not been decrypted
+2026-04-13 15:00:50,476 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 e:\github project\wxyAgent\data\dong_embroidery\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf 时出错: Failed to open file 'e:\\github project\\wxyAgent\\data\\dong_embroidery\\三江侗族民间刺绣的艺术人类学阐释_陈结媚.pdf'.
+2026-04-13 15:16:39,782 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成，共写入 36 个 chunk
+2026-04-13 16:19:15,397 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成，共写入 36 个 chunk
+2026-04-13 16:21:15,387 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf
+2026-04-13 16:21:43,473 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 370 个 chunk
+2026-04-13 16:21:52,028 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载完成，共写入 28 个 chunk
+2026-04-13 16:22:09,846 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载完成，共写入 53 个 chunk
+2026-04-13 16:22:19,292 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载完成，共写入 22 个 chunk
+2026-04-13 16:22:27,096 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 24 个 chunk
+2026-04-13 16:23:17,165 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf
+2026-04-13 16:23:17,192 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf
+2026-04-13 16:23:17,196 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-13 16:23:17,217 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-13 16:23:17,220 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-13 16:23:17,233 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf
+2026-04-13 16:23:20,145 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 16:23:22,469 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 370 个 chunk
+2026-04-13 16:23:22,492 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-13 16:23:22,510 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-13 16:23:22,513 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-13 16:23:22,526 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf
+2026-04-13 16:23:22,586 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf
+2026-04-13 16:24:33,116 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 16:24:40,240 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 16:24:42,443 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 16:24:42,550 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf
+2026-04-13 16:24:55,267 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 40 个 chunk
+2026-04-13 16:24:59,241 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 40 个 chunk
+2026-04-13 16:25:11,091 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 40 个 chunk
+2026-04-13 16:27:35,938 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 256 个 chunk
+2026-04-13 16:27:43,432 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 256 个 chunk
+2026-04-13 16:27:48,798 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 256 个 chunk
+2026-04-13 16:27:57,122 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 38 个 chunk
+2026-04-13 16:28:06,094 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 38 个 chunk
+2026-04-13 16:28:09,990 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 38 个 chunk
+2026-04-13 16:28:18,831 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 16:28:19,891 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:20,620 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 16:28:20,622 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:21,263 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 16:28:21,265 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:28:23,801 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:24,631 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 16:28:24,632 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:25,123 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 16:28:25,124 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:28:27,675 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 16:28:28,795 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:29,437 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 16:28:29,438 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:29,772 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 16:28:29,878 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 16:28:29,879 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:28:30,780 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:31,533 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 16:28:31,533 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:32,097 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 16:28:32,099 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:28:32,358 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:33,187 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 16:28:33,188 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:33,810 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 16:28:33,811 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:28:34,507 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:35,165 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 16:28:35,166 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 16:28:35,689 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 16:28:35,690 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:30:01,627 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 192 个 chunk
+2026-04-13 16:30:01,736 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:30:09,473 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 192 个 chunk
+2026-04-13 16:30:09,581 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 16:30:11,404 - agent - INFO - vector_store.py:112 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 192 个 chunk
+2026-04-13 16:30:11,515 - agent - INFO - vector_store.py:92 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 20:24:25,535 - agent - INFO - middleware.py:69 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-13 20:24:25,537 - agent - INFO - middleware.py:70 - [log_before_model][HumanMessage]: 以下是本轮导览中最近的对话上下文，请在回答当前问题时适度继承：
+用户：广西三江侗族织绣纹样有哪些形意特征？对创新设计有什么启发？
+
+当前问题：广西三江侗族织绣纹样有哪些形意特征？对创新设计有什么启发？
+2026-04-13 20:24:39,429 - agent - INFO - middleware.py:36 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-13 20:24:39,431 - agent - INFO - middleware.py:37 - [mointor_tool]工具调用参数: {'query': '广西三江侗族织绣纹样的形意特征与设计启发'}
+2026-04-13 20:24:49,691 - agent - ERROR - middleware.py:57 - [mointor_tool]工具rag_summarize调用失败: Error executing plan: Error sending backfill request to compactor: Error constructing hnsw segment reader: Error creating hnsw segment reader: Error loading hnsw index
+2026-04-13 21:32:43,238 - agent - WARNING - vector_store.py:121 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 第 1 次加载失败，将在 3s 后重试: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-04-13 21:33:27,110 - agent - WARNING - vector_store.py:121 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 第 2 次加载失败，将在 6s 后重试: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 21:34:03,455 - agent - ERROR - vector_store.py:118 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 重试 3 次后仍失败: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\rag\vector_store.py", line 108, in load_document
+    self.vector_store.add_documents(docs)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 258, in add_documents
+    return self.add_texts(texts, metadatas, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 627, in add_texts
+    embeddings = self._embedding_function.embed_documents(texts)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 155, in embed_documents
+    embeddings = embed_with_retry(
+                 ^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 83, in embed_with_retry
+    return _embed_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 66, in _embed_with_retry
+    resp = embeddings.client.call(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\embeddings\text_embedding.py", line 52, in call
+    return super().call(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 21:37:01,654 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf 加载完成，共写入 370 个 chunk
+2026-04-13 21:37:18,189 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf 加载完成，共写入 28 个 chunk
+2026-04-13 21:37:32,649 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf 加载完成，共写入 53 个 chunk
+2026-04-13 21:37:38,770 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf 加载完成，共写入 22 个 chunk
+2026-04-13 21:37:45,242 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf 加载完成，共写入 24 个 chunk
+2026-04-13 21:38:26,322 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 21:39:07,691 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf 加载完成，共写入 159 个 chunk
+2026-04-13 21:39:19,283 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf 加载完成，共写入 40 个 chunk
+2026-04-13 21:40:30,228 - agent - WARNING - vector_store.py:121 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 第 1 次加载失败，将在 3s 后重试: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-13 21:41:53,300 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf 加载完成，共写入 256 个 chunk
+2026-04-13 21:42:01,415 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf 加载完成，共写入 38 个 chunk
+2026-04-13 21:42:11,126 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf 加载完成，共写入 33 个 chunk
+2026-04-13 21:42:11,428 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 21:42:11,593 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 21:42:11,593 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 21:42:11,793 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 21:42:11,795 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 21:42:12,485 - agent - WARNING - file_handler.py:125 - [pdf_loader]PyPDFLoader加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 21:42:12,654 - agent - WARNING - file_handler.py:66 - [pdf_loader]PDF处于加密状态但空密码无法解开，继续尝试直接读取: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-13 21:42:12,655 - agent - WARNING - file_handler.py:133 - [pdf_loader]pypdf回退读取失败，继续尝试PyMuPDF: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf | File has not been decrypted
+2026-04-13 21:42:12,824 - agent - ERROR - file_handler.py:143 - [pdf_loader]加载PDF文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 时出错: Failed to open file 'E:\\github project\\wxyAgent\\data/dong_embroidery\\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf'.
+2026-04-13 21:42:12,824 - agent - WARNING - file_handler.py:194 - [pdf_loader]PDF读取失败，使用同名DOCX兜底: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-13 21:42:54,769 - agent - INFO - vector_store.py:113 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf 加载完成，共写入 192 个 chunk
+2026-04-13 21:42:54,833 - agent - INFO - vector_store.py:93 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx

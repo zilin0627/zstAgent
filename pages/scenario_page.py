@@ -11,7 +11,7 @@ SCENARIO_APPLICATIONS = [
     {
         "title": "虚拟博物馆沉浸导览",
         "subtitle": "角色引导、展厅浏览、互动问答",
-        "desc": "让用户从“进入展厅”开始理解侗绣，而不是只停留在静态浏览层。",
+        "desc": "让用户从‘进入展厅’开始理解侗绣，而不是只停留在静态浏览层。",
     },
     {
         "title": "展馆 / 景区数字讲解",
@@ -21,7 +21,7 @@ SCENARIO_APPLICATIONS = [
     {
         "title": "研学课堂与美育活动",
         "subtitle": "课程包、任务卡、共创工作坊",
-        "desc": "让侗绣纹样从“被看见”走向“被理解、被讲述、被动手表达”。",
+        "desc": "让侗绣纹样从‘被看见’走向‘被理解、被讲述、被动手表达’。",
     },
     {
         "title": "文创传播与品牌联动",
@@ -103,27 +103,51 @@ def _asset(path: Path) -> str:
     return str(path)
 
 
+def _render_bullets(items):
+    for item in items:
+        st.markdown(f"- {item}")
+
+
 def render_scenario_page(*, render_section_heading):
     st.title("场景落地")
-    st.caption("让侗绣从内容展示走向导览体验、文化讲述、文创转化与持续传播。")
+    st.caption("这一页负责回答：平台不只是在展示侗绣内容，还能如何进入展馆、课堂、文旅与品牌传播等真实使用场景。")
     st.divider()
 
-    intro_left, intro_right = st.columns([1.08, 0.92], gap="large")
+    intro_left, intro_right = st.columns([1.05, 0.95], gap="large")
     with intro_left:
-        st.markdown("### 从“看见纹样”走向“走进侗绣世界”")
+        render_section_heading("这一页在平台里承担什么角色", "它不是功能说明页，而是平台价值和落地方式的集中表达")
         st.write(
-            "如果前面的图谱与导览解决了“有什么纹样”和“纹样是什么意思”，"
-            "那么场景落地页更适合继续回答：这些内容怎样进入虚拟博物馆、线下展陈、课堂活动与文创传播，"
-            "真正形成一个可以被观看、被讲述、被体验的文化闭环。"
+            "如果图谱页解决了‘看什么’，导览页解决了‘怎么理解’，设计工作台和文创展陈解决了‘怎么转化’，"
+            "那么场景落地页更适合继续回答：这些内容最终怎样进入真实环境，被观众、学生、游客、机构和品牌真正使用。"
         )
-        st.write(
-            "它不只是一个展示页，更像是侗绣内容从资料、图像、知识，逐渐走向角色、故事和日常使用场景的连接层。"
-        )
+        st.markdown("- 把前面几个页面的内容汇成一条真实使用路径")
+        st.markdown("- 把技术能力翻译成展馆、课堂、文旅和传播中的具体体验")
+        st.markdown("- 把项目从‘能演示’进一步讲成‘能落地、能合作、能持续延展’")
     with intro_right:
-        st.info(
-            "结合你已有的侗族虚拟博物馆项目，这一页最适合承接“展厅入口 + 导览角色 + 纹样故事 + 文创转化”这条完整路线。"
-        )
+        st.info("这页最适合在答辩或路演时讲‘平台价值’，尤其适合承接虚拟博物馆、数字导览和文创传播这些场景。")
+        metric_cols = st.columns(2, gap="medium")
+        with metric_cols[0]:
+            st.metric("页面角色", "落地价值页")
+        with metric_cols[1]:
+            st.metric("表达重点", "场景闭环")
 
+    st.divider()
+    path_cols = st.columns(4, gap="large")
+    path_items = [
+        ("阶段 1", "进入场景", "从虚拟博物馆、专题入口或展馆讲解页进入，让用户先愿意停留。"),
+        ("阶段 2", "理解内容", "通过角色导览、纹样故事和问答内容，让知识不再只是静态展板。"),
+        ("阶段 3", "继续转化", "再延展到设计工作台、文创展陈与课程活动，形成连续使用路径。"),
+        ("阶段 4", "形成传播", "最后落到品牌联动、社媒传播、周边展示和长期合作。"),
+    ]
+    for col, item in zip(path_cols, path_items):
+        step, title, desc = item
+        with col:
+            st.markdown(f"#### {step}")
+            st.caption(title)
+            st.write(desc)
+
+    st.divider()
+    render_section_heading("平台能进入哪些真实场景", "把页面功能翻译成可被理解的使用场景")
     scenario_cols = st.columns(4, gap="large")
     for col, item in zip(scenario_cols, SCENARIO_APPLICATIONS):
         with col:
@@ -132,68 +156,59 @@ def render_scenario_page(*, render_section_heading):
             st.write(item["desc"])
 
     st.divider()
-    render_section_heading("角色引入：让侗绣被更自然地讲出来", "一个能陪伴用户进入侗乡世界的数字小使者")
-    ip_left, ip_right = st.columns([0.92, 1.08], gap="large")
+    render_section_heading("角色引入：让知识被更自然地讲出来", "角色不是装饰，而是场景落地里的讲述接口")
+    ip_left, ip_right = st.columns([0.95, 1.05], gap="large")
     with ip_left:
         st.markdown("### 锦小绣")
         st.caption("侗族刺绣非遗守护精灵 · 侗乡文化小使者")
         st.write(
             "她以侗族传统刺绣与织锦纹样为核心视觉符号，是一个兼具民族气质与亲和力的数字导览形象。"
-            "在页面里，她不是简单的卡通装饰，而是负责把纹样、生活与故事串联起来的讲述者。"
+            "在场景页里，她承担的是‘带用户进入侗绣世界’的角色，而不只是提供视觉点缀。"
         )
-        st.markdown("#### 形象印象")
-        for item in IP_FEATURES:
-            st.markdown(f"- {item}")
+        st.markdown("#### 形象特征")
+        _render_bullets(IP_FEATURES)
     with ip_right:
-        st.markdown("#### 角色故事")
+        st.markdown("#### 她为什么对落地有帮助")
         st.write(
-            "锦小绣像是从侗乡老绣娘的绣绷上醒来的一缕彩线。她熟悉鼓楼、风雨桥、寨门与节庆的气息，"
-            "也记得阿妈们在月光下挑花、打籽、辫绣的样子。那些被绣进衣裙的太阳、鸟纹、蝴蝶和龙纹，"
-            "对她来说不是图案，而是侗族人对自然、生活与美好愿望的表达。"
+            "很多文化项目在传播时会卡在一个问题上：知识是对的，但不够好进入。"
+            "角色的价值就在于，她能把纹样、工艺、生活和情感串成更容易被普通用户接受的讲述路径。"
         )
         st.write(
-            "因此，当她出现在虚拟博物馆或数字导览里，用户感受到的就不只是知识说明，"
-            "而是一种有人带领、有人讲述、有人陪伴的进入方式。"
+            "因此，当她出现在虚拟博物馆、扫码导览、课堂活动或文创传播中时，用户感受到的就不只是说明文本，"
+            "而是一种有人带领、有人陪伴、有人解释的进入方式。"
         )
 
     st.divider()
-    meaning_left, meaning_right = st.columns([1, 1], gap="large")
+    meaning_left, meaning_right = st.columns(2, gap="large")
     with meaning_left:
-        render_section_heading("纹样不只是图案，也是一种生活语言", "每一种纹样，都能成为一段更容易被记住的故事")
+        render_section_heading("纹样为什么能进入这些场景", "因为它们不仅是图案，也承载故事、情感与祝愿")
         for name, meaning in PATTERN_MEANINGS:
             st.markdown(f"- **{name}**：{meaning}")
-        st.write(
-            "这些图案之所以动人，不在于形式本身，而在于它们与侗族人的服饰、节庆、祝愿和日常记忆始终连在一起。"
-        )
+        st.write("当纹样本身有文化寓意、视觉识别度和讲述空间时，它们就天然适合进入导览、课程和传播内容。")
     with meaning_right:
-        render_section_heading("锦小绣可以怎么讲这些内容", "从纹样出发，再回到人、生活与情感")
+        render_section_heading("角色可以怎么把它们讲活", "从纹样出发，再回到人、生活和场景")
         st.write(
-            "她可以从一枚太阳花纹讲到光明与祝福，从对鸟纹讲到和合与陪伴，从蝴蝶纹讲到自由与灵动，"
-            "再把这些寓意自然带回到侗族人的服饰场景、生活经验与文化情感中。"
+            "她可以从太阳花纹讲到光明与祝福，从对鸟纹讲到和合与陪伴，从蝴蝶纹讲到灵动和美好，"
+            "再把这些内容带回到侗族人的服饰、节庆和日常生活里。"
         )
-        st.write(
-            "这样，用户记住的不只是纹样名称，而是‘为什么会这样绣、为什么值得被继续看见’。"
-        )
+        st.write("这样用户记住的就不只是一个纹样名称，而是一段更容易被感知和复述的文化体验。")
 
     st.divider()
-    render_section_heading("视觉资源与场景表达", "从原始纹样到文创转化，形成更完整的展示路径")
-    image_cols = st.columns(3, gap="large")
-    with image_cols[0]:
+    render_section_heading("视觉资源如何继续变成场景表达", "从原始纹样到设计成果，再进入真实使用环境")
+    top_images = st.columns(3, gap="large")
+    with top_images[0]:
         st.image(_asset(PATTERN_DIR / "duiniaowen.png"), caption="原始纹样：对鸟纹", use_container_width=True)
-    with image_cols[1]:
+    with top_images[1]:
         st.image(_asset(PATTERN_DIR / "taiyanghuawen.png"), caption="主题纹样：太阳花纹", use_container_width=True)
-    with image_cols[2]:
+    with top_images[2]:
         st.image(
             _asset(SHOWCASE_DIR / "mockups" / "phonecase_longwen.png"),
-            caption="转化示意：纹样文创应用",
+            caption="设计转化：纹样文创应用",
             use_container_width=True,
         )
 
-    st.markdown("#### 文创视觉延展")
-    st.write(
-        "结合你现有的角色方向和文创表达，这些视觉可以继续被整理成虚拟博物馆导览页、文创提案页和角色传播页，"
-        "让用户看到侗绣如何从原始纹样自然过渡到更年轻化的当代应用。"
-    )
+    st.caption("这条路径适合被讲成：原始纹样 -> 导览理解 -> 设计转化 -> 场景传播。")
+
     showcase_row_1 = st.columns(3, gap="large")
     for col, (img_path, caption) in zip(showcase_row_1, SHOWCASE_IMAGES[:3]):
         with col:
@@ -204,43 +219,37 @@ def render_scenario_page(*, render_section_heading):
         with col:
             st.image(_asset(img_path), caption=caption, use_container_width=True)
 
+    st.divider()
     roadmap_left, roadmap_right = st.columns(2, gap="large")
     with roadmap_left:
-        render_section_heading("一条自然的落地路径", "从进入场景到形成记忆点")
+        render_section_heading("一条更自然的落地路径", "从第一次接触，到形成记忆点和传播意愿")
         for idx, item in enumerate(LANDING_PATH, start=1):
             st.markdown(f"{idx}. {item}")
     with roadmap_right:
-        render_section_heading("适合继续延展的文创方向", "让角色、纹样和场景形成统一识别")
-        for item in PRODUCT_IDEAS:
-            st.markdown(f"- {item}")
-        st.write(
-            "当角色形象、纹样语言与场景叙事统一之后，这一页就不只是在讲功能，也能自然承接文创展示与品牌传播。"
-        )
+        render_section_heading("可以继续延展的文创方向", "让角色、纹样与使用场景形成统一识别")
+        _render_bullets(PRODUCT_IDEAS)
+        st.write("当角色形象、纹样语言和场景叙事统一后，这页就不只是在讲功能，也能承接展示、合作与传播。")
 
     st.divider()
     persona_left, persona_right = st.columns([0.95, 1.05], gap="large")
     with persona_left:
         render_section_heading("角色气质", "让非遗传播不再显得遥远")
-        for item in IP_PERSONA:
-            st.markdown(f"- {item}")
+        _render_bullets(IP_PERSONA)
     with persona_right:
-        render_section_heading("为什么这一页值得继续加强", "它最适合承接项目展示、答辩表达与落地说明")
-        st.markdown("- 它能把“技术功能”翻译成“真实使用场景”。")
-        st.markdown("- 它能把“纹样资料”转成“有人讲述的文化内容”。")
-        st.markdown("- 它能把“虚拟博物馆”与“IP 导览”连接成更完整的体验路线。")
-        st.markdown("- 它能帮助老师、评审或合作方更快理解项目的落地价值。")
+        render_section_heading("为什么这页对项目表达很重要", "它最适合承接答辩里的‘真实价值’部分")
+        st.markdown("- 它能把‘技术能力’翻译成‘真实使用场景’。")
+        st.markdown("- 它能把‘纹样资料’转成‘有人讲述的文化内容’。")
+        st.markdown("- 它能把‘虚拟博物馆’与‘IP 导览’连接成更完整的体验路线。")
+        st.markdown("- 它能帮助老师、评审或合作方更快理解项目为什么值得落地。")
 
     st.divider()
     user_cols = st.columns(3, gap="large")
     with user_cols[0]:
         render_section_heading("适合的合作对象", "更偏展陈、文旅、教育与数字内容项目")
-        for item in B_SIDE_USERS:
-            st.markdown(f"- {item}")
+        _render_bullets(B_SIDE_USERS)
     with user_cols[1]:
-        render_section_heading("适合的观看者", "更偏普通观众、学生与年轻文化用户")
-        for item in C_SIDE_USERS:
-            st.markdown(f"- {item}")
+        render_section_heading("适合的使用者", "更偏普通观众、学生与年轻文化用户")
+        _render_bullets(C_SIDE_USERS)
     with user_cols[2]:
         render_section_heading("可延展的合作方式", "既能做展示，也能做长期传播与授权")
-        for item in BUSINESS_MODELS:
-            st.markdown(f"- {item}")
+        _render_bullets(BUSINESS_MODELS)

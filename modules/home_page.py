@@ -93,7 +93,7 @@ def render_home_page(
     with metrics_cols[1]:
         render_metric("当前模块", "7 页", "首页、图谱、导览、共创、流程、文创、场景应用")
     with metrics_cols[2]:
-        render_metric("平台重点", "体验 + 科普", "更偏非遗讲解、文化展示和数字体验，而不是工具平台")
+        render_metric("平台重点", "体验 + 科普", "非遗讲解、文化展示和数字体验")
     with metrics_cols[3]:
         render_metric("后续内容", "持续补充", "后面会继续接入展陈、侗寨、生成图和文创成果")
 

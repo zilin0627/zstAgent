@@ -1,11 +1,11 @@
 collection_name: agent
 persist_directory: chroma_db
-k: 3
+k: 12
 # 知识库根目录（建议放侗族织绣相关资料）
 data_path: data/dong_embroidery
 md5_hex_store: md5.text
-allow_knowledge_file_type: [".txt", ".pdf"]
+allow_knowledge_file_type: [".txt", ".pdf", ".docx"]
 
-chunk_size: 200
-chunk_overlap: 20
+chunk_size: 360
+chunk_overlap: 60
 separators: ["\n\n", "\n", ".", "!", "?", "。", "！", "？", " ", ""]

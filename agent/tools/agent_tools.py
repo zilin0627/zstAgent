@@ -3,36 +3,153 @@ import csv
 import json
 import urllib.parse
 import urllib.request
+from urllib.error import HTTPError, URLError
+
 from langchain_core.tools import tool
 from rag.rag_service import RagSummarizeService
-from rag.vector_store import VectorStoreService
 from utils.path_tool import get_abs_path
 from utils.config_handler import agent_config
 from utils.logger_handler import logger
 
 
-
-vector_store = VectorStoreService()
 rag = RagSummarizeService()
-
 _exhibits_index: dict[str, dict] = {}
 
-@tool(description="从向量存储中检索参考资料")
+
+def _looks_like_useful_public_url(url: str) -> bool:
+    raw = (url or "").strip().lower()
+    if not raw.startswith(("http://", "https://")):
+        return False
+
+    blocked_tokens = [
+        "duckduckgo.com",
+        "localhost",
+        "127.0.0.1",
+        "/html/",
+    ]
+    if any(token in raw for token in blocked_tokens):
+        return False
+    return True
+
+
+def _fetch_page_text(url: str, timeout: float = 2.5) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "Mozilla/5.0"},
+        method="GET",
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        raw = resp.read(8192)
+        return raw.decode("utf-8", errors="ignore")
+
+
+def _looks_like_invalid_page_content(text: str) -> bool:
+    content = (text or "").strip().lower()
+    if not content:
+        return True
+
+    bad_markers = [
+        "welcome to nginx",
+        "404 not found",
+        "403 forbidden",
+        "502 bad gateway",
+        "503 service unavailable",
+        "index of /",
+        "nginx is successfully installed",
+        "test page for the nginx",
+        "iis windows server",
+        "apache2 default page",
+    ]
+    if any(marker in content for marker in bad_markers):
+        return True
+
+    stripped = " ".join(content.split())
+    if len(stripped) < 40:
+        return True
+    return False
+
+
+def _is_reachable_url(url: str) -> bool:
+    if not _looks_like_useful_public_url(url):
+        return False
+
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0"},
+            method="HEAD",
+        )
+        with urllib.request.urlopen(req, timeout=2) as resp:
+            status = getattr(resp, "status", 200)
+            if not 200 <= int(status) < 400:
+                return False
+    except HTTPError as e:
+        if not 200 <= int(getattr(e, "code", 500)) < 400:
+            return False
+    except (URLError, ValueError, TimeoutError):
+        return False
+    except Exception:
+        return False
+
+    try:
+        page_text = _fetch_page_text(url)
+        return not _looks_like_invalid_page_content(page_text)
+    except Exception:
+        return False
+
+
+@tool(description="识别当前用户问题属于哪类任务，并给出建议路由。返回 JSON 字符串。")
+def classify_intent(query: str) -> str:
+    q = (query or "").strip()
+
+    if not q:
+        return json.dumps(
+            {
+                "intent": "unknown",
+                "need_rag": True,
+                "need_web": False,
+                "need_human": False,
+            },
+            ensure_ascii=False,
+        )
+
+    lower_q = q.lower()
+
+    if any(token in q for token in ["展签", "展板", "说明牌"]):
+        intent = "label"
+    elif any(token in q for token in ["faq", "常见问题", "观众会问"]):
+        intent = "faq"
+    elif any(token in q for token in ["研究", "来源", "地域差异", "象征", "比较", "文献"]):
+        intent = "research"
+    elif any(token in q for token in ["设计", "转化", "配色", "文创", "包装", "海报", "方案"]):
+        intent = "design"
+    else:
+        intent = "guide"
+
+    need_web = any(token in q for token in ["最新", "现在", "近期", "官网", "网址", "链接"])
+    need_human = any(token in q for token in ["投诉", "退款", "人工", "联系工作人员"])
+
+    if "http" in lower_q or "www." in lower_q:
+        need_web = True
+
+    return json.dumps(
+        {
+            "intent": intent,
+            "need_rag": True,
+            "need_web": need_web,
+            "need_human": need_human,
+        },
+        ensure_ascii=False,
+    )
+
+
+@tool(description="从向量存储中检索参考资料并总结，返回 JSON 字符串，包含 answer/citations/retrieval/confidence。")
 def rag_summarize(query: str) -> str:
-    """
-    从向量存储中检索参考资料， 并总结问题的答案
-    """
-    # 返回 JSON 字符串，包含 answer 和 citations，方便上层展示引用溯源
     return rag.rag_summarize_with_citations(query)
 
 
 @tool(description="联网搜索公开网页信息（用于补充最新背景），返回JSON字符串，包含title/url/snippet列表")
 def web_search(query: str) -> str:
-    """
-    轻量联网检索：
-    - 使用 DuckDuckGo Instant Answer API（无需密钥）
-    - 返回结构化 JSON，便于模型整合
-    """
     q = (query or "").strip()
     if not q:
         return json.dumps({"query": "", "results": []}, ensure_ascii=False)
@@ -52,7 +169,7 @@ def web_search(query: str) -> str:
             headers={"User-Agent": "Mozilla/5.0"},
             method="GET",
         )
-        with urllib.request.urlopen(req, timeout=5) as resp:
+        with urllib.request.urlopen(req, timeout=3) as resp:
             payload = json.loads(resp.read().decode("utf-8", errors="ignore"))
 
         results = []
@@ -69,7 +186,6 @@ def web_search(query: str) -> str:
             )
 
         for item in payload.get("RelatedTopics", [])[:10]:
-            # DDG 的 RelatedTopics 可能是列表嵌套
             topics = item.get("Topics") if isinstance(item, dict) else None
             if topics:
                 for sub in topics[:5]:
@@ -89,21 +205,23 @@ def web_search(query: str) -> str:
                         {"title": text[:80], "url": first_url, "snippet": text[:500]}
                     )
 
-        # 去重并截断
         dedup = []
         seen = set()
-        for r in results:
-            k = r.get("url", "")
-            if k and k not in seen:
-                seen.add(k)
-                dedup.append(r)
-            if len(dedup) >= 8:
+        for result in results:
+            link = result.get("url", "")
+            if not _is_reachable_url(link):
+                continue
+            if link not in seen:
+                seen.add(link)
+                dedup.append(result)
+            if len(dedup) >= 5:
                 break
 
         return json.dumps({"query": q, "results": dedup}, ensure_ascii=False)
     except Exception as e:
         logger.warning(f"[web_search]联网检索失败: {str(e)}")
         return json.dumps({"query": q, "results": []}, ensure_ascii=False)
+
 
 def _load_exhibits():
     if _exhibits_index:
@@ -148,7 +266,6 @@ def fetch_exhibit(query: str) -> str:
     if not row:
         return ""
 
-    # 返回紧凑结构，便于模型引用
     parts = []
     for k in ["id", "name", "summary", "source", "era", "technique", "region"]:
         v = (row.get(k) or "").strip()
@@ -156,5 +273,15 @@ def fetch_exhibit(query: str) -> str:
             parts.append(f"{k}={v}")
     return "; ".join(parts)
 
-if __name__ == "__main__":
-    print(fetch_exhibit("E001"))
+
+@tool(description="当资料不足、置信度过低或需要人工接入时，返回统一的兜底建议。")
+def handoff_to_human(reason: str) -> str:
+    r = (reason or "").strip() or "资料覆盖不足"
+    return json.dumps(
+        {
+            "status": "handoff",
+            "reason": r,
+            "message": "当前资料不足以给出高置信度回答，建议转交人工讲解员、研究人员或平台管理员进一步处理。",
+        },
+        ensure_ascii=False,
+    )
