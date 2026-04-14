@@ -197,27 +197,33 @@ def render_scenario_page(*, render_section_heading):
     render_section_heading("视觉资源如何继续变成场景表达", "从原始纹样到设计成果，再进入真实使用环境")
     top_images = st.columns(3, gap="large")
     with top_images[0]:
-        st.image(_asset(PATTERN_DIR / "duiniaowen.png"), caption="原始纹样：对鸟纹", use_container_width=True)
+        _, img_col, _ = st.columns([0.5, 3, 0.5])
+        with img_col:
+            st.image(_asset(PATTERN_DIR / "duiniaowen.png"), caption="原始纹样：对鸟纹", use_container_width=True)
     with top_images[1]:
-        st.image(_asset(PATTERN_DIR / "taiyanghuawen.png"), caption="主题纹样：太阳花纹", use_container_width=True)
+        _, img_col, _ = st.columns([0.5, 3, 0.5])
+        with img_col:
+            st.image(_asset(PATTERN_DIR / "taiyanghuawen.png"), caption="主题纹样：太阳花纹", use_container_width=True)
     with top_images[2]:
-        st.image(
-            _asset(SHOWCASE_DIR / "mockups" / "phonecase_longwen.png"),
-            caption="设计转化：纹样文创应用",
-            use_container_width=True,
-        )
+        _, img_col, _ = st.columns([0.5, 3, 0.5])
+        with img_col:
+            st.image(_asset(SHOWCASE_DIR / "mockups" / "phonecase_longwen.png"), caption="设计转化：纹样文创应用", use_container_width=True)
 
     st.caption("这条路径适合被讲成：原始纹样 -> 导览理解 -> 设计转化 -> 场景传播。")
 
     showcase_row_1 = st.columns(3, gap="large")
     for col, (img_path, caption) in zip(showcase_row_1, SHOWCASE_IMAGES[:3]):
         with col:
-            st.image(_asset(img_path), caption=caption, use_container_width=True)
+            _, img_col, _ = st.columns([0.5, 3, 0.5])
+            with img_col:
+                st.image(_asset(img_path), caption=caption, use_container_width=True)
 
     showcase_row_2 = st.columns(3, gap="large")
-    for col, (img_path, caption) in zip(showcase_row_2, SHOWCASE_IMAGES[3:]):
+    for col, (img_path, caption) in zip(showcase_row_2, SHOWCASE_IMAGES[:3]):
         with col:
-            st.image(_asset(img_path), caption=caption, use_container_width=True)
+            _, img_col, _ = st.columns([0.5, 3, 0.5])
+            with img_col:
+                st.image(_asset(img_path), caption=caption, use_container_width=True)
 
     st.divider()
     roadmap_left, roadmap_right = st.columns(2, gap="large")

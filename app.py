@@ -60,33 +60,56 @@ def _inject_global_styles():
     st.markdown(
         """
         <style>
+        /* ========== 全局基础 ========== */
         :root {
             --xiu-ink: #1f2a30;
             --xiu-muted: #61717a;
             --xiu-accent: #2e5b66;
             --xiu-accent-soft: #dbe9ea;
             --xiu-line: rgba(46, 91, 102, 0.12);
-            --xiu-shadow: 0 14px 32px rgba(35, 56, 64, 0.05);
+            --xiu-shadow: 0 8px 18px rgba(35, 56, 64, 0.04);
             --xiu-panel: rgba(253, 253, 250, 0.78);
             --xiu-panel-strong: rgba(255, 255, 253, 0.96);
         }
+
+        /* 整体背景 */
         .stApp {
             background:
-                radial-gradient(circle at 0% 0%, rgba(180, 214, 218, 0.28), transparent 24%),
-                radial-gradient(circle at 100% 10%, rgba(232, 220, 195, 0.22), transparent 24%),
+                radial-gradient(circle at 0% 0%, rgba(180, 214, 218, 0.18), transparent 24%),
+                radial-gradient(circle at 100% 10%, rgba(232, 220, 195, 0.15), transparent 24%),
                 linear-gradient(180deg, #f6f7f4 0%, #f2f4ef 100%);
             color: var(--xiu-ink);
         }
+
+        /* 主要内容区宽度与间距 */
         .block-container {
-            padding-top: 2.2rem;
-            padding-bottom: 3.4rem;
-            max-width: 1180px;
+            padding-top: 1.2rem;
+            padding-bottom: 2rem;
+            max-width: 1280px;
         }
+
+        /* ========== 隐藏顶部白色横条 ========== */
+        header[data-testid="stHeader"] {
+            display: none !important;
+        }
+        .main .block-container {
+            padding-top: 1rem !important;
+        }
+        /* =================================== */
+        
+
+        /* ========== 侧边栏紧凑化 ========== */
         [data-testid="stSidebar"] {
             background: linear-gradient(180deg, #eef3f1 0%, #e8eeeb 100%);
             border-right: 1px solid rgba(46, 91, 102, 0.08);
+            min-width: 240px !important;
+            max-width: 260px !important;
         }
-
+        [data-testid="stSidebar"] .block-container {
+            padding-top: 1rem;
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+        }
         [data-testid="stSidebar"] label,
         [data-testid="stSidebar"] .stMarkdown,
         [data-testid="stSidebar"] p,
@@ -94,132 +117,244 @@ def _inject_global_styles():
         [data-testid="stSidebar"] [data-baseweb="radio"] *,
         [data-testid="stSidebar"] [role="radiogroup"] * {
             color: var(--xiu-ink) !important;
+            font-size: 0.85rem !important;
         }
         [data-testid="stSidebar"] .stCaption {
             color: var(--xiu-muted) !important;
+            font-size: 0.75rem !important;
         }
-        [data-testid="stSidebar"] [data-baseweb="radio"] > div,
-        [data-testid="stSidebar"] [data-baseweb="radio"] label {
-            color: var(--xiu-ink) !important;
+        [data-testid="stSidebar"] h2, 
+        [data-testid="stSidebar"] h3 {
+            font-size: 1.1rem !important;
         }
-
+        /* 隐藏原生导航 */
         [data-testid="stSidebarNav"],
         [data-testid="stSidebarNavSeparator"] {
             display: none;
         }
 
+        /* ========== 标题字号整体缩小 ========== */
+        h1 {
+            font-size: 1.8rem !important;
+            margin-bottom: 0.4rem !important;
+        }
+        h2 {
+            font-size: 1.4rem !important;
+            margin-top: 0.8rem !important;
+            margin-bottom: 0.3rem !important;
+        }
+        h3 {
+            font-size: 1.15rem !important;
+            margin-top: 0.6rem !important;
+            margin-bottom: 0.2rem !important;
+        }
+        h4 {
+            font-size: 1rem !important;
+            margin-bottom: 0.2rem !important;
+        }
+
+        /* ========== 正文与辅助文字 ========== */
+        p, li, .stMarkdown, .stText {
+            font-size: 0.88rem !important;
+            line-height: 1.5 !important;
+        }
+        .stCaption {
+            font-size: 0.78rem !important;
+            color: var(--xiu-muted) !important;
+        }
+
+        /* ========== 卡片与面板（紧凑内边距） ========== */
         div[data-testid="stMetric"] {
             background: transparent;
             border: 1px solid var(--xiu-line);
-            border-radius: 14px;
-            padding: 0.95rem 1rem;
+            border-radius: 12px;
+            padding: 0.5rem 0.8rem;
             box-shadow: none;
         }
+        div[data-testid="stMetric"] label {
+            font-size: 0.75rem !important;
+        }
+        div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
+            font-size: 1.3rem !important;
+        }
+
         .xiu-hero {
-            padding: 0.2rem 0 0.4rem;
+            padding: 0.1rem 0 0.2rem;
         }
         .xiu-card, .xiu-strip, .xiu-gallery, .xiu-module-row {
             background: var(--xiu-panel);
             border: 1px solid var(--xiu-line);
-            border-radius: 18px;
+            border-radius: 14px;
             box-shadow: var(--xiu-shadow);
             backdrop-filter: blur(8px);
         }
         .xiu-card {
-            padding: 1rem 1.05rem 0.95rem;
+            padding: 0.7rem 0.9rem;
             height: 100%;
         }
         .xiu-strip {
-            padding: 1rem 1.05rem;
+            padding: 0.7rem 0.9rem;
         }
         .xiu-gallery {
-            padding: 1rem;
+            padding: 0.8rem;
         }
         .xiu-module-row {
-            padding: 1rem 1.1rem;
-            margin-bottom: 0.85rem;
+            padding: 0.7rem 0.9rem;
+            margin-bottom: 0.6rem;
         }
+
         .xiu-eyebrow {
             color: var(--xiu-accent);
-            font-size: 0.79rem;
-            letter-spacing: 0.05em;
+            font-size: 0.7rem;
+            letter-spacing: 0.03em;
             font-weight: 700;
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.2rem;
         }
         .xiu-title {
-            font-size: 2.45rem;
-            line-height: 1.18;
+            font-size: 2rem;
+            line-height: 1.2;
             font-weight: 800;
             color: var(--xiu-ink);
-            margin-bottom: 0.9rem;
-            max-width: 11ch;
+            margin-bottom: 0.5rem;
+            max-width: 12ch;
         }
         .xiu-desc {
-            font-size: 0.98rem;
-            line-height: 1.82;
+            font-size: 0.85rem;
+            line-height: 1.6;
             color: var(--xiu-muted);
         }
+
         .xiu-card h4, .xiu-strip h4, .xiu-module-row h4 {
             color: var(--xiu-ink);
-            margin-bottom: 0.34rem;
-            font-size: 1.03rem;
+            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
         }
+
         .xiu-chip {
             display: inline-block;
-            padding: 0.28rem 0.78rem;
-            margin: 0.2rem 0.34rem 0 0;
+            padding: 0.2rem 0.6rem;
+            margin: 0.15rem 0.3rem 0 0;
             border-radius: 999px;
             background: var(--xiu-accent-soft);
             color: var(--xiu-accent);
-            font-size: 0.84rem;
+            font-size: 0.75rem;
             font-weight: 600;
         }
+
         .xiu-chain {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 0.8rem;
+            gap: 0.6rem;
         }
         .xiu-chain-item {
             background: transparent;
             border: 1px dashed var(--xiu-line);
-            border-radius: 15px;
-            padding: 0.92rem 0.75rem;
+            border-radius: 12px;
+            padding: 0.6rem 0.5rem;
             text-align: center;
             font-weight: 700;
+            font-size: 0.8rem;
             color: #4a5d66;
         }
+
         .xiu-section-intro {
             max-width: 760px;
             color: var(--xiu-muted);
-            line-height: 1.85;
-            margin-bottom: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.6rem;
+            font-size: 0.85rem;
         }
+
         .xiu-feature-list {
             display: grid;
-            gap: 0.75rem;
-            margin-top: 0.4rem;
+            gap: 0.5rem;
+            margin-top: 0.2rem;
         }
         .xiu-feature-item {
-            padding: 0.85rem 0;
+            padding: 0.6rem 0;
             border-bottom: 1px solid var(--xiu-line);
-        }
-        .xiu-feature-item:last-child {
-            border-bottom: none;
         }
         .xiu-feature-item strong {
             color: var(--xiu-ink);
             display: block;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.1rem;
+            font-size: 0.9rem;
         }
+
+        /* ========== 对话气泡（紧凑版） ========== */
+        .user-bubble {
+            background: #e9f2f0;
+            padding: 0.6rem 0.9rem;
+            border-radius: 16px 16px 4px 16px;
+            margin: 0.4rem 0;
+            max-width: 85%;
+            margin-left: auto;
+            border: 1px solid #cbdcd9;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        .assistant-bubble {
+            background: #ffffffd9;
+            padding: 0.6rem 0.9rem;
+            border-radius: 16px 16px 16px 4px;
+            margin: 0.4rem 0;
+            max-width: 85%;
+            border: 1px solid #d4e3e0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+        .thought-box {
+            background: #f8f5e9;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid #b0a28a;
+            margin: 0.3rem 0;
+            font-size: 0.8rem;
+            color: #4d4436;
+        }
+
+        details {
+            background: #fafaf8;
+            border-radius: 10px;
+            padding: 0.4rem 0.8rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* ========== 按钮紧凑化 ========== */
+        .stButton button, .stFormSubmitButton button {
+            font-size: 0.85rem !important;
+            padding: 0.3rem 0.9rem !important;
+            border-radius: 20px !important;
+        }
+
+        /* ========== 输入框、选择框等 ========== */
+        .stTextInput input, .stTextArea textarea, .stSelectbox div {
+            font-size: 0.85rem !important;
+        }
+        /* 图片自适应：限制最大高度，避免撑爆卡片 */
+    img {
+        max-height: 240px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* 在小屏幕上进一步缩小图片 */
+    @media (max-width: 768px) {
+        img {
+            max-height: 180px;
+        }
+    }
+        /* ========== 移动端适配 ========== */
         @media (max-width: 900px) {
             .xiu-chain { grid-template-columns: 1fr; }
-            .xiu-title { font-size: 1.78rem; max-width: none; }
+            .xiu-title { font-size: 1.5rem; max-width: none; }
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
-
 
 
 PATTERN_ATLAS_ITEMS = _load_json("data/platform/pattern_atlas.json")
@@ -237,12 +372,6 @@ _inject_global_styles()
 
 
 def _extract_citations(text: str):
-    """
-    从模型输出中抽取引用区块：
-    [[CITATIONS]]
-    {...json...}
-    [[/CITATIONS]]
-    """
     if not text:
         return text, None
 
@@ -281,31 +410,23 @@ def _extract_citations(text: str):
 
 
 def _clean_answer_text(answer: str) -> str:
-    """
-    清洗模型正文中的工具回显噪音（例如 web_search 的 {"query":...,"results":[...]}）。
-    """
     if not answer:
         return answer
 
     cleaned = answer
     cleaned = re.sub(r"\[\[THOUGHT\]\].*", " ", cleaned)
-
-    # 去掉残留的引用区块与异常标签，避免直接显示在页面正文中
     cleaned = re.sub(r"\[\[?/?CITATIONS\]?\]", " ", cleaned, flags=re.I)
     cleaned = re.sub(r"\{\s*\"answer\"\s*:\s*.*?\"citations\"\s*:\s*\[.*?\]\s*\}", " ", cleaned, flags=re.S)
-
     cleaned = re.sub(
         r'\s*\{"query"\s*:\s*".*?"\s*,\s*"results"\s*:\s*\[.*?\]\}\s*',
         " ",
         cleaned,
         flags=re.S,
     )
-
     cleaned = re.sub(r"(?m)^\s*#{1,6}\s*网络补充来源\s*$", "网络补充来源", cleaned)
     cleaned = cleaned.replace("###### 网络补充来源", "网络补充来源")
     cleaned = cleaned.replace("### 网络补充来源", "网络补充来源")
     cleaned = cleaned.replace("## 网络补充来源", "网络补充来源")
-
     cleaned = re.sub(r"（?注：此为示意链接，实际搜索未返回具体结果）?", "", cleaned)
 
     filtered_lines = []
@@ -326,13 +447,10 @@ def _clean_answer_text(answer: str) -> str:
         if not stripped:
             normalized_lines.append("")
             continue
-
         if stripped == last_meaningful:
             continue
-
         if stripped.endswith("？") and last_meaningful == "":
             continue
-
         normalized_lines.append(stripped)
         last_meaningful = stripped
 
@@ -348,10 +466,8 @@ def _extract_web_results_from_tool_text(tool_text: str) -> list[dict]:
         payload = json.loads(tool_text)
     except Exception:
         return []
-
     if not isinstance(payload, dict):
         return []
-
     results = payload.get("results", []) or []
     web_citations = []
     seen_urls = set()
@@ -384,16 +500,13 @@ def _extract_web_results_from_tool_text(tool_text: str) -> list[dict]:
 def _merge_citations(base_citations, web_citations: list[dict]):
     if not web_citations:
         return base_citations
-
     if isinstance(base_citations, dict):
         payload = dict(base_citations)
         existing = payload.get("citations", []) or []
         payload["citations"] = existing + web_citations
         return payload
-
     if isinstance(base_citations, list):
         return base_citations + web_citations
-
     return {"citations": web_citations}
 
 
@@ -707,6 +820,7 @@ def _build_network_error_notice(error: Exception) -> dict[str, str]:
     }
 
 
+# ================== 保持原有直接调用逻辑，不做 API 替换 ==================
 def _run_agent_request_streaming(prompt: str, context: dict, placeholder, thought_placeholder=None):
     response_message = []
     web_citations = []
@@ -719,12 +833,12 @@ def _run_agent_request_streaming(prompt: str, context: dict, placeholder, though
                 if thought_text.startswith("TOOL::"):
                     _, tool_name, tool_text = thought_text.split("::", 2)
                     if thought_placeholder is not None:
-                        thought_placeholder.info(_normalize_thought_label(tool_name, tool_text))
+                        thought_placeholder.markdown(f'<div class="thought-box">⏳ {_normalize_thought_label(tool_name, tool_text)}</div>', unsafe_allow_html=True)
                     if tool_name == "web_search":
                         web_citations = _extract_web_results_from_tool_text(tool_text)
                 else:
                     if thought_placeholder is not None:
-                        thought_placeholder.info(thought_text)
+                        thought_placeholder.markdown(f'<div class="thought-box">{thought_text}</div>', unsafe_allow_html=True)
                 continue
 
             response_message.append(chunk)
@@ -792,6 +906,7 @@ def _run_direct_rag_request(prompt: str):
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
 
     return answer, citations, retrieval, confidence, system_notice
+# =============================================================
 
 
 if "rag_service" not in st.session_state:
@@ -805,7 +920,7 @@ if "messages" not in st.session_state:
 
 
 with st.sidebar:
-    st.subheader("平台导航")
+    st.subheader("导航")
     selected_page = st.radio(
         "页面",
         options=NAV_PAGES,
@@ -817,7 +932,12 @@ with st.sidebar:
         st.rerun()
 
     st.divider()
-    render_guide_sidebar(current_page=st.session_state.current_page, guide_page=GUIDE_PAGE)
+
+    # 只在导览页显示设置面板
+    if st.session_state.current_page == GUIDE_PAGE:
+        render_guide_sidebar(current_page=st.session_state.current_page, guide_page=GUIDE_PAGE)
+    else:
+        st.caption("浏览模式")
 
 
 if st.session_state.current_page == HOME_PAGE:
@@ -859,4 +979,3 @@ elif st.session_state.current_page == AI_WORKFLOW_PAGE:
 
 elif st.session_state.current_page == SCENARIO_PAGE:
     render_scenario_page(render_section_heading=_render_section_heading)
-

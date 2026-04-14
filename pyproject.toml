@@ -19,3 +19,6 @@ dependencies = [
     "streamlit>=1.56.0",
     "uvicorn>=0.35.0",
 ]
+
+[tool.setuptools]
+packages = []

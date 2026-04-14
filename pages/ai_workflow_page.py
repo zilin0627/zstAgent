@@ -139,7 +139,9 @@ def render_ai_workflow_page(*, ai_workflow_content: dict, asset_path):
             _, image_path, bullets = item
             with tab:
                 try:
-                    st.image(asset_path(image_path), width="stretch")
+                    _, img_col, _ = st.columns([0.5, 3, 0.5])
+                    with img_col:
+                        st.image(asset_path(image_path), use_container_width=True)
                 except Exception:
                     st.warning("该图片暂时无法显示。")
                 if bullets:

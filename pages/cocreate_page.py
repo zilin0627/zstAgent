@@ -164,36 +164,31 @@ def render_cocreate_page(
     workspace_left, workspace_right = st.columns([1.05, 0.95], gap="large")
 
     with workspace_left:
-        render_section_heading("设置本次设计任务", "通过选择而不是长提示词来组织设计需求")
-        pattern_name = st.selectbox("核心纹样", get_pattern_names(), key="cocreate_pattern")
-        pattern_item = get_pattern_item(pattern_name) or {}
-        default_theme = f"围绕{pattern_name}展开当代转化"
-        theme = st.text_input("设计主题", value=default_theme, key="cocreate_theme")
-        target = st.selectbox("应用方向", TARGET_OPTIONS, key="cocreate_target")
-        tone = st.selectbox("风格倾向", TONE_OPTIONS, key="cocreate_tone")
-        extra = st.text_area(
-            "补充要求",
-            value=st.session_state.get("cocreate_extra", "希望既有传统纹样依据，也适合当代传播语境。"),
-            height=120,
-            key="cocreate_extra",
-        )
+        render_section_heading("设置任务", "")
+        col1, col2 = st.columns(2)
+        with col1:
+            pattern_name = st.selectbox("纹样", get_pattern_names(), key="cocreate_pattern")
+            pattern_item = get_pattern_item(pattern_name) or {}   # 紧跟在 pattern_name 后面
+            target = st.selectbox("用途", TARGET_OPTIONS, key="cocreate_target")
+        with col2:
+            # 注意：theme 的默认值里用到了 pattern_name，所以 pattern_name 必须先定义
+            default_theme = f"围绕{pattern_name}展开当代转化"
+            theme = st.text_input("主题", value=default_theme, key="cocreate_theme")
+            tone = st.selectbox("风格", TONE_OPTIONS, key="cocreate_tone")
+    
+        extra = st.text_area("补充说明", value=st.session_state.get("cocreate_extra", ""), height=80, key="cocreate_extra")
 
-        with st.expander("生成策略", expanded=False):
-            allow_web = st.toggle("允许联网补充", value=True, key="cocreate_allow_web")
-            generation_mode = st.radio(
-                "生成模式",
-                options=GENERATION_OPTIONS,
-                index=0,
-                key="cocreate_generation_mode",
-            )
+        with st.expander("高级选项"):
+            allow_web = st.checkbox("允许联网", value=True, key="cocreate_allow_web")
+            generation_mode = st.radio("生成方式", GENERATION_OPTIONS, index=0, key="cocreate_generation_mode", horizontal=True)
 
-        generate = st.button("生成设计提案", key="cocreate_generate", use_container_width=True)
+        generate = st.button("生成提案", key="cocreate_generate", use_container_width=True)
 
-        st.markdown("### 快速示例")
-        example_cols = st.columns(3, gap="medium")
-        for col, sample in zip(example_cols, COCREATE_PROMPT_EXAMPLES):
-            with col:
-                if st.button(sample["label"], key=f"cocreate-example-{sample['label']}", use_container_width=True):
+        st.caption("试试这些：")
+        ex_cols = st.columns(3)
+        for i, sample in enumerate(COCREATE_PROMPT_EXAMPLES):
+            with ex_cols[i]:
+                if st.button(sample["label"], key=f"ex_{i}", use_container_width=True):
                     apply_cocreate_preset(
                         sample["pattern"],
                         f"围绕{sample['pattern']}展开当代转化",
@@ -237,9 +232,11 @@ def render_cocreate_page(
         render_section_heading("图谱卡片参考", "先看图谱，再做提案，通常比直接生成更稳")
         if pattern_item:
             try:
-                st.image(pattern_item["image"], use_container_width=True)
+                _, img_col, _ = st.columns([0.5, 3, 0.5])
+                with img_col:
+                    st.image(pattern_item["image"], use_container_width=True)
             except Exception:
-                st.warning("该纹样图片暂时无法显示。")
+                st.warning("该纹样图片暂时无法显示。")        
             st.markdown(f"#### {pattern_name}")
             st.caption(pattern_item.get("category", ""))
             for feature in pattern_item.get("features", []):
@@ -253,12 +250,14 @@ def render_cocreate_page(
         if related_scans:
             for item in related_scans[:2]:
                 try:
-                    st.image(item["image"], use_container_width=True)
+                    _, img_col, _ = st.columns([0.5, 3, 0.5])
+                    with img_col:
+                        st.image(item["image"], use_container_width=True)
                 except Exception:
                     st.warning("该扫图暂时无法显示。")
                 st.caption(f"{item['name']}｜{item['category']}")
                 if item.get("caption"):
-                    st.write(item["caption"])
+                    st.write(item["caption"])            
         else:
             st.caption("当前暂无关联扫图。")
 
@@ -282,7 +281,7 @@ def render_cocreate_page(
 
             if generation_mode == GENERATION_OPTIONS[0]:
                 with st.spinner("正在快速生成设计提案..."):
-                    answer, citations, _, _ = run_direct_rag_request(cocreate_prompt)
+                    answer, citations, _, _, _ = run_direct_rag_request(cocreate_prompt)
             else:
                 stream_placeholder = st.empty()
                 with st.spinner("正在生成设计提案..."):

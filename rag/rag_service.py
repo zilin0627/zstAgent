@@ -21,14 +21,37 @@ from rag.vector_store import VectorStoreService
 from utils.prompt_loader import load_rag_prompts
 
 
+# ================== 改动点 1：扩展术语别名表 ==================
 TERM_ALIASES: dict[str, list[str]] = {
+    # 核心母题别名
     "八菜一汤": ["八菜一汤", "八菜一汤纹样", "混沌花", "混沌花纹", "八菜一汤 又称 混沌花"],
     "混沌花": ["混沌花", "混沌花纹", "八菜一汤", "八菜一汤纹样"],
-    "萨巴天": ["萨巴天", "萨巴天女神", "祖源歌", "创世女神 萨巴天"],
+    "萨巴天": ["萨巴天", "萨巴天女神", "祖源歌", "创世女神 萨巴天", "蜘蛛神"],
+
+    # 纹样类别别名
     "动物纹样": ["动物纹样", "龙 凤 鱼 鸟 蝴蝶 牛 马 鸡 虎", "动物题材 侗绣纹样"],
-    "植物纹样": ["植物纹样", "花草树木 植物题材 侗绣纹样"],
+    "植物纹样": ["植物纹样", "花草树木 植物题材 侗绣纹样", "太阳花纹 榕树纹"],
     "几何纹样": ["几何纹样", "菱形 折线 井纹 八角花 几何图案"],
+    "人物纹样": ["人物纹样", "人形纹", "叙事纹样"],
+    "组合纹样": ["组合纹样", "复合纹样", "龙凤纹 复合母题"],
+
+    # 具体常见纹样别名
+    "龙纹": ["龙纹", "盘龙纹", "盛龙纹", "龙形纹"],
+    "凤鸟纹": ["凤鸟纹", "凤纹", "鸟纹", "新鸿凤纹"],
+    "太阳花纹": ["太阳花纹", "太阳纹", "日纹", "放射花纹"],
+    "月亮花纹": ["月亮花纹", "月纹", "月院花纹", "日月花纹"],
+    "榕树纹": ["榕树纹", "太阳榕树纹", "树纹"],
+    "蝴蝶纹": ["蝴蝶纹", "蝶纹"],
+    "鱼纹": ["鱼纹", "鱼形纹"],
+    "人形纹": ["人形纹", "人物纹", "人纹"],
+    "八角花纹": ["八角花纹", "八瓣花纹", "八角花"],
+
+    # 地域别名
+    "三江": ["三江", "广西三江", "三江侗族自治县"],
+    "从江": ["从江", "贵州从江"],
+    "黎平": ["黎平", "肇兴侗寨", "肇兴"],
 }
+# ========================================================
 
 
 class RagSummarizeService:
@@ -53,12 +76,33 @@ class RagSummarizeService:
     # =========================
     # 1. Query Rewrite
     # =========================
+    def _identify_terms(self, query: str) -> dict[str, list[str]]:
+        """改动点 2：新增术语识别方法"""
+        identified = {}
+        q_lower = query.lower()
+        for term, aliases in TERM_ALIASES.items():
+            # 检查主术语或其任一同义词是否在查询中出现
+            if any(alias.lower() in q_lower for alias in [term] + aliases):
+                identified[term] = aliases
+        return identified
+
     def rewrite_query(self, query: str) -> list[str]:
+        """改动点 3：在改写时融入术语别名"""
         q = (query or "").strip()
         if not q:
             return []
 
         rewrites = [q]
+
+        # ---------- 术语识别与别名扩展 ----------
+        identified_terms = self._identify_terms(q)
+        for term, aliases in identified_terms.items():
+            # 将主术语的别名也作为查询变体加入（最多取两个避免过多）
+            for alias in aliases[:2]:
+                if alias not in rewrites:
+                    rewrites.append(alias)
+        # ---------------------------------------
+
         focus = self._detect_query_focus(q)
         alias_rewrites = self._expand_alias_queries(q)
 
@@ -340,7 +384,22 @@ class RagSummarizeService:
         return round(score, 4)
 
     def _build_answer_query(self, query: str) -> str:
+        """改动点 4：根据识别到的术语微调回答框架"""
+        identified = self._identify_terms(query)
         focus = self._detect_query_focus(query)
+
+        # 特定术语微调
+        if ("八菜一汤" in identified or "混沌花" in identified) and focus == "meaning":
+            return (f"{query}\n\n"
+                    "请重点解释‘八菜一汤/混沌花’的文化寓意，包括与萨巴天女神、创世神话的关联，尽量引用本地文献。")
+        if "动物纹样" in identified and focus == "taxonomy":
+            return (f"{query}\n\n"
+                    "请列举侗绣中常见的动物纹样（如龙、凤、鸟、鱼、蝴蝶等），并简要说明每种纹样的典型特征和常见位置。")
+        if "几何纹样" in identified and focus == "taxonomy":
+            return (f"{query}\n\n"
+                    "请列举侗绣中常见的几何纹样（如菱形、折线、井纹、八角花等），并说明它们在构图中的作用。")
+
+        # 否则走原有逻辑
         if focus == "taxonomy":
             return (
                 f"{query}\n\n"

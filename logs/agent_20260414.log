@@ -177,3 +177,418 @@ Traceback (most recent call last):
     raise SSLError(e, request=request)
 requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
 During task with name 'model' and id 'bd1bc21c-2867-ab30-0e34-c324dadb7d92'
+2026-04-14 14:56:46,449 - agent - WARNING - app.py:785 - [RAG] 模型调用失败，返回友好提示
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\app.py", line 783, in _run_direct_rag_request
+    raw_result = st.session_state.rag_service.rag_summarize_with_citations(prompt)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 816, in rag_summarize_with_citations
+    result = self.run_workflow(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 798, in run_workflow
+    return self.design_plan(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 732, in design_plan
+    payload = self.retrieve_docs_with_meta(query)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 475, in retrieve_docs_with_meta
+    docs = self.retrieve_docs(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 180, in retrieve_docs
+    return self.retriever.invoke(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\retrievers.py", line 222, in invoke
+    result = self._get_relevant_documents(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 1045, in _get_relevant_documents
+    docs = self.vectorstore.similarity_search(query, **kwargs_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 748, in similarity_search
+    docs_and_scores = self.similarity_search_with_score(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 848, in similarity_search_with_score
+    query_embedding = self._embedding_function.embed_query(query)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 170, in embed_query
+    embedding = embed_with_retry(
+                ^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 83, in embed_with_retry
+    return _embed_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 66, in _embed_with_retry
+    resp = embeddings.client.call(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\embeddings\text_embedding.py", line 52, in call
+    return super().call(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-14 16:33:00,751 - agent - WARNING - app.py:873 - [RAG] 模型调用失败，返回友好提示
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\app.py", line 871, in _run_direct_rag_request
+    raw_result = st.session_state.rag_service.rag_summarize_with_citations(prompt)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 816, in rag_summarize_with_citations
+    result = self.run_workflow(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 804, in run_workflow
+    return self.rag_answer(query)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 646, in rag_answer
+    answer = self._invoke_llm(self._build_quality_instruction(self._build_answer_query(query), focus), context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 636, in _invoke_llm
+    return self.chain.invoke({"input": query, "context": context})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3157, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 454, in invoke
+    self.generate_prompt(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1185, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 995, in generate
+    self._generate_with_cache(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1297, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 669, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 540, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 537, in _completion_with_retry
+    resp = self.client.call(**_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\aigc\generation.py", line 181, in call
+    response = super().call(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+2026-04-14 16:33:53,631 - agent - WARNING - app.py:873 - [RAG] 模型调用失败，返回友好提示
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\app.py", line 871, in _run_direct_rag_request
+    raw_result = st.session_state.rag_service.rag_summarize_with_citations(prompt)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 816, in rag_summarize_with_citations
+    result = self.run_workflow(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 804, in run_workflow
+    return self.rag_answer(query)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 642, in rag_answer
+    payload = self.retrieve_docs_with_meta(query)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 475, in retrieve_docs_with_meta
+    docs = self.retrieve_docs(item)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 180, in retrieve_docs
+    return self.retriever.invoke(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\retrievers.py", line 222, in invoke
+    result = self._get_relevant_documents(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\vectorstores\base.py", line 1045, in _get_relevant_documents
+    docs = self.vectorstore.similarity_search(query, **kwargs_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 748, in similarity_search
+    docs_and_scores = self.similarity_search_with_score(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_chroma\vectorstores.py", line 848, in similarity_search_with_score
+    query_embedding = self._embedding_function.embed_query(query)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 170, in embed_query
+    embedding = embed_with_retry(
+                ^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 83, in embed_with_retry
+    return _embed_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\embeddings\dashscope.py", line 66, in _embed_with_retry
+    resp = embeddings.client.call(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\embeddings\text_embedding.py", line 52, in call
+    return super().call(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/embeddings/text-embedding/text-embedding (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
