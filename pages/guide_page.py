@@ -2,6 +2,8 @@ import json
 import requests
 import streamlit as st
 
+from pages.runtime_status import render_runtime_status
+
 
 GUIDE_SAMPLE_QUESTIONS = [
     "侗绣里常见的典型纹样有哪些？各自最容易辨认的特点是什么？",
@@ -94,6 +96,7 @@ def _render_message_block(message, highlight_latest=False):
     role = message.get("role", "assistant")
     content = message.get("content", "")
     citations_payload = message.get("citations")
+    runtime_status = message.get("runtime_status") if role == "assistant" else None
     citation_items = []
     if isinstance(citations_payload, dict):
         citation_items = citations_payload.get("citations", []) or []
@@ -104,6 +107,7 @@ def _render_message_block(message, highlight_latest=False):
         st.markdown(f'<div class="user-bubble">{content}</div>', unsafe_allow_html=True)
     else:
         st.markdown(f'<div class="assistant-bubble">{content}</div>', unsafe_allow_html=True)
+        render_runtime_status(runtime_status)
 
     if citation_items:
         with st.expander("参考资料", expanded=False):
@@ -218,7 +222,15 @@ def render_guide_page(*, run_agent_request_streaming, run_direct_rag_request):
                 answer, citations = "服务暂时不可用，请稍后重试。", None
                 placeholder.markdown(answer)
 
+            runtime_status = st.session_state.get("_last_runtime_status")
             if not citations_on:
                 citations = None
-            st.session_state["messages"].append({"role": "assistant", "content": answer, "citations": citations})
+            st.session_state["messages"].append(
+                {
+                    "role": "assistant",
+                    "content": answer,
+                    "citations": citations,
+                    "runtime_status": runtime_status,
+                }
+            )
             st.rerun()

@@ -663,6 +663,51 @@ def _normalize_thought_label(tool_name: str, tool_text: str) -> str:
     return "正在整理回答思路…"
 
 
+def _render_thought_trace_html(thought_steps: list[str]) -> str:
+    items = []
+    for step in thought_steps:
+        text = str(step or "").strip()
+        if text:
+            items.append(f'<div class="thought-box">{text}</div>')
+    return "".join(items)
+
+
+def _build_runtime_status(*, path: str, allow_web: bool, web_search_called: bool, web_result_count: int, used_local_rag: bool, tool_calls: list[str] | None = None, thought_trace: list[str] | None = None, retrieval_count: int | None = None, confidence: str | None = None, error_notice: dict | None = None) -> dict:
+    tool_calls = tool_calls or []
+    thought_trace = thought_trace or []
+
+    if path == "direct_rag":
+        summary = "本轮使用的是直连 RAG，只参考本地知识库，没有经过联网补充。"
+    elif web_search_called and web_result_count > 0:
+        summary = f"本轮使用的是 Agent 工作流：先查了本地资料，也补充了联网信息，并拿到 {web_result_count} 条可用网页结果。"
+    elif web_search_called:
+        summary = "本轮使用的是 Agent 工作流，也尝试了联网补充，但网页检索没有返回可用结果；当前回答主要仍基于本地资料。"
+    elif allow_web:
+        summary = "本轮使用的是 Agent 工作流，虽然允许联网，但这次问题不需要额外网页补充，回答主要基于本地资料。"
+    else:
+        summary = "本轮使用的是 Agent 工作流，已按设置只使用本地资料，没有进行联网补充。"
+
+    status = {
+        "path": path,
+        "allow_web": allow_web,
+        "web_search_called": web_search_called,
+        "web_result_count": web_result_count,
+        "used_local_rag": used_local_rag,
+        "tool_calls": tool_calls,
+        "thought_trace": thought_trace,
+        "retrieval_count": retrieval_count,
+        "confidence": confidence,
+        "summary": summary,
+    }
+    if error_notice:
+        status["error_notice"] = error_notice
+    return status
+
+
+def _set_last_runtime_status(status: dict | None):
+    st.session_state["_last_runtime_status"] = status
+
+
 def _render_section_heading(title: str, subtitle: str):
     st.markdown(f"### {title}")
     st.caption(subtitle)
@@ -962,6 +1007,10 @@ def _build_network_error_notice(error: Exception) -> dict[str, str]:
 def _run_agent_request_streaming(prompt: str, context: dict, placeholder, thought_placeholder=None):
     response_message = []
     web_citations = []
+    thought_steps: list[str] = []
+    tool_calls: list[str] = []
+    web_search_called = False
+    used_local_rag = False
 
     try:
         response_stream = st.session_state.agent.execute_stream(prompt, context=context)
@@ -970,13 +1019,20 @@ def _run_agent_request_streaming(prompt: str, context: dict, placeholder, though
                 thought_text = chunk[len("[[THOUGHT]]") :].strip()
                 if thought_text.startswith("TOOL::"):
                     _, tool_name, tool_text = thought_text.split("::", 2)
+                    tool_calls.append(tool_name)
+                    normalized_label = _normalize_thought_label(tool_name, tool_text)
+                    thought_steps.append(f"⏳ {normalized_label}")
                     if thought_placeholder is not None:
-                        thought_placeholder.markdown(f'<div class="thought-box">⏳ {_normalize_thought_label(tool_name, tool_text)}</div>', unsafe_allow_html=True)
+                        thought_placeholder.markdown(_render_thought_trace_html(thought_steps), unsafe_allow_html=True)
                     if tool_name == "web_search":
+                        web_search_called = True
                         web_citations = _extract_web_results_from_tool_text(tool_text)
+                    if tool_name == "rag_summarize":
+                        used_local_rag = True
                 else:
+                    thought_steps.append(thought_text)
                     if thought_placeholder is not None:
-                        thought_placeholder.markdown(f'<div class="thought-box">{thought_text}</div>', unsafe_allow_html=True)
+                        thought_placeholder.markdown(_render_thought_trace_html(thought_steps), unsafe_allow_html=True)
                 continue
 
             response_message.append(chunk)
@@ -989,13 +1045,22 @@ def _run_agent_request_streaming(prompt: str, context: dict, placeholder, though
         fallback_answer = notice["message"]
         placeholder.markdown(fallback_answer)
         if thought_placeholder is not None:
-            thought_placeholder.warning("本次未能连通模型服务，已返回诊断提示。")
+            thought_steps.append("⚠️ 本次未能连通模型服务，已返回诊断提示。")
+            thought_placeholder.markdown(_render_thought_trace_html(thought_steps), unsafe_allow_html=True)
+        runtime_status = _build_runtime_status(
+            path="agent",
+            allow_web=bool(context.get("allow_web", False)),
+            web_search_called=web_search_called,
+            web_result_count=len(web_citations),
+            used_local_rag=used_local_rag,
+            tool_calls=tool_calls,
+            thought_trace=thought_steps,
+            error_notice=notice,
+        )
+        _set_last_runtime_status(runtime_status)
         if not context.get("citations_enabled", True):
             return fallback_answer, None, notice
         return fallback_answer, [], notice
-
-    if thought_placeholder is not None:
-        thought_placeholder.success("回答生成完成")
 
     full_text = "".join(response_message).strip()
     citation_payload = _extract_citations(full_text)
@@ -1011,6 +1076,21 @@ def _run_agent_request_streaming(prompt: str, context: dict, placeholder, though
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
     if not context.get("citations_enabled", True):
         citations = None
+
+    thought_steps.append("✅ 回答生成完成")
+    if thought_placeholder is not None:
+        thought_placeholder.markdown(_render_thought_trace_html(thought_steps), unsafe_allow_html=True)
+
+    runtime_status = _build_runtime_status(
+        path="agent",
+        allow_web=bool(context.get("allow_web", False)),
+        web_search_called=web_search_called,
+        web_result_count=len(web_citations),
+        used_local_rag=used_local_rag,
+        tool_calls=tool_calls,
+        thought_trace=thought_steps,
+    )
+    _set_last_runtime_status(runtime_status)
     return answer, citations, None
 
 
@@ -1020,12 +1100,29 @@ def _run_direct_rag_request(prompt: str):
     except Exception as error:
         logger.warning("[RAG] 模型调用失败，返回友好提示", exc_info=True)
         notice = _build_network_error_notice(error)
+        runtime_status = _build_runtime_status(
+            path="direct_rag",
+            allow_web=False,
+            web_search_called=False,
+            web_result_count=0,
+            used_local_rag=True,
+            error_notice=notice,
+        )
+        _set_last_runtime_status(runtime_status)
         return notice["message"], [], None, None, notice
 
     try:
         payload = json.loads(raw_result)
     except Exception:
         cleaned = _clean_answer_text(str(raw_result).strip())
+        runtime_status = _build_runtime_status(
+            path="direct_rag",
+            allow_web=False,
+            web_search_called=False,
+            web_result_count=0,
+            used_local_rag=True,
+        )
+        _set_last_runtime_status(runtime_status)
         return (
             cleaned or "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。",
             None,
@@ -1043,6 +1140,16 @@ def _run_direct_rag_request(prompt: str):
     if not answer:
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"
 
+    runtime_status = _build_runtime_status(
+        path="direct_rag",
+        allow_web=False,
+        web_search_called=False,
+        web_result_count=0,
+        used_local_rag=True,
+        retrieval_count=len(retrieval) if isinstance(retrieval, list) else None,
+        confidence=confidence,
+    )
+    _set_last_runtime_status(runtime_status)
     return answer, citations, retrieval, confidence, system_notice
 # =============================================================
 

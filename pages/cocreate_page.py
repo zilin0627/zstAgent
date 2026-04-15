@@ -1,5 +1,7 @@
 import streamlit as st
 
+from pages.runtime_status import render_runtime_status
+
 
 COCREATE_PROMPT_EXAMPLES = [
     {
@@ -300,12 +302,15 @@ def render_cocreate_page(
             st.session_state["cocreate_result"] = answer
             st.session_state["cocreate_citations"] = citations
             st.session_state["cocreate_debug_notice"] = debug_notice
+            st.session_state["cocreate_runtime_status"] = st.session_state.get("_last_runtime_status")
 
         cocreate_result = st.session_state.get("cocreate_result", "")
         cocreate_citations = st.session_state.get("cocreate_citations")
         cocreate_debug_notice = st.session_state.get("cocreate_debug_notice")
+        cocreate_runtime_status = st.session_state.get("cocreate_runtime_status")
 
         if cocreate_result:
+            render_runtime_status(cocreate_runtime_status)
             st.text_area("提案全文", value=cocreate_result, height=260, key="cocreate_result_text")
             if cocreate_debug_notice:
                 st.warning(cocreate_debug_notice.get("message", "本次生成出现异常。"))
