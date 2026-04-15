@@ -58,7 +58,6 @@ class RagSummarizeService:
     def __init__(self, web_search_fn: Callable[[str], list[dict]] | None = None):
         self.vector_store = VectorStoreService()
         self.retriever = self.vector_store.get_retriever()
-        self._retrieval_cache: dict[str, list[Document]] = {}
 
         self.prompt_text = load_rag_prompts()
         self.prompt_template = PromptTemplate.from_template(self.prompt_text)
@@ -176,15 +175,9 @@ class RagSummarizeService:
     # 2. 文档检索基础能力
     # =========================
     def retrieve_docs(self, query: str) -> list[Document]:
-        normalized_query = " ".join(str(query or "").split()).strip()
-        if normalized_query in self._retrieval_cache:
-            return self._retrieval_cache[normalized_query]
-
         try:
             self.recovery_notice = None
-            docs = self.retriever.invoke(normalized_query)
-            self._retrieval_cache[normalized_query] = docs
-            return docs
+            return self.retriever.invoke(query)
         except Exception as e:
             recovered = self.vector_store.recover_if_hnsw_broken(e)
             if not recovered:
@@ -192,10 +185,7 @@ class RagSummarizeService:
 
             self.recovery_notice = recovered
             self.retriever = self.vector_store.get_retriever()
-            self._retrieval_cache.clear()
-            docs = self.retriever.invoke(normalized_query)
-            self._retrieval_cache[normalized_query] = docs
-            return docs
+            return self.retriever.invoke(query)
 
     def _extract_query_tokens(self, query: str) -> list[str]:
         q = str(query or "").strip()
