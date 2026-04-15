@@ -2,7 +2,7 @@ import json
 import requests
 import streamlit as st
 
-from pages.runtime_status import render_runtime_status
+from runtime_status import render_runtime_status
 
 
 GUIDE_SAMPLE_QUESTIONS = [

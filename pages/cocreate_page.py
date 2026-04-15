@@ -1,6 +1,6 @@
 import streamlit as st
 
-from pages.runtime_status import render_runtime_status
+from runtime_status import render_runtime_status
 
 
 COCREATE_PROMPT_EXAMPLES = [
