@@ -369,6 +369,27 @@ def _inject_global_styles():
             color: #9aa3af !important;
             opacity: 1 !important;
         }
+
+        /* ========== 桌面端底部聊天区：覆盖 Streamlit 默认深色容器 ========== */
+        [data-testid="stChatInput"] {
+            background: #f6f6f1 !important;
+            border-top: 1px solid rgba(32, 33, 36, 0.08) !important;
+        }
+        [data-testid="stChatInput"] > div {
+            background: transparent !important;
+        }
+        [data-testid="stBottomBlockContainer"],
+        [data-testid="stBottom"] {
+            background: #f6f6f1 !important;
+        }
+        [data-testid="stChatInput"] button {
+            background: #ffffff !important;
+            color: #202124 !important;
+            border: 1px solid #e3e7ed !important;
+        }
+        [data-testid="stChatInput"] button svg {
+            fill: #202124 !important;
+        }
         /* 图片自适应：限制最大高度，避免撑爆卡片 */
     img {
         max-height: 240px;
