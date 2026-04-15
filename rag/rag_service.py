@@ -170,7 +170,7 @@ class RagSummarizeService:
                 final_queries.append(normalized_item)
                 seen.add(normalized_item)
 
-        return final_queries[:4]
+        return final_queries[:6]
 
     # =========================
     # 2. 文档检索基础能力
@@ -543,7 +543,7 @@ class RagSummarizeService:
         scored = [{"doc": doc, "score": self._score_doc(query, doc)} for doc in merged_docs]
         scored.sort(key=lambda x: x["score"], reverse=True)
 
-        top_items = scored[:3]
+        top_items = scored[:4]
         final_docs = [item["doc"] for item in top_items]
         final_scores = [item["score"] for item in top_items]
 
