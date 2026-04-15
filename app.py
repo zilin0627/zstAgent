@@ -324,16 +324,41 @@ def _inject_global_styles():
             font-size: 0.8rem;
         }
 
-        /* ========== 按钮紧凑化 ========== */
+        /* ========== 按钮紧凑化 + 明确前景色，避免深浅主题串色 ========== */
         .stButton button, .stFormSubmitButton button {
             font-size: 0.85rem !important;
             padding: 0.3rem 0.9rem !important;
             border-radius: 20px !important;
+            background: #1f2a30 !important;
+            color: #f6f7f4 !important;
+            border: 1px solid #1f2a30 !important;
+            box-shadow: none !important;
+        }
+        .stButton button *, .stFormSubmitButton button * {
+            color: #f6f7f4 !important;
+        }
+        .stButton button:hover, .stFormSubmitButton button:hover {
+            background: #2e5b66 !important;
+            border-color: #2e5b66 !important;
+            color: #ffffff !important;
         }
 
-        /* ========== 输入框、选择框等 ========== */
-        .stTextInput input, .stTextArea textarea, .stSelectbox div {
+        /* ========== 输入框、选择框等：强制浅底深字 ========== */
+        .stTextInput input,
+        .stTextArea textarea,
+        .stSelectbox div[data-baseweb="select"] > div,
+        [data-testid="stChatInput"] textarea,
+        [data-testid="stChatInput"] input {
             font-size: 0.85rem !important;
+            background: rgba(255, 255, 253, 0.96) !important;
+            color: var(--xiu-ink) !important;
+        }
+        .stTextInput input::placeholder,
+        .stTextArea textarea::placeholder,
+        [data-testid="stChatInput"] textarea::placeholder,
+        [data-testid="stChatInput"] input::placeholder {
+            color: var(--xiu-muted) !important;
+            opacity: 1 !important;
         }
         /* 图片自适应：限制最大高度，避免撑爆卡片 */
     img {
