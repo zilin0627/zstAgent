@@ -119,6 +119,18 @@ def _inject_global_styles():
             color: var(--xiu-ink) !important;
             font-size: 0.85rem !important;
         }
+        /* 去掉侧边栏单选前面的黑圆点 */
+        [data-testid="stSidebar"] [data-baseweb="radio"] > div:first-child,
+        [data-testid="stSidebar"] [role="radiogroup"] > label > div:first-child,
+        [data-testid="stSidebar"] input[type="radio"] {
+            display: none !important;
+        }
+        [data-testid="stSidebar"] [data-baseweb="radio"] label {
+            padding-left: 0 !important;
+        }
+        [data-testid="stSidebar"] [data-baseweb="radio"] label > div {
+            gap: 0.25rem !important;
+        }
         [data-testid="stSidebar"] .stCaption {
             color: var(--xiu-muted) !important;
             font-size: 0.75rem !important;
@@ -166,6 +178,16 @@ def _inject_global_styles():
         .stCaption {
             font-size: 0.78rem !important;
             color: var(--xiu-muted) !important;
+        }
+
+        /* 去掉全站默认列表黑圆点，保留自定义内容展示 */
+        ul, ol {
+            list-style: none !important;
+            padding-left: 0 !important;
+            margin-left: 0 !important;
+        }
+        li::marker {
+            content: "" !important;
         }
 
         /* ========== 卡片与面板（紧凑内边距） ========== */
@@ -368,6 +390,31 @@ def _inject_global_styles():
         [data-testid="stChatInput"] input::placeholder {
             color: #9aa3af !important;
             opacity: 1 !important;
+        }
+
+        /* ========== 下拉框弹层：覆盖 BaseWeb 默认深色菜单 ========== */
+        div[data-baseweb="popover"],
+        div[data-baseweb="popover"] * {
+            color: #202124 !important;
+        }
+        div[data-baseweb="popover"] > div,
+        div[data-baseweb="select"] ul,
+        div[data-baseweb="select"] li,
+        div[role="listbox"],
+        div[role="option"] {
+            background: #ffffff !important;
+            color: #202124 !important;
+            border-color: #e3e7ed !important;
+        }
+        div[role="listbox"] {
+            border: 1px solid #e3e7ed !important;
+            border-radius: 12px !important;
+            box-shadow: 0 10px 28px rgba(17, 24, 39, 0.08) !important;
+        }
+        div[role="option"]:hover,
+        div[role="option"][aria-selected="true"] {
+            background: #f3f6fa !important;
+            color: #202124 !important;
         }
 
         /* ========== 桌面端底部聊天区：覆盖 Streamlit 默认深色容器 ========== */
