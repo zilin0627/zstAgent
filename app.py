@@ -119,6 +119,38 @@ def _inject_global_styles():
             color: var(--xiu-ink) !important;
             font-size: 0.85rem !important;
         }
+        /* 单选项做成可见的选中态，避免看不出点的是哪个 */
+        [data-testid="stSidebar"] [data-baseweb="radio"] label,
+        [data-testid="stSidebar"] [role="radiogroup"] label,
+        [data-baseweb="radio"] label,
+        [role="radiogroup"] label {
+            border: 1px solid transparent !important;
+            border-radius: 12px !important;
+            padding: 0.35rem 0.55rem !important;
+            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+        }
+        [data-testid="stSidebar"] [data-baseweb="radio"] label:hover,
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover,
+        [data-baseweb="radio"] label:hover,
+        [role="radiogroup"] label:hover {
+            background: #f5f5f3 !important;
+            border-color: #e5e7eb !important;
+        }
+        [data-testid="stSidebar"] [data-baseweb="radio"] label:has(input:checked),
+        [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked),
+        [data-baseweb="radio"] label:has(input:checked),
+        [role="radiogroup"] label:has(input:checked) {
+            background: #fbe4e4 !important;
+            border-color: #efb3b3 !important;
+            color: #b93838 !important;
+            font-weight: 700 !important;
+        }
+        [data-testid="stSidebar"] [data-baseweb="radio"] label:has(input:checked) *,
+        [data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) *,
+        [data-baseweb="radio"] label:has(input:checked) *,
+        [role="radiogroup"] label:has(input:checked) * {
+            color: #b93838 !important;
+        }
         /* 去掉侧边栏单选前面的黑圆点 */
         [data-testid="stSidebar"] [data-baseweb="radio"] > div:first-child,
         [data-testid="stSidebar"] [role="radiogroup"] > label > div:first-child,

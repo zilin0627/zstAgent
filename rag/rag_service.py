@@ -58,6 +58,7 @@ class RagSummarizeService:
     def __init__(self, web_search_fn: Callable[[str], list[dict]] | None = None):
         self.vector_store = VectorStoreService()
         self.retriever = self.vector_store.get_retriever()
+        self._retrieval_cache: dict[str, list[Document]] = {}
 
         self.prompt_text = load_rag_prompts()
         self.prompt_template = PromptTemplate.from_template(self.prompt_text)
@@ -175,9 +176,15 @@ class RagSummarizeService:
     # 2. 文档检索基础能力
     # =========================
     def retrieve_docs(self, query: str) -> list[Document]:
+        normalized_query = " ".join(str(query or "").split()).strip()
+        if normalized_query in self._retrieval_cache:
+            return self._retrieval_cache[normalized_query]
+
         try:
             self.recovery_notice = None
-            return self.retriever.invoke(query)
+            docs = self.retriever.invoke(normalized_query)
+            self._retrieval_cache[normalized_query] = docs
+            return docs
         except Exception as e:
             recovered = self.vector_store.recover_if_hnsw_broken(e)
             if not recovered:
@@ -185,7 +192,10 @@ class RagSummarizeService:
 
             self.recovery_notice = recovered
             self.retriever = self.vector_store.get_retriever()
-            return self.retriever.invoke(query)
+            self._retrieval_cache.clear()
+            docs = self.retriever.invoke(normalized_query)
+            self._retrieval_cache[normalized_query] = docs
+            return docs
 
     def _extract_query_tokens(self, query: str) -> list[str]:
         q = str(query or "").strip()
@@ -262,7 +272,7 @@ class RagSummarizeService:
             if normalized_item and normalized_item not in seen:
                 final_queries.append(normalized_item)
                 seen.add(normalized_item)
-        return final_queries[:6]
+        return final_queries[:4]
 
     def _detect_query_focus(self, query: str) -> str:
         q = str(query or "").strip()
@@ -533,7 +543,7 @@ class RagSummarizeService:
         scored = [{"doc": doc, "score": self._score_doc(query, doc)} for doc in merged_docs]
         scored.sort(key=lambda x: x["score"], reverse=True)
 
-        top_items = scored[:4]
+        top_items = scored[:3]
         final_docs = [item["doc"] for item in top_items]
         final_scores = [item["score"] for item in top_items]
 
