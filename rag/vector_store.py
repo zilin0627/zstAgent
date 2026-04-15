@@ -164,17 +164,27 @@ class VectorStoreService:
         title, author = self._parse_title_author_from_filename(file_name)
         page_docs = []
         for page_index, raw_doc in enumerate(raw_documents, start=1):
-            page = raw_doc.metadata.get("page", page_index)
+            raw_metadata = dict(raw_doc.metadata or {})
+            page = raw_metadata.get("page", page_index)
             text = self._normalize_text(raw_doc.page_content or "")
             if not text:
                 continue
             page_docs.append(Document(page_content=text, metadata={
+                **raw_metadata,
                 "source": file_path,
                 "file_name": file_name,
                 "title": title,
                 "author": author,
                 "page": page,
-                "section": "原始页内容",
+                "section": raw_metadata.get("section") or "原始页内容",
+                "page_number": raw_metadata.get("page_number", page),
+                "element_type": raw_metadata.get("element_type", "text"),
+                "source_parser": raw_metadata.get("source_parser", "unknown"),
+                "parser_strategy": raw_metadata.get("parser_strategy", ""),
+                "has_ocr": raw_metadata.get("has_ocr", False),
+                "has_table": raw_metadata.get("has_table", False),
+                "table_html": raw_metadata.get("table_html", ""),
+                "has_image": raw_metadata.get("has_image", False),
             }))
         chunk_docs = self.spliter.split_documents(page_docs)
         preserved_docs = []

@@ -1,0 +1,104 @@
+2026-04-15 01:12:48,185 - agent - WARNING - file_handler.py:128 - [pdf_loader]Unstructured加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf | An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2026-04-15 01:12:50,400 - agent - INFO - file_handler.py:201 - [pdf_loader]PyPDFLoader回退读取成功: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf，共 5 页
+2026-04-15 01:15:32,100 - agent - WARNING - file_handler.py:128 - [pdf_loader]Unstructured加载失败，尝试回退读取: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf | An error happened while trying to locate the file on the Hub and we cannot find the requested files in the local cache. Please check your connection and try again or make sure your Internet connection is on.
+2026-04-15 01:15:32,715 - agent - INFO - file_handler.py:201 - [pdf_loader]PyPDFLoader回退读取成功: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf，共 5 页
+2026-04-15 01:15:43,522 - agent - INFO - vector_store.py:144 - [加载知识库]文件 E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf 加载完成，共写入 36 个 chunk
+2026-04-15 01:15:43,576 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf
+2026-04-15 01:15:43,591 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-15 01:15:43,622 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-15 01:15:44,310 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-15 01:15:44,343 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf
+2026-04-15 01:15:44,420 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf
+2026-04-15 01:15:44,478 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf
+2026-04-15 01:15:44,502 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf
+2026-04-15 01:15:44,524 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf
+2026-04-15 01:15:44,584 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf
+2026-04-15 01:15:44,644 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf
+2026-04-15 01:15:44,807 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-15 01:15:44,877 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-15 02:04:02,908 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\贵州黎平侗族刺绣的文化结构与功能_杨再旺.pdf
+2026-04-15 02:04:02,943 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于三江侗族剪纸视觉特征的设计分析与智能生成_崔誉丹.pdf
+2026-04-15 02:04:02,957 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\基于用户体验的侗族刺绣APP交互设计研究_黄天瑶.pdf
+2026-04-15 02:04:02,986 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf
+2026-04-15 02:04:03,480 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\三江侗族刺绣纹样在文创产品设计中的应用与实践研究——以三江侗族丝巾设计为例_张文州.pdf
+2026-04-15 02:04:03,512 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\肇兴侗寨刺绣纹样的美学特征分析_左小敏.pdf
+2026-04-15 02:04:03,590 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\产业化背景下三江侗族刺绣品牌视觉设计研究_黄天瑶.pdf
+2026-04-15 02:04:03,645 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗绣传统纹样数字化应用研究_李源.pdf
+2026-04-15 02:04:03,671 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样创新设计研究_覃小容.pdf
+2026-04-15 02:04:03,699 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\从江侗族刺绣纹样研究_邓惠文.pdf
+2026-04-15 02:04:03,726 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\侗族“八菜一汤”刺绣纹样解析及创新运用研究_刘佳琪.pdf
+2026-04-15 02:04:03,780 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\侗族服饰与纹样整理.pdf
+2026-04-15 02:04:03,881 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.pdf
+2026-04-15 02:04:03,954 - agent - INFO - vector_store.py:124 - [加载知识库]该文件内容已经存在知识库内，跳过: E:\github project\wxyAgent\data/dong_embroidery\广西三江侗族织绣纹样形意解构与创新设计_吴婷婷.docx
+2026-04-15 02:42:50,626 - agent - WARNING - app.py:885 - [RAG] 模型调用失败，返回友好提示
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\app.py", line 883, in _run_direct_rag_request
+    raw_result = st.session_state.rag_service.rag_summarize_with_citations(prompt)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 861, in rag_summarize_with_citations
+    result = self.run_workflow(query)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 843, in run_workflow
+    return self.design_plan(query)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 800, in design_plan
+    answer = self._invoke_llm(design_query, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\rag\rag_service.py", line 681, in _invoke_llm
+    return self.chain.invoke({"input": query, "context": context})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 3157, in invoke
+    input_ = context.run(step.invoke, input_, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 454, in invoke
+    self.generate_prompt(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1185, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 995, in generate
+    self._generate_with_cache(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1297, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 669, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 540, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 538, in _completion_with_retry
+    return check_response(resp)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\llms\tongyi.py", line 67, in check_response
+    raise HTTPError(
+          ^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\exceptions.py", line 23, in __init__
+    if response is not None and not self.request and hasattr(response, "request"):
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\dashscope_response.py", line 62, in __getattr__
+    return self[attr]
+           ~~~~^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\dashscope_response.py", line 18, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'request'

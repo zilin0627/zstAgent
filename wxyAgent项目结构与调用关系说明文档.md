@@ -717,3 +717,174 @@ pages/guide_page.py 展示最终结果与引用
 如果从项目表达角度概括，可以将其理解为：
 
 > 一个围绕侗族刺绣纹样展开的“知识理解 + AI 导览 + 设计转化 + 场景落地”的垂直领域 AI 辅助设计平台。
+
+---
+
+## 九、项目架构图与调用流程图
+
+## 9.1 项目整体架构图
+
+```mermaid
+graph TD
+    A[用户 / 使用者] --> B[Streamlit 前端 app.py]
+    A --> C[FastAPI 接口 api_server.py]
+
+    B --> D[pages 页面层]
+    D --> D1[guide_page.py]
+    D --> D2[pattern_page.py]
+    D --> D3[cocreate_page.py]
+    D --> D4[cultural_page.py]
+    D --> D5[ai_workflow_page.py]
+    D --> D6[scenario_page.py]
+
+    B --> E[Agent 编排层]
+    C --> E
+    B --> F[RAG 服务层]
+    C --> F
+
+    E --> E1[react_agent.py]
+    E1 --> E2[agent_tools.py]
+    E1 --> E3[middleware.py]
+
+    E2 --> F
+    E2 --> G[联网搜索 web_search]
+
+    F --> F1[rag_service.py]
+    F1 --> F2[vector_store.py]
+    F2 --> H[chroma_db 向量库]
+    F2 --> I[data/dong_embroidery 原始资料]
+
+    B --> J[data/platform 结构化页面数据]
+    D --> K[assets 静态素材]
+
+    L[config 配置层] --> E
+    L --> F
+    M[prompts 提示词层] --> E
+    M --> F
+    N[model 模型工厂] --> E
+    N --> F
+    O[utils 通用工具层] --> E
+    O --> F
+```
+
+### 图示说明
+
+这张图体现了项目的六层结构：
+
+1. **入口层**：`app.py` 与 `api_server.py`
+2. **页面层**：`pages/` 下各页面
+3. **智能编排层**：`agent/`
+4. **检索增强层**：`rag/`
+5. **数据与素材层**：`data/`、`assets/`、`chroma_db/`
+6. **基础支撑层**：`config/`、`prompts/`、`model/`、`utils/`
+
+---
+
+## 9.2 用户在导览页提问时的调用流程图
+
+```mermaid
+flowchart TD
+    A[用户在 guide_page 输入问题] --> B[pages/guide_page.py 收集输入]
+    B --> C{当前回答策略}
+
+    C -->|快速导览| D[app.py 调用 run_direct_rag_request]
+    C -->|智能导览| E[app.py 调用 run_agent_request_streaming]
+
+    D --> F[rag/rag_service.py]
+    F --> G[vector_store 获取 retriever]
+    G --> H[chroma_db 检索相关资料]
+    H --> I[模型总结 answer + citations]
+    I --> J[app.py 清洗结果]
+    J --> K[guide_page 展示回答与引用]
+
+    E --> L[react_agent.py 构造 Agent 输入]
+    L --> M[middleware 按 mode 切换 prompt]
+    M --> N[classify_intent 判断问题类型]
+    N --> O{是否需要更多工具}
+    O -->|本地知识| P[调用 rag_summarize]
+    O -->|联网补充| Q[调用 web_search]
+    P --> R[Agent 汇总答案]
+    Q --> R
+    R --> S[app.py 解析引用与清洗输出]
+    S --> K
+```
+
+### 图示说明
+
+这张图把导览页的两条主路径区分开了：
+
+- **快速导览**：直接走本地 RAG，路径更短，响应更快
+- **智能导览**：先进入 Agent，再决定调用哪些工具，更适合复杂问题
+
+---
+
+## 9.3 本地知识库构建流程图
+
+```mermaid
+flowchart TD
+    A[data/dong_embroidery 原始资料] --> B[utils/file_handler.py 读取文件]
+    B --> C[rag/vector_store.py 清洗文本]
+    C --> D[去页码 / 去目录 / 去尾部噪音]
+    D --> E[切分为 chunks]
+    E --> F[补充 metadata]
+    F --> G[embedding 模型向量化]
+    G --> H[chroma_db 本地向量库存储]
+    H --> I[rag/rag_service.py 检索使用]
+```
+
+### 图示说明
+
+这张图强调的是：
+
+- 侗绣论文和资料不是直接给模型看
+- 而是先经过清洗、切分、向量化
+- 再进入 `chroma_db/` 供后续问答检索使用
+
+---
+
+## 9.4 页面、数据和素材映射图
+
+```mermaid
+graph LR
+    A[pages/pattern_page.py] --> B[data/platform/pattern_atlas.json]
+    A --> C[data/platform/pattern_scans.json]
+    A --> D[assets/patterns]
+    A --> E[assets/scans]
+
+    F[pages/cultural_page.py] --> G[data/platform/cultural_showcase.json]
+    F --> H[assets/showcase/postcards]
+    F --> I[assets/showcase/mockups]
+    F --> J[assets/showcase/generated]
+
+    K[pages/ai_workflow_page.py] --> L[data/platform/ai_workflow.json]
+    K --> M[assets/workflow/boards]
+
+    N[pages/cocreate_page.py] --> B
+    N --> C
+    N --> O[Agent / RAG 能力]
+
+    P[pages/guide_page.py] --> Q[app.py 请求封装]
+    Q --> O
+```
+
+### 图示说明
+
+这张图适合解释“页面不是写死内容，而是从 JSON 数据和素材目录中拼装出来的”。
+
+---
+
+## 十、文档使用建议
+
+这份文档可以直接用于以下场景：
+
+1. **项目答辩材料底稿**：帮助梳理项目结构与模块关系
+2. **团队交接文档**：帮助新成员快速理解目录分工
+3. **代码阅读入口文档**：帮助先看结构，再看实现细节
+4. **比赛/面试说明材料**：用于说明项目并非单纯页面展示，而是具备知识库、Agent 与设计工作台的完整系统
+
+如果后续项目继续扩展，建议优先同步更新以下章节：
+
+- 第二章：根目录文件说明
+- 第三章：目录结构与职责说明
+- 第六章：页面、数据和素材映射关系
+- 第九章：架构图与调用流程图

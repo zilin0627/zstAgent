@@ -307,6 +307,50 @@ class RagSummarizeService:
         ]
         return any(marker in section or marker in content for marker in background_markers)
 
+    def _off_topic_penalty(self, query: str, doc: Document) -> float:
+        q = str(query or "").strip()
+        md = doc.metadata or {}
+        section = str(md.get("section", ""))
+        topic = str(md.get("topic", ""))
+        knowledge_layer = str(md.get("knowledge_layer", ""))
+        content = (doc.page_content or "")[:1200]
+        source_text = " ".join(
+            str(md.get(key, ""))
+            for key in ["source", "file_name", "title", "section", "topic", "keywords", "knowledge_layer", "region"]
+        )
+        text = f"{section}\n{topic}\n{knowledge_layer}\n{source_text}\n{content}"
+
+        embroidery_core_markers = [
+            "侗绣", "侗族刺绣", "侗族织绣", "纹样", "图案", "龙纹", "凤纹", "鸟纹", "鱼纹",
+            "八菜一汤", "混沌花", "服饰", "头帕", "背带", "鞋面", "肇兴", "三江", "从江", "黎平",
+        ]
+        theory_noise_markers = [
+            "莫里斯", "符号学", "语义学", "语用学", "语构学", "三分法", "形式美法则",
+            "用户体验", "交互设计", "app交互", "biggan", "cyclegan", "gan", "生成对抗网络",
+            "模式坍塌", "wasserstein", "智能生成", "实验一", "实验二", "数据拟合",
+        ]
+
+        has_core = any(marker in text for marker in embroidery_core_markers)
+        penalty = 0.0
+
+        for marker in theory_noise_markers:
+            if marker in text:
+                penalty += 0.9 if has_core else 1.4
+
+        if any(marker in text for marker in ["莫里斯", "符号学", "语义学", "语用学", "语构学", "biggan", "cyclegan", "生成对抗网络"]):
+            if not any(marker in q for marker in ["符号学", "设计理论", "交互", "生成", "ai", "算法"]):
+                penalty += 2.2
+
+        if any(marker in text for marker in ["实验一", "实验二", "训练结果", "模型训练", "数据集构建"]):
+            if not any(marker in q for marker in ["生成", "设计", "算法", "模型"]):
+                penalty += 1.6
+
+        if any(marker in text for marker in ["用户体验", "交互设计", "app交互"]):
+            if not any(marker in q for marker in ["交互", "app", "用户体验", "界面"]):
+                penalty += 1.8
+
+        return round(min(penalty, 6.0), 4)
+
     def _query_focus_adjustment(self, query: str, doc: Document) -> float:
         focus = self._detect_query_focus(query)
         if focus == "general":
@@ -456,6 +500,7 @@ class RagSummarizeService:
                 score += 0.35 if len(tok) >= 4 else 0.2
 
         score += self._query_focus_adjustment(q, doc)
+        score -= self._off_topic_penalty(q, doc)
 
         if md.get("source") or md.get("file_path") or md.get("path"):
             score += 0.2

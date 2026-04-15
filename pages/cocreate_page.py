@@ -281,11 +281,11 @@ def render_cocreate_page(
 
             if generation_mode == GENERATION_OPTIONS[0]:
                 with st.spinner("正在快速生成设计提案..."):
-                    answer, citations, _, _, _ = run_direct_rag_request(cocreate_prompt)
+                    answer, citations, _, _, debug_notice = run_direct_rag_request(cocreate_prompt)
             else:
                 stream_placeholder = st.empty()
                 with st.spinner("正在生成设计提案..."):
-                    answer, citations = run_agent_request_streaming(
+                    answer, citations, debug_notice = run_agent_request_streaming(
                         cocreate_prompt,
                         {
                             "mode": "research",
@@ -299,12 +299,20 @@ def render_cocreate_page(
 
             st.session_state["cocreate_result"] = answer
             st.session_state["cocreate_citations"] = citations
+            st.session_state["cocreate_debug_notice"] = debug_notice
 
         cocreate_result = st.session_state.get("cocreate_result", "")
         cocreate_citations = st.session_state.get("cocreate_citations")
+        cocreate_debug_notice = st.session_state.get("cocreate_debug_notice")
 
         if cocreate_result:
             st.text_area("提案全文", value=cocreate_result, height=260, key="cocreate_result_text")
+            if cocreate_debug_notice:
+                st.warning(cocreate_debug_notice.get("message", "本次生成出现异常。"))
+                detail = cocreate_debug_notice.get("detail")
+                if detail:
+                    with st.expander("查看本次调试信息", expanded=False):
+                        st.code(detail)
             _render_result_sections(cocreate_result)
             _render_reference_citations(cocreate_citations)
         else:

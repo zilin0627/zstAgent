@@ -88,12 +88,14 @@ def _inject_global_styles():
             max-width: 1280px;
         }
 
-        /* ========== 隐藏顶部白色横条 ========== */
+        /* ========== 保留侧边栏开关，只弱化顶部条 ========== */
         header[data-testid="stHeader"] {
-            display: none !important;
+            background: transparent !important;
+            border-bottom: none !important;
+            height: auto !important;
         }
         .main .block-container {
-            padding-top: 1rem !important;
+            padding-top: 0.6rem !important;
         }
         /* =================================== */
         
@@ -803,6 +805,7 @@ def _render_homepage():
 def _build_network_error_notice(error: Exception) -> dict[str, str]:
     message = str(error).strip()
     lower_message = message.lower()
+    error_type = type(error).__name__
 
     if isinstance(error, requests.exceptions.SSLError) or "ssl" in lower_message:
         user_message = "当前大模型服务的 HTTPS 连接异常，请检查网络、代理或稍后重试。"
@@ -813,10 +816,11 @@ def _build_network_error_notice(error: Exception) -> dict[str, str]:
     else:
         user_message = "当前大模型服务暂时不可用，请稍后重试。"
 
+    debug_detail = f"{error_type}: {message}".strip(": ")[:300]
     return {
         "code": "model_network_error",
         "message": user_message,
-        "detail": message[:300],
+        "detail": debug_detail,
     }
 
 
