@@ -62,22 +62,20 @@ def _inject_global_styles():
         <style>
         /* ========== 全局基础 ========== */
         :root {
-            --xiu-ink: #1f2a30;
-            --xiu-muted: #61717a;
-            --xiu-accent: #2e5b66;
-            --xiu-accent-soft: #dbe9ea;
-            --xiu-line: rgba(46, 91, 102, 0.12);
-            --xiu-shadow: 0 8px 18px rgba(35, 56, 64, 0.04);
-            --xiu-panel: rgba(253, 253, 250, 0.78);
-            --xiu-panel-strong: rgba(255, 255, 253, 0.96);
+            --xiu-ink: #202124;
+            --xiu-muted: #4b5563;
+            --xiu-accent: #d84c4c;
+            --xiu-accent-soft: #fbe4e4;
+            --xiu-line: rgba(32, 33, 36, 0.10);
+            --xiu-shadow: 0 6px 16px rgba(17, 24, 39, 0.03);
+            --xiu-panel: rgba(255, 255, 255, 0.92);
+            --xiu-panel-strong: rgba(255, 255, 255, 0.98);
         }
 
         /* 整体背景 */
         .stApp {
             background:
-                radial-gradient(circle at 0% 0%, rgba(180, 214, 218, 0.18), transparent 24%),
-                radial-gradient(circle at 100% 10%, rgba(232, 220, 195, 0.15), transparent 24%),
-                linear-gradient(180deg, #f6f7f4 0%, #f2f4ef 100%);
+                linear-gradient(180deg, #f8f8f4 0%, #f6f6f1 100%);
             color: var(--xiu-ink);
         }
 
@@ -102,8 +100,8 @@ def _inject_global_styles():
 
         /* ========== 侧边栏紧凑化 ========== */
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #eef3f1 0%, #e8eeeb 100%);
-            border-right: 1px solid rgba(46, 91, 102, 0.08);
+            background: #f3f5f4;
+            border-right: 1px solid rgba(32, 33, 36, 0.08);
             min-width: 240px !important;
             max-width: 260px !important;
         }
@@ -156,6 +154,11 @@ def _inject_global_styles():
         }
 
         /* ========== 正文与辅助文字 ========== */
+        h1, h2, h3, h4, h5, h6,
+        p, li, label, span, div,
+        .stMarkdown, .stText {
+            color: var(--xiu-ink);
+        }
         p, li, .stMarkdown, .stText {
             font-size: 0.88rem !important;
             line-height: 1.5 !important;
@@ -185,7 +188,7 @@ def _inject_global_styles():
         }
         .xiu-card, .xiu-strip, .xiu-gallery, .xiu-module-row {
             background: var(--xiu-panel);
-            border: 1px solid var(--xiu-line);
+            border: 1px solid rgba(32, 33, 36, 0.06);
             border-radius: 14px;
             box-shadow: var(--xiu-shadow);
             backdrop-filter: blur(8px);
@@ -285,62 +288,66 @@ def _inject_global_styles():
 
         /* ========== 对话气泡（紧凑版） ========== */
         .user-bubble {
-            background: #e9f2f0;
+            background: #eef6fb;
+            color: #202124;
             padding: 0.6rem 0.9rem;
             border-radius: 16px 16px 4px 16px;
             margin: 0.4rem 0;
             max-width: 85%;
             margin-left: auto;
-            border: 1px solid #cbdcd9;
+            border: 1px solid #d7e6f1;
             font-size: 0.88rem;
             line-height: 1.5;
         }
         .assistant-bubble {
-            background: #ffffffd9;
+            background: #ffffff;
+            color: #202124;
             padding: 0.6rem 0.9rem;
             border-radius: 16px 16px 16px 4px;
             margin: 0.4rem 0;
             max-width: 85%;
-            border: 1px solid #d4e3e0;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
             font-size: 0.88rem;
             line-height: 1.5;
         }
         .thought-box {
-            background: #f8f5e9;
+            background: #faf6ee;
             padding: 0.4rem 0.8rem;
             border-radius: 8px;
-            border-left: 3px solid #b0a28a;
+            border-left: 3px solid #c9ab7a;
             margin: 0.3rem 0;
             font-size: 0.8rem;
-            color: #4d4436;
+            color: #5b4630;
         }
 
         details {
-            background: #fafaf8;
+            background: #fbfbf8;
+            border: 1px solid #ece7dd;
             border-radius: 10px;
             padding: 0.4rem 0.8rem;
             margin-top: 0.5rem;
             font-size: 0.8rem;
+            color: #202124;
         }
 
         /* ========== 按钮紧凑化 + 明确前景色，避免深浅主题串色 ========== */
         .stButton button, .stFormSubmitButton button {
             font-size: 0.85rem !important;
             padding: 0.3rem 0.9rem !important;
-            border-radius: 20px !important;
-            background: #1f2a30 !important;
-            color: #f6f7f4 !important;
-            border: 1px solid #1f2a30 !important;
+            border-radius: 999px !important;
+            background: #ffffff !important;
+            color: #202124 !important;
+            border: 1px solid #e5e7eb !important;
             box-shadow: none !important;
         }
         .stButton button *, .stFormSubmitButton button * {
-            color: #f6f7f4 !important;
+            color: #202124 !important;
         }
         .stButton button:hover, .stFormSubmitButton button:hover {
-            background: #2e5b66 !important;
-            border-color: #2e5b66 !important;
-            color: #ffffff !important;
+            background: #f5f5f3 !important;
+            border-color: #d7dce2 !important;
+            color: #202124 !important;
         }
 
         /* ========== 输入框、选择框等：强制浅底深字 ========== */
@@ -350,14 +357,16 @@ def _inject_global_styles():
         [data-testid="stChatInput"] textarea,
         [data-testid="stChatInput"] input {
             font-size: 0.85rem !important;
-            background: rgba(255, 255, 253, 0.96) !important;
-            color: var(--xiu-ink) !important;
+            background: #f8f9fb !important;
+            color: #202124 !important;
+            border: 1px solid #e3e7ed !important;
+            border-radius: 12px !important;
         }
         .stTextInput input::placeholder,
         .stTextArea textarea::placeholder,
         [data-testid="stChatInput"] textarea::placeholder,
         [data-testid="stChatInput"] input::placeholder {
-            color: var(--xiu-muted) !important;
+            color: #9aa3af !important;
             opacity: 1 !important;
         }
         /* 图片自适应：限制最大高度，避免撑爆卡片 */
