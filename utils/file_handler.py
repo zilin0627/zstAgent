@@ -1,14 +1,12 @@
-import hashlib
-import os
-from typing import Any
 
-import pymupdf
-from docx import Document as DocxDocument
+import os
+import hashlib
+from utils.logger_handler import logger
 from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from pypdf import PdfReader
-
-from utils.logger_handler import logger
+import pymupdf
+from docx import Document as DocxDocument
 
 
 def get_file_md5_hex(file_path: str) -> str:
@@ -19,22 +17,27 @@ def get_file_md5_hex(file_path: str) -> str:
     if not os.path.exists(file_path):
         logger.error(f"[md5计算]文件不存在: {file_path}")
         return None
-
+    
     if not os.path.isfile(file_path):
         logger.error(f"[md5计算]路径不是文件: {file_path}")
         return None
-
+    
     md5_obj = hashlib.md5()
     chunk_size = 4096  # 4KB 读取文件, 避免内存溢出
     try:
-        with open(file_path, "rb") as f:
+        with open(file_path, 'rb') as f:
             while chunk := f.read(chunk_size):  # 按块读取大文件
-                md5_obj.update(chunk)  # 增量更新MD5哈希值
+                md5_obj.update(chunk)   # 增量更新MD5哈希值
+            
             return md5_obj.hexdigest()
     except Exception as e:
         logger.error(f"[md5计算]读取文件 {file_path} 时出错: {str(e)}")
         return None
+    
+    md5_hex = md5_obj.hexdigest()
+    return md5_hex
 
+    chunk_size = 4096  # 4KB 读取文件
 
 def listdir_with_allowed_type(dir_path: str, allowed_types: tuple[str]):
     """
@@ -45,65 +48,13 @@ def listdir_with_allowed_type(dir_path: str, allowed_types: tuple[str]):
     if not os.path.isdir(dir_path):
         logger.error(f"[listdir_with_allowed_type]路径不是目录: {dir_path}")
         return []
-
+    
     for root, _, files in os.walk(dir_path):
         for file in files:
             if file.endswith(allowed_types):  # 检查文件是否以允许的类型结尾
                 allowed_files.append(os.path.join(root, file))
-
+    
     return allowed_files
-
-
-def _normalize_page_number(value: Any) -> int | None:
-    if isinstance(value, int):
-        return value
-    if isinstance(value, str) and value.isdigit():
-        return int(value)
-    return None
-
-
-def _decorate_documents(
-    docs: list[Document],
-    *,
-    source: str,
-    parser_name: str,
-    parser_strategy: str = "",
-    has_ocr: bool = False,
-) -> list[Document]:
-    decorated_docs: list[Document] = []
-    for page_index, doc in enumerate(docs, start=1):
-        metadata = dict(doc.metadata or {})
-        page_number = _normalize_page_number(
-            metadata.get("page_number", metadata.get("page", page_index))
-        )
-        element_type = str(
-            metadata.get("category")
-            or metadata.get("element_type")
-            or metadata.get("type")
-            or "text"
-        )
-        text_as_html = metadata.get("text_as_html") or metadata.get("table_as_html") or ""
-        metadata.update(
-            {
-                "source": source,
-                "page": page_number if page_number is not None else page_index,
-                "page_number": page_number if page_number is not None else page_index,
-                "element_type": element_type,
-                "source_parser": parser_name,
-                "parser_strategy": parser_strategy,
-                "has_ocr": has_ocr,
-                "has_table": element_type.lower() == "table",
-                "table_html": text_as_html,
-                "has_image": element_type.lower() in {"image", "figurecaption"},
-            }
-        )
-        decorated_docs.append(Document(page_content=doc.page_content, metadata=metadata))
-    return decorated_docs
-
-
-def _pypdf_loader(file_path: str, password: str = None) -> list[Document]:
-    docs = PyPDFLoader(file_path, password=password).load()
-    return _decorate_documents(docs, source=file_path, parser_name="pypdfloader")
 
 
 def _fallback_pdf_reader(file_path: str, password: str = None) -> list[Document]:
@@ -117,16 +68,21 @@ def _fallback_pdf_reader(file_path: str, password: str = None) -> list[Document]
             logger.warning(f"[pdf_loader]PDF解密尝试失败，继续尝试直接读取: {file_path} | {str(decrypt_error)}")
 
     docs: list[Document] = []
-    for page_index, page in enumerate(reader.pages, start=1):
+    for page_index, page in enumerate(reader.pages):
         try:
             text = page.extract_text() or ""
         except Exception as page_error:
-            logger.warning(f"[pdf_loader]PDF第 {page_index} 页提取失败，跳过: {file_path} | {str(page_error)}")
+            logger.warning(f"[pdf_loader]PDF第 {page_index + 1} 页提取失败，跳过: {file_path} | {str(page_error)}")
             text = ""
         if not text.strip():
             continue
-        docs.append(Document(page_content=text, metadata={"source": file_path, "page": page_index}))
-    return _decorate_documents(docs, source=file_path, parser_name="pypdf")
+        docs.append(
+            Document(
+                page_content=text,
+                metadata={"source": file_path, "page": page_index},
+            )
+        )
+    return docs
 
 
 def _fallback_pymupdf_reader(file_path: str) -> list[Document]:
@@ -150,12 +106,12 @@ def _fallback_pymupdf_reader(file_path: str) -> list[Document]:
             docs.append(
                 Document(
                     page_content=text,
-                    metadata={"source": file_path, "page": page_index + 1},
+                    metadata={"source": file_path, "page": page_index},
                 )
             )
     finally:
         pdf.close()
-    return _decorate_documents(docs, source=file_path, parser_name="pymupdf")
+    return docs
 
 
 def pdf_loader(file_path: str, password: str = None) -> list[Document]:
@@ -164,12 +120,9 @@ def pdf_loader(file_path: str, password: str = None) -> list[Document]:
     传入PDF文件路径，返回PDF文件的内容列表
     """
     try:
-        docs = _pypdf_loader(file_path, password=password)
-        if docs:
-            logger.info(f"[pdf_loader]PyPDFLoader读取成功: {file_path}，共 {len(docs)} 页")
-            return docs
+        return PyPDFLoader(file_path, password=password).load()
     except Exception as e:
-        logger.warning(f"[pdf_loader]PyPDFLoader加载失败，尝试继续回退读取: {file_path} | {str(e)}")
+        logger.warning(f"[pdf_loader]PyPDFLoader加载失败，尝试回退读取: {file_path} | {str(e)}")
 
     try:
         docs = _fallback_pdf_reader(file_path, password=password)
@@ -197,8 +150,7 @@ def txt_loader(file_path: str) -> list[Document]:
     传入TXT文件路径，返回TXT文件的内容列表
     """
     try:
-        docs = TextLoader(file_path, encoding="utf-8").load()
-        return _decorate_documents(docs, source=file_path, parser_name="text")
+        return TextLoader(file_path, encoding="utf-8").load()
     except Exception as e:
         logger.error(f"[txt_loader]加载TXT文件 {file_path} 时出错: {str(e)}")
         return None
@@ -210,8 +162,7 @@ def docx_loader(file_path: str) -> list[Document]:
         text = "\n".join(p.text for p in doc.paragraphs if p.text and p.text.strip())
         if not text.strip():
             return []
-        docs = [Document(page_content=text, metadata={"source": file_path, "page": 1})]
-        return _decorate_documents(docs, source=file_path, parser_name="docx")
+        return [Document(page_content=text, metadata={"source": file_path, "page": 0})]
     except Exception as e:
         logger.error(f"[docx_loader]加载DOCX文件 {file_path} 时出错: {str(e)}")
         return None
