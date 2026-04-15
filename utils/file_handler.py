@@ -5,14 +5,10 @@ from typing import Any
 import pymupdf
 from docx import Document as DocxDocument
 from langchain_core.documents import Document
-from langchain_community.document_loaders import PyPDFLoader, TextLoader, UnstructuredPDFLoader
+from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from pypdf import PdfReader
 
 from utils.logger_handler import logger
-
-
-UNSTRUCTURED_PDF_STRATEGY = "hi_res"
-UNSTRUCTURED_PDF_MODE = "elements"
 
 
 def get_file_md5_hex(file_path: str) -> str:
@@ -105,30 +101,6 @@ def _decorate_documents(
     return decorated_docs
 
 
-def unstructured_pdf_loader(file_path: str) -> list[Document]:
-    try:
-        loader = UnstructuredPDFLoader(
-            file_path,
-            mode=UNSTRUCTURED_PDF_MODE,
-            strategy=UNSTRUCTURED_PDF_STRATEGY,
-            infer_table_structure=True,
-        )
-        docs = loader.load()
-        if not docs:
-            return []
-        logger.info(f"[pdf_loader]Unstructured加载成功: {file_path}，共 {len(docs)} 个元素")
-        return _decorate_documents(
-            docs,
-            source=file_path,
-            parser_name="unstructured",
-            parser_strategy=UNSTRUCTURED_PDF_STRATEGY,
-            has_ocr=True,
-        )
-    except Exception as e:
-        logger.warning(f"[pdf_loader]Unstructured加载失败，尝试回退读取: {file_path} | {str(e)}")
-        return []
-
-
 def _pypdf_loader(file_path: str, password: str = None) -> list[Document]:
     docs = PyPDFLoader(file_path, password=password).load()
     return _decorate_documents(docs, source=file_path, parser_name="pypdfloader")
@@ -191,14 +163,10 @@ def pdf_loader(file_path: str, password: str = None) -> list[Document]:
     加载PDF文件
     传入PDF文件路径，返回PDF文件的内容列表
     """
-    docs = unstructured_pdf_loader(file_path)
-    if docs:
-        return docs
-
     try:
         docs = _pypdf_loader(file_path, password=password)
         if docs:
-            logger.info(f"[pdf_loader]PyPDFLoader回退读取成功: {file_path}，共 {len(docs)} 页")
+            logger.info(f"[pdf_loader]PyPDFLoader读取成功: {file_path}，共 {len(docs)} 页")
             return docs
     except Exception as e:
         logger.warning(f"[pdf_loader]PyPDFLoader加载失败，尝试继续回退读取: {file_path} | {str(e)}")
