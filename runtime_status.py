@@ -11,12 +11,13 @@ def render_runtime_status(status: dict | None):
 
     labels = []
     path = status.get("path")
+    allow_web = bool(status.get("allow_web"))
     if path == "agent":
-        labels.append("路径：Agent")
+        labels.append(f"模式：{'Agent + 联网' if allow_web else 'Agent'}")
     elif path == "direct_rag":
-        labels.append("路径：直连RAG")
+        labels.append("模式：直连 RAG")
 
-    labels.append(f"联网开关：{'开' if status.get('allow_web') else '关'}")
+    labels.append(f"联网开关：{'开' if allow_web else '关'}")
 
     if path == "agent":
         if status.get("web_search_called"):

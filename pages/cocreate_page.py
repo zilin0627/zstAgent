@@ -29,7 +29,7 @@ COCREATE_PROMPT_EXAMPLES = [
 
 TARGET_OPTIONS = ["海报视觉", "丝巾设计", "课程工作坊", "品牌包装"]
 TONE_OPTIONS = ["传统庄重", "轻盈现代", "几何理性", "节庆热烈"]
-GENERATION_OPTIONS = ["快速模式（直连知识库）", "标准模式（Agent 工作流）"]
+GENERATION_OPTIONS = ["直连 RAG", "Agent", "Agent + 联网"]
 
 
 def parse_cocreate_sections(text: str) -> list[tuple[str, str]]:
@@ -181,8 +181,8 @@ def render_cocreate_page(
         extra = st.text_area("补充说明", value=st.session_state.get("cocreate_extra", ""), height=80, key="cocreate_extra")
 
         with st.expander("高级选项"):
-            allow_web = st.checkbox("允许联网", value=True, key="cocreate_allow_web")
-            generation_mode = st.radio("生成方式", GENERATION_OPTIONS, index=0, key="cocreate_generation_mode", horizontal=True)
+            generation_mode = st.radio("调用模式", GENERATION_OPTIONS, index=2, key="cocreate_generation_mode", horizontal=True)
+            allow_web = generation_mode == "Agent + 联网"
 
         generate = st.button("生成提案", key="cocreate_generate", use_container_width=True)
 
@@ -216,17 +216,15 @@ def render_cocreate_page(
         else:
             st.caption("当前纹样暂未关联真实扫图。")
 
-        allow_web = st.session_state.get("cocreate_allow_web", True)
-        generation_mode = st.session_state.get("cocreate_generation_mode", GENERATION_OPTIONS[0])
-        if allow_web:
-            st.caption("本次生成将优先使用本地知识库，并在必要时补充公开网络资料。")
-        else:
-            st.caption("本次生成仅使用本地知识库与当前图谱资料。")
+        generation_mode = st.session_state.get("cocreate_generation_mode", GENERATION_OPTIONS[2])
+        allow_web = generation_mode == "Agent + 联网"
 
-        if generation_mode == GENERATION_OPTIONS[0]:
-            st.caption("快速模式更适合先出第一版提案。")
+        if generation_mode == "直连 RAG":
+            st.caption("本次生成将直接走本地知识库检索，速度更快，适合先出第一版提案。")
+        elif generation_mode == "Agent":
+            st.caption("本次生成将走 Agent 工作流，但只使用本地知识库，不联网。")
         else:
-            st.caption("标准模式会经过 Agent 工作流，通常更完整，也更适合复杂需求。")
+            st.caption("本次生成将走 Agent 工作流，并在必要时补充公开网络资料。")
 
     st.divider()
     reference_left, reference_right = st.columns([1.1, 0.9], gap="large")
@@ -281,12 +279,12 @@ def render_cocreate_page(
                 get_pattern_item,
             )
 
-            if generation_mode == GENERATION_OPTIONS[0]:
-                with st.spinner("正在快速生成设计提案..."):
+            if generation_mode == "直连 RAG":
+                with st.spinner("正在通过直连 RAG 生成设计提案..."):
                     answer, citations, _, _, debug_notice = run_direct_rag_request(cocreate_prompt)
             else:
                 stream_placeholder = st.empty()
-                with st.spinner("正在生成设计提案..."):
+                with st.spinner("正在通过 Agent 生成设计提案..."):
                     answer, citations, debug_notice = run_agent_request_streaming(
                         cocreate_prompt,
                         {
@@ -328,7 +326,9 @@ def render_cocreate_page(
         st.markdown("- 先确定一个核心纹样，不建议一开始就给过于宽泛的主题。")
         st.markdown("- 优先观察图谱和扫图，再写补充要求，结果通常更贴近侗绣语境。")
         st.markdown("- 如果目标是比赛、课程或品牌方案，把使用场景写进补充要求会更好。")
-        st.markdown("- 快速模式适合先出初稿，标准模式适合需要更完整说明的方案。")
+        st.markdown("- 直连 RAG 适合快速打底稿。")
+        st.markdown("- Agent 适合需要更完整组织但只想用本地资料的情况。")
+        st.markdown("- Agent + 联网 适合需要补充公开资料或更复杂任务的情况。")
 
     st.divider()
     usage_left, usage_right = st.columns(2, gap="large")
