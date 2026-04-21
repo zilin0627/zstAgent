@@ -1,0 +1,184 @@
+2026-04-21 10:23:32,028 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-21 10:23:32,030 - agent - INFO - middleware.py:101 - [log_before_model][HumanMessage]: 侗绣里常见的典型纹样有哪些？各自最容易辨认的特点是什么？
+2026-04-21 10:23:49,956 - agent - WARNING - app.py:1043 - [Agent] 模型调用失败，返回友好提示
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 796, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connection.py", line 975, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+               ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 483, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\ssl_.py", line 527, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 455, in wrap_socket
+    return self.sslsocket_class._create(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1041, in _create
+    self.do_handshake()
+  File "D:\ProgramData\anaconda3\Lib\ssl.py", line 1319, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 645, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\urllib3\util\retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\github project\wxyAgent\app.py", line 1017, in _run_agent_request_streaming
+    for chunk in response_stream:
+                 ^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\agent\react_agent.py", line 42, in execute_stream
+    for chunk in runner.stream(input_dict, stream_mode="values", context=runtime_context):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\pregel\main.py", line 2727, in stream
+    for _ in runner.tick(
+             ^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\pregel\_runner.py", line 167, in tick
+    run_with_retry(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\pregel\_retry.py", line 96, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 656, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 400, in invoke
+    ret = self.func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\factory.py", line 1313, in model_node
+    result = wrap_model_call_handler(request, _execute_model_sync)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\factory.py", line 265, in normalized_single
+    return _to_composed_result(single_handler(request, handler))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langsmith\run_helpers.py", line 760, in wrapper
+    function_result = run_container["context"].run(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\middleware\types.py", line 1703, in wrapped
+    return handler(request)
+           ^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain\agents\factory.py", line 1282, in _execute_model_sync
+    output = model_.invoke(messages)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\runnables\base.py", line 5695, in invoke
+    return self.bound.invoke(
+           ^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 454, in invoke
+    self.generate_prompt(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1185, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 995, in generate
+    self._generate_with_cache(
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1297, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 669, in _generate
+    resp = self.completion_with_retry(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 540, in completion_with_retry
+    return _completion_with_retry(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 331, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 470, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 371, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 393, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramData\anaconda3\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\tenacity\__init__.py", line 473, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\langchain_community\chat_models\tongyi.py", line 537, in _completion_with_retry
+    resp = self.client.call(**_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\aigc\generation.py", line 181, in call
+    response = super().call(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\client\base_api.py", line 515, in call
+    return request.call()
+           ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 143, in call
+    output = next(response)
+             ^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 501, in _handle_request
+    raise e
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\dashscope\api_entities\http_request.py", line 475, in _handle_request
+    response = session.post(
+               ^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\github project\wxyAgent\.venv\Lib\site-packages\requests\adapters.py", line 676, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='dashscope.aliyuncs.com', port=443): Max retries exceeded with url: /api/v1/services/aigc/text-generation/generation (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)')))
+During task with name 'model' and id '5cb0f6e6-26d9-81ca-74a2-ffb199f85bfc'
+2026-04-21 10:29:47,097 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-21 10:29:47,098 - agent - INFO - middleware.py:101 - [log_before_model][HumanMessage]: 侗绣里常见的典型纹样有哪些？各自最容易辨认的特点是什么？
+2026-04-21 10:29:50,546 - agent - INFO - middleware.py:68 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-21 10:29:50,551 - agent - INFO - middleware.py:69 - [mointor_tool]工具调用参数: {'query': '侗绣常见典型纹样及其辨识特征'}
+2026-04-21 10:30:20,691 - agent - INFO - middleware.py:78 - [mointor_tool]工具rag_summarize调用成功
+2026-04-21 10:30:20,692 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-21 10:30:20,692 - agent - INFO - middleware.py:101 - [log_before_model][ToolMessage]: {"task_type": "general_qa", "answer": "侗绣常见典型纹样以题材分类为主，主要包括动物纹、植物纹、几何纹、图腾纹及组合纹等类型，其中最具辨识度的具体纹样为龙纹与蝴蝶纹。  \n\n- **龙纹**：造型质朴稚拙，保留“蛇身、虾眼、鹿角、牛嘴”的基本特征，但不与其他动物复合，轮廓延续传统剪纸小样，强调装饰协调性而非叙事性（见于从江地区资料）。  \n- **蝴蝶纹**：突出硕大翅膀与一对长触角，形象单纯直接，同样源于固定剪纸底样，在从江侗绣中常见于边角小片装饰。  \n- **植物纹与几何纹**：植物纹常以红花绿叶等意象出现，但形态高度抽象化，不拘泥自然原型；几何纹则多用于填充或边饰，构图饱满、色彩艳丽（黎平、从江均有记载）。  \n- **组合纹**：多个独立主题纹样可拼合成新画面，图案形状随载体变化而灵活调整，体现“架构饱满丰富”的构图特点。  \n\n这些结论主要来自对从江、黎平等黔东南侗族聚居区刺绣纹样的实地研究文献，强调纹样的意象性、简化性与地域传承性，且明确区分了侗绣与苗绣在情节性和复合形象上的差异。", "citations": [{"index": 1, "source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 74, "snippet": "为了一小块一小块，没有整幅的大图案，其情节性也\n较苗族刺绣简单得多。虽然都是龙纹样和蝴蝶纹样，\n侗族的龙纹样和蝴蝶纹样主体形象基本为图 5-6 所\n示，虽然纹样大小和形状可能在具体的刺绣时候因为\n要适应刺绣品形状或者刺绣妇女的突然灵感，会有一\n些细节有所改变，但是在大致的轮廓上基本是延续着前人所留下来的剪纸小样。\n龙纹样和蝴蝶纹样并没有与任何动物结合起来，侗族妇女只是用简单、稚拙的线\n条来将自己心中的龙和蝴蝶刺绣出来，纹样的特征基本上符", "metadata": {"page_label": null, "total_pages": null, "author": "邓惠文", "topic": "纹样特征", "knowledge_layer": "基础事实层", "keywords": "纹样、图案、龙纹"}}, {"index": 2, "source": "从江侗族刺绣纹样创新设计研究_覃小容.pdf", "page": 0, "snippet": "纹 样 、图 腾 纹\n样、 植物纹样， 以及其他纹样\n[4]\n，具 体 纹 样 分 类 见 表 1。\n1.2 从江侗族刺绣纹样构图特征\n1.2.1 从江侗族刺绣纹样图案形状\n从江侗族刺绣纹样架构饱满丰富， 大多数的刺绣图案色彩艳丽， 形\n态各异。 图案的形状会随着物品形状的变化而变化， 不会拘泥于某一种\n特定的图案， 以符合各种形状的载体需求。 受到装饰对象、 目的、 材质、\n制作工艺等方面的影响， 刺绣构图上也会有适当的变化\n[5]\n", "metadata": {"page_label": null, "total_pages": null, "author": "覃小容", "topic": "纹样特征", "knowledge_layer": "基础事实层", "keywords": "侗族刺绣、纹样、图案"}}, {"index": 3, "source": "从江侗族刺绣纹样创新设计研究_覃小容.pdf", "page": 1, "snippet": "纹 样 、图 腾 纹\n样、 植物纹样， 以及其他纹样\n[4]\n，具 体 纹 样 分 类 见 表 1。\n1.2 从江侗族刺绣纹样构图特征\n1.2.1 从江侗族刺绣纹样图案形状\n从江侗族刺绣纹样架构饱满丰富， 大多数的刺绣图案色彩艳丽， 形\n态各异。 图案的形状会随着物品形状的变化而变化， 不会拘泥于某一种\n特定的图案， 以符合各种形状的载体需求。 受到装饰对象、 目的、 材质、\n制作工艺等方面的影响， 刺绣构图上也会有适当的变化\n[5]\n", "metadata": {"page_label": null, "total_pages": null, "author": "覃小容", "topic": "纹样特征", "knowledge_layer": "基础事实层", "keywords": "侗族刺绣、纹样、图案"}}, {"index": 4, "source": "黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf", "page": 4, "snippet": "中国民族美术｜ CHINESE MINZU ART ｜ 2025 ｜ 01 ｜\n064\n作能够倾尽自身的情感和精力，图案的构造以及色彩，\n映射出妇女的现实生活和精神生活。从环境论的视角\n分析，侗绣的纹样来源自然环境和人文环境，环境塑\n造着民族文化，侗族的“万物有灵”便是从居住的环\n境而来，认为周围的一切花草树木均有生命，体现着\n天人合一的宇宙观，以及保护环境的生态观，比如，\n动物纹样、植物纹样、几何纹样、鸟语花香纹样内容\n等有着浓厚的民", "metadata": {"page_label": null, "total_pages": null, "author": "杨再旺", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗绣、纹样、图案、几何纹、文化"}}], "retrieval": [{"rank": 1, "score": 7.0, "source": "从江侗族刺绣纹样研究_邓惠文.pdf", "page": 74, "snippet": "为了一小块一小块，没有整幅的大图案，其情节性也\n较苗族刺绣简单得多。虽然都是龙纹样和蝴蝶纹样，\n侗族的龙纹样和蝴蝶纹样主体形象基本为图 5-6 所\n示，虽然纹样大小和形状可能在具体的刺绣时候因为\n要适应刺绣品形状或者刺绣妇女的突然灵感，会有一\n些细节有所改变，但是在大致的轮廓上基本是延续着前人所留下来的剪纸小样。\n龙纹样和蝴蝶纹样并没有与任何动物结合起来，侗族妇女只是用简单、稚拙的线\n条来将自己心", "topic": "纹样特征", "knowledge_layer": "基础事实层"}, {"rank": 2, "score": 6.8, "source": "从江侗族刺绣纹样创新设计研究_覃小容.pdf", "page": 0, "snippet": "纹 样 、图 腾 纹\n样、 植物纹样， 以及其他纹样\n[4]\n，具 体 纹 样 分 类 见 表 1。\n1.2 从江侗族刺绣纹样构图特征\n1.2.1 从江侗族刺绣纹样图案形状\n从江侗族刺绣纹样架构饱满丰富， 大多数的刺绣图案色彩艳丽， 形\n态各异。 图案的形状会随着物品形状的变化而变化， 不会拘泥于某一种\n特定的图案， 以符合各种形状的载体需求。 受到装饰对象、 目的、 材质、\n制作工艺等方面的影响", "topic": "纹样特征", "knowledge_layer": "基础事实层"}, {"rank": 3, "score": 6.8, "source": "从江侗族刺绣纹样创新设计研究_覃小容.pdf", "page": 1, "snippet": "纹 样 、图 腾 纹\n样、 植物纹样， 以及其他纹样\n[4]\n，具 体 纹 样 分 类 见 表 1。\n1.2 从江侗族刺绣纹样构图特征\n1.2.1 从江侗族刺绣纹样图案形状\n从江侗族刺绣纹样架构饱满丰富， 大多数的刺绣图案色彩艳丽， 形\n态各异。 图案的形状会随着物品形状的变化而变化， 不会拘泥于某一种\n特定的图案， 以符合各种形状的载体需求。 受到装饰对象、 目的、 材质、\n制作工艺等方面的影响", "topic": "纹样特征", "knowledge_layer": "基础事实层"}, {"rank": 4, "score": 6.6, "source": "黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf", "page": 4, "snippet": "中国民族美术｜ CHINESE MINZU ART ｜ 2025 ｜ 01 ｜\n064\n作能够倾尽自身的情感和精力，图案的构造以及色彩，\n映射出妇女的现实生活和精神生活。从环境论的视角\n分析，侗绣的纹样来源自然环境和人文环境，环境塑\n造着民族文化，侗族的“万物有灵”便是从居住的环\n境而来，认为周围的一切花草树木均有生命，体现着\n天人合一的宇宙观，以及保护环境的生态观，比如，\n动物纹样、植物纹样、几", "topic": "文化内涵", "knowledge_layer": "基础事实层"}], "confidence": "high", "rewritten_queries": ["侗绣常见典型纹样及其辨识特征", "侗族织绣纹样 构成元素 分类 侗绣常见典型纹样及其辨识特征", "侗绣纹样 类型 类别 侗绣常见典型纹样及其辨识特征", "侗族刺绣 图案 构成 要素 侗绣常见典型纹样及其辨识特征"]}
+2026-04-21 12:13:20,431 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-21 12:13:20,432 - agent - INFO - middleware.py:101 - [log_before_model][HumanMessage]: 如果只看图案构成，怎样快速分辨侗绣里的龙纹、鸟纹和花纹？
+2026-04-21 12:13:25,222 - agent - INFO - middleware.py:68 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-21 12:13:25,222 - agent - INFO - middleware.py:69 - [mointor_tool]工具调用参数: {'query': '侗绣 龙纹 鸟纹 花纹 图案构成特征 区分方法'}
+2026-04-21 12:13:47,750 - agent - INFO - middleware.py:78 - [mointor_tool]工具rag_summarize调用成功
+2026-04-21 12:13:47,752 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有3条消息，消息如下：
+2026-04-21 12:13:47,753 - agent - INFO - middleware.py:101 - [log_before_model][ToolMessage]: {"task_type": "knowledge_qa", "answer": "侗绣中龙纹、鸟纹与花纹的图案构成特征及区分方法，主要依据题材分类与造型构成两个维度：在题材上分为动物纹（含龙、鸟）、植物纹（含各类花）及几何纹；在构成上则强调以菱形、八角形等几何骨架为基础，结合抽象化、线描式或块面化的表现手法。\n\n具体可区分如下：  \n1. **对鸟大龙纹**：属组合纹样，以菱形为通幅骨架，其中“对鸟纹”用单线勾勒、两尾相接，突出展翅动态；“龙纹”仅以黑色线条表现躯干，强调刚劲雄健，二者共构于同一骨架内，见于黎平、从江等地织锦。  \n2. **对鸟纹**：独立动物纹，采用抽象几何形式，以连续菱形为骨架，几何化对鸟重复排列，秩序感强，体现“敬鸟如神”的文化寓意。  \n3. **八角花纹**：属植物与几何融合纹样，核心为八角形结构，由三角形块面与几何线条构成小型菱格纹，嵌套于长方形框中，色彩对比鲜明（白、橘色框配黑色地），图案饱满精致。  \n4. **蝴蝶纹**：虽非用户所问，但作为典型自然形态纹样，其以菱形与龟背形交错重叠为骨架，用白、粉、绿等色挑绣，格律感强，常与鸟纹并列出现，反映自然崇拜。\n\n这些结论主要来自本地文献对纹样题材、骨架结构、线条处理及色彩布局的具体描述，尤其强调菱形骨架的普遍性与动物纹的抽象线描特征。", "citations": [{"index": 1, "source": "侗族服饰与纹样整理.pdf", "page": 12, "snippet": "侗族纹样在形态上呈现出多样化的特点，其构成方式也十分精妙：\n几何形态：\n特点：是侗族纹样的基础形态，由点、线、面等基本几何元素构成。如三角形、方形、菱形、\n八角形、圆形、螺旋形以及各种直线、曲线、折线等。\n构成：这些几何形态通过重复、对称、交错、旋转、叠加等构成法则，形成了富有节奏感和\n韵律感的复杂图案。例如，以菱形为骨架的 “对鸟大龙纹”，以八角形为基础的 “八角花\n纹”。\n自然形态：\n特点：源于对自然界中各种物象的观察和提炼，包括动", "metadata": {"page_label": null, "total_pages": null, "author": "", "topic": "纹样特征", "knowledge_layer": "基础事实层", "keywords": "纹样、图案、构成、元素、龙纹、鸟纹"}}, {"index": 2, "source": "侗族服饰与纹样整理.pdf", "page": 4, "snippet": "纹样名称：对鸟纹表现形式：采用抽象几何纹的表现形式。文化寓意：“敬鸟如神，爱鸟如\n命” 是侗族自古以来就有的传统，侗族人相信鸟是平安与吉祥的化身，可以带来幸福，因\n此常将此纹样织入所用的纺织品中。特点：以连续菱形为骨架，几何化对鸟纹重复排列，秩\n序感强，是侗族织锦的经典纹样。\n四、八角花纹\n纹样名称：八角花纹核心布局：白色和橘色长方形框中嵌套连续排列的小长方形，相交形成\n菱形骨架；骨架内为八角花图案，由三角形块面和几何形线条构成小型菱格", "metadata": {"page_label": null, "total_pages": null, "author": "", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "纹样、图案、构成、龙纹、鸟纹、几何纹、文化、寓意"}}, {"index": 3, "source": "侗族服饰与纹样整理.pdf", "page": 3, "snippet": "纹样名称：蝴蝶纹核心布局：以白、粉、绿等色挑出蝴蝶纹样，以菱形骨架交错重叠，构成\n富有变化的龟背形骨架。文化寓意：蝴蝶是幸福和爱情的象征，也用来表达对自由的向往。\n特点：菱形与龟背形结合，格律感极强，视觉层次丰富。\n二、对鸟大龙纹\n纹样名称：对鸟大龙纹核心布局：以菱形为骨架，通幅而下；菱形骨架中用接近于线描式的\n单线勾勒出抽象的对鸟纹，两尾相接，抓住了鸟展翅高飞的形象特征；龙纹仅用黑色线条作\n为躯干。特点：线条凝练，体现出龙的刚劲雄健，", "metadata": {"page_label": null, "total_pages": null, "author": "", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "纹样、构成、龙纹、鸟纹、文化、寓意"}}, {"index": 4, "source": "黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf", "page": 4, "snippet": "中国民族美术｜ CHINESE MINZU ART ｜ 2025 ｜ 01 ｜\n064\n作能够倾尽自身的情感和精力，图案的构造以及色彩，\n映射出妇女的现实生活和精神生活。从环境论的视角\n分析，侗绣的纹样来源自然环境和人文环境，环境塑\n造着民族文化，侗族的“万物有灵”便是从居住的环\n境而来，认为周围的一切花草树木均有生命，体现着\n天人合一的宇宙观，以及保护环境的生态观，比如，\n动物纹样、植物纹样、几何纹样、鸟语花香纹样内容\n等有着浓厚的民", "metadata": {"page_label": null, "total_pages": null, "author": "杨再旺", "topic": "文化内涵", "knowledge_layer": "基础事实层", "keywords": "侗绣、纹样、图案、几何纹、文化"}}], "retrieval": [{"rank": 1, "score": 8.8, "source": "侗族服饰与纹样整理.pdf", "page": 12, "snippet": "侗族纹样在形态上呈现出多样化的特点，其构成方式也十分精妙：\n几何形态：\n特点：是侗族纹样的基础形态，由点、线、面等基本几何元素构成。如三角形、方形、菱形、\n八角形、圆形、螺旋形以及各种直线、曲线、折线等。\n构成：这些几何形态通过重复、对称、交错、旋转、叠加等构成法则，形成了富有节奏感和\n韵律感的复杂图案。例如，以菱形为骨架的 “对鸟大龙纹”，以八角形为基础的 “八角花\n纹”。\n自然形态：\n特点：源", "topic": "纹样特征", "knowledge_layer": "基础事实层"}, {"rank": 2, "score": 8.0, "source": "侗族服饰与纹样整理.pdf", "page": 4, "snippet": "纹样名称：对鸟纹表现形式：采用抽象几何纹的表现形式。文化寓意：“敬鸟如神，爱鸟如\n命” 是侗族自古以来就有的传统，侗族人相信鸟是平安与吉祥的化身，可以带来幸福，因\n此常将此纹样织入所用的纺织品中。特点：以连续菱形为骨架，几何化对鸟纹重复排列，秩\n序感强，是侗族织锦的经典纹样。\n四、八角花纹\n纹样名称：八角花纹核心布局：白色和橘色长方形框中嵌套连续排列的小长方形，相交形成\n菱形骨架；骨架内为八角花图", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 3, "score": 7.2, "source": "侗族服饰与纹样整理.pdf", "page": 3, "snippet": "纹样名称：蝴蝶纹核心布局：以白、粉、绿等色挑出蝴蝶纹样，以菱形骨架交错重叠，构成\n富有变化的龟背形骨架。文化寓意：蝴蝶是幸福和爱情的象征，也用来表达对自由的向往。\n特点：菱形与龟背形结合，格律感极强，视觉层次丰富。\n二、对鸟大龙纹\n纹样名称：对鸟大龙纹核心布局：以菱形为骨架，通幅而下；菱形骨架中用接近于线描式的\n单线勾勒出抽象的对鸟纹，两尾相接，抓住了鸟展翅高飞的形象特征；龙纹仅用黑色线条作\n为躯", "topic": "文化内涵", "knowledge_layer": "基础事实层"}, {"rank": 4, "score": 6.6, "source": "黎平侗族刺绣纹样特征与文化内涵研究_杨再旺.pdf", "page": 4, "snippet": "中国民族美术｜ CHINESE MINZU ART ｜ 2025 ｜ 01 ｜\n064\n作能够倾尽自身的情感和精力，图案的构造以及色彩，\n映射出妇女的现实生活和精神生活。从环境论的视角\n分析，侗绣的纹样来源自然环境和人文环境，环境塑\n造着民族文化，侗族的“万物有灵”便是从居住的环\n境而来，认为周围的一切花草树木均有生命，体现着\n天人合一的宇宙观，以及保护环境的生态观，比如，\n动物纹样、植物纹样、几", "topic": "文化内涵", "knowledge_layer": "基础事实层"}], "confidence": "high", "rewritten_queries": ["侗绣 龙纹 鸟纹 花纹 图案构成特征 区分方法", "龙纹", "盘龙纹", "凤鸟纹"]}
+2026-04-21 13:08:49,559 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有1条消息，消息如下：
+2026-04-21 13:08:49,566 - agent - INFO - middleware.py:101 - [log_before_model][HumanMessage]: 最近有哪些侗绣相关的展览或活动？
+2026-04-21 13:08:54,783 - agent - INFO - middleware.py:68 - [mointor_tool]开始监控工具调用: rag_summarize
+2026-04-21 13:08:54,783 - agent - INFO - middleware.py:69 - [mointor_tool]工具调用参数: {'query': '侗绣近期展览或活动信息'}
+2026-04-21 13:08:54,787 - agent - INFO - middleware.py:68 - [mointor_tool]开始监控工具调用: web_search
+2026-04-21 13:08:54,790 - agent - INFO - middleware.py:69 - [mointor_tool]工具调用参数: {'query': '2024年侗绣展览 活动'}
+2026-04-21 13:08:58,050 - agent - INFO - middleware.py:78 - [mointor_tool]工具web_search调用成功
+2026-04-21 13:09:11,918 - agent - INFO - middleware.py:78 - [mointor_tool]工具rag_summarize调用成功
+2026-04-21 13:09:11,921 - agent - INFO - middleware.py:100 - [log_before_model]: 即将调用模型，带有4条消息，消息如下：
+2026-04-21 13:09:11,921 - agent - INFO - middleware.py:101 - [log_before_model][ToolMessage]: {"query": "2024年侗绣展览 活动", "results": []}

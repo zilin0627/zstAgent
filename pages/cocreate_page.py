@@ -181,7 +181,7 @@ def render_cocreate_page(
         extra = st.text_area("补充说明", value=st.session_state.get("cocreate_extra", ""), height=80, key="cocreate_extra")
 
         with st.expander("高级选项"):
-            generation_mode = st.radio("调用模式", GENERATION_OPTIONS, index=2, key="cocreate_generation_mode", horizontal=True)
+            generation_mode = st.radio("调用模式", GENERATION_OPTIONS, index=1, key="cocreate_generation_mode", horizontal=True)
             allow_web = generation_mode == "Agent + 联网"
 
         generate = st.button("生成提案", key="cocreate_generate", use_container_width=True)
@@ -216,7 +216,7 @@ def render_cocreate_page(
         else:
             st.caption("当前纹样暂未关联真实扫图。")
 
-        generation_mode = st.session_state.get("cocreate_generation_mode", GENERATION_OPTIONS[2])
+        generation_mode = st.session_state.get("cocreate_generation_mode", GENERATION_OPTIONS[1])
         allow_web = generation_mode == "Agent + 联网"
 
         if generation_mode == "直连 RAG":
@@ -224,7 +224,7 @@ def render_cocreate_page(
         elif generation_mode == "Agent":
             st.caption("本次生成将走 Agent 工作流，但只使用本地知识库，不联网。")
         else:
-            st.caption("本次生成将走 Agent 工作流，并在必要时补充公开网络资料。")
+            st.caption("本次生成将走 Agent 工作流，并在本地资料不足或需要外部补充时主动联网检索公开资料。")
 
     st.divider()
     reference_left, reference_right = st.columns([1.1, 0.9], gap="large")

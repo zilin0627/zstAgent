@@ -39,50 +39,94 @@ def render_guide_sidebar(*, current_page, guide_page):
     strategy_options = ["快速导览（直连RAG）", "智能导览（Agent）"]
     audience_options = ["大众观众", "学生/入门", "专业观众"]
 
-    default_mode = st.session_state.get("guide_mode", "导览讲解")
-    default_strategy = st.session_state.get("guide_strategy", "快速导览（直连RAG）")
-    default_allow_web = st.session_state.get("guide_allow_web", False)
-    default_audience = st.session_state.get("guide_audience", "大众观众")
-    default_citations = st.session_state.get("guide_citations", True)
+    mode_label = st.selectbox(
+        "模式",
+        options=mode_options,
+        index=mode_options.index(st.session_state.get("guide_mode", "导览讲解"))
+        if st.session_state.get("guide_mode", "导览讲解") in mode_options
+        else 0,
+        key="guide_mode_selector",
+    )
 
-    with st.form("guide_settings_form", clear_on_submit=False):
-        mode_label = st.selectbox(
-            "模式",
-            options=mode_options,
-            index=mode_options.index(default_mode) if default_mode in mode_options else 0,
-        )
-        strategy_label = st.radio(
-            "回答策略",
-            options=strategy_options,
-            index=strategy_options.index(default_strategy) if default_strategy in strategy_options else 0,
-        )
-        use_direct_rag = strategy_label == "快速导览（直连RAG）"
-        allow_web = st.toggle("允许联网补充", value=default_allow_web)
-        audience = st.selectbox(
-            "受众",
-            options=audience_options,
-            index=audience_options.index(default_audience) if default_audience in audience_options else 0,
-        )
-        citations_enabled = st.toggle("展示参考资料与出处", value=default_citations)
-        submitted = st.form_submit_button("应用设置", use_container_width=True)
+    # 展签文案/深度研究/FAQ生成 必须走 Agent，不允许选直连RAG
+    mode_forces_agent = mode_label != "导览讲解"
 
-    if submitted:
-        _save_guide_settings(mode_label, strategy_label, allow_web, audience, citations_enabled)
-        st.rerun()
+    if mode_forces_agent:
+        st.session_state["guide_strategy_selector"] = "智能导览（Agent）"
 
-    current_mode = st.session_state.get("guide_mode", default_mode)
-    current_strategy = st.session_state.get("guide_strategy", default_strategy)
-    current_use_direct_rag = current_strategy == "快速导览（直连RAG）"
-    current_allow_web = st.session_state.get("guide_allow_web", default_allow_web)
+    strategy_label = st.radio(
+        "回答策略",
+        options=strategy_options,
+        index=1 if mode_forces_agent else (
+            strategy_options.index(st.session_state.get("guide_strategy", "快速导览（直连RAG）"))
+            if st.session_state.get("guide_strategy", "快速导览（直连RAG）") in strategy_options
+            else 0
+        ),
+        disabled=mode_forces_agent,
+        key="guide_strategy_selector",
+    )
+    if mode_forces_agent:
+        st.caption(mode_label + " 模式固定走 Agent，策略选择不起效。")
+        strategy_label = "智能导览（Agent）"
+
+    current_use_direct_rag = strategy_label == "快速导览（直连RAG）"
+    saved_allow_web = st.session_state.get("guide_allow_web", False)
+    effective_allow_web = False if current_use_direct_rag else saved_allow_web
+    if current_use_direct_rag and saved_allow_web:
+        st.session_state["guide_allow_web"] = False
+
+    allow_web = st.toggle(
+        "允许联网补充",
+        value=effective_allow_web,
+        disabled=current_use_direct_rag,
+        key="guide_allow_web_toggle",
+    )
+
+    # 受众只对导览讲解有效，其他模式格式固定
+    audience_active = not mode_forces_agent
+    audience = st.selectbox(
+        "受众",
+        options=audience_options,
+        index=audience_options.index(st.session_state.get("guide_audience", "大众观众"))
+        if st.session_state.get("guide_audience", "大众观众") in audience_options
+        else 0,
+        disabled=not audience_active,
+        key="guide_audience_selector",
+    )
+    if not audience_active:
+        st.caption(mode_label + " 模式输出格式固定，受众设置不起效。")
+
+    citations_enabled = st.toggle(
+        "展示参考资料与出处",
+        value=st.session_state.get("guide_citations", True),
+        key="guide_citations_toggle",
+    )
+
+    saved_settings = (
+        st.session_state.get("guide_mode", "导览讲解"),
+        st.session_state.get("guide_strategy", "快速导览（直连RAG）"),
+        st.session_state.get("guide_allow_web", False),
+        st.session_state.get("guide_audience", "大众观众"),
+        st.session_state.get("guide_citations", True),
+    )
+    current_settings = (
+        mode_label,
+        strategy_label,
+        False if current_use_direct_rag else allow_web,
+        audience,
+        citations_enabled,
+    )
+    if current_settings != saved_settings:
+        _save_guide_settings(*current_settings)
+
+    current_allow_web = False if current_use_direct_rag else allow_web
 
     if current_use_direct_rag:
-        st.caption("快速模式仅用本地知识库，联网开关不生效。")
-        if MODE_MAP[current_mode] != "guide":
-            st.caption("当前模式需走 Agent。")
+        st.caption("当前为直连 RAG，联网补充已禁用。")
     elif current_allow_web:
-        st.caption("优先本地检索，必要时联网。")
+        st.caption("当前为 Agent + 联网：优先本地检索，必要时联网补充。")
     else:
-        st.caption("仅用本地资料。")
+        st.caption("当前为 Agent 本地模式：仅使用本地资料。")
 
     st.divider()
     st.caption("示例问题")

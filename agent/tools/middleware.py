@@ -26,7 +26,39 @@ def _runtime_context_dict(raw_context: Any) -> dict:
     return {}
 
 
-# 工具执行的监控
+def _build_runtime_instruction(context: dict) -> str:
+    mode = str(context.get("mode", "guide") or "guide")
+    allow_web = bool(context.get("allow_web", False))
+    citations_enabled = bool(context.get("citations_enabled", True))
+    audience = str(context.get("audience", "") or "").strip()
+
+    instruction_lines = [
+        "\n\n### 本轮运行时约束（强制）",
+        f"- 当前模式：{mode}",
+        f"- 当前受众：{audience or '未指定'}",
+        f"- 引用展示：{'开启' if citations_enabled else '关闭'}",
+    ]
+
+    if allow_web:
+        instruction_lines.extend(
+            [
+                "- 本轮已开启联网补充能力，必须使用 Agent 路径，不要退化成只做纯本地直答。",
+                "- 回答前应优先调用 rag_summarize 获取本地资料；若用户明确要求外部信息、最新信息、链接/官网，或本地资料不足以支撑回答，应继续调用 web_search 补充。",
+                "- 当问题属于研究、设计转化、方案提案、外部背景补充等较复杂场景时，不要忽略联网开关；在确有必要时主动调用 web_search。",
+                "- 联网资料只能作为补充，不能替代本地资料证据。",
+            ]
+        )
+    else:
+        instruction_lines.extend(
+            [
+                "- 本轮未开启联网补充，只能使用本地资料与本地工具。",
+                "- 若需要知识依据，应优先调用 rag_summarize；不要调用 web_search。",
+            ]
+        )
+
+    return "\n".join(instruction_lines)
+
+
 @wrap_tool_call
 def mointor_tool(
     request: ToolCallRequest,
@@ -60,7 +92,6 @@ def mointor_tool(
         raise e
 
 
-# 在模型调用前记录日志
 @before_model
 def log_before_model(
     state: AgentState,
@@ -71,19 +102,21 @@ def log_before_model(
     return None
 
 
-# 动态切换提示词（按模式）
 @dynamic_prompt
 def mode_prompt_switch(request: ModelRequest):
     context = _runtime_context_dict(request.runtime.context)
     mode = context.get("mode", "guide")
 
     if mode == "guide":
-        return load_guide_prompt()
-    if mode == "label":
-        return load_label_prompt()
-    if mode == "research":
-        return load_research_prompt()
-    if mode == "faq":
-        return load_faq_prompt()
+        base_prompt = load_guide_prompt()
+    elif mode == "label":
+        base_prompt = load_label_prompt()
+    elif mode == "research":
+        base_prompt = load_research_prompt()
+    elif mode == "faq":
+        base_prompt = load_faq_prompt()
+    else:
+        base_prompt = load_system_prompt()
 
-    return load_system_prompt()
+    return base_prompt + _build_runtime_instruction(context)
+
