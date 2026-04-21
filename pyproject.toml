@@ -11,6 +11,7 @@ dependencies = [
     "langchain>=1.2.14",
     "langchain-chroma>=1.1.0",
     "langchain-community>=0.4.1",
+    "matplotlib>=3.10.8",
     "pycryptodome>=3.23.0",
     "pymupdf>=1.27.2.2",
     "pypdf>=6.9.2",
