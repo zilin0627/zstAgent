@@ -1,5 +1,3 @@
-import json
-import requests
 import streamlit as st
 
 from runtime_status import render_runtime_status
@@ -17,25 +15,126 @@ MODE_MAP = {
     "导览讲解": "guide",
     "展签文案": "label",
     "深度研究": "research",
-    "FAQ生成": "faq",
+    "FAQ生成":  "faq",
+}
+
+_MODE_COLOR = {
+    "导览讲解": "#1e3a5f",
+    "展签文案": "#1a5c4f",
+    "深度研究": "#3d2a5c",
+    "FAQ生成":  "#7c4a0a",
 }
 
 
+def _inject_css():
+    st.markdown(
+        """
+        <style>
+        /* 对话泡泡 */
+        .user-bubble {
+            background: #eef2fb;
+            border-left: 3px solid #1e3a5f;
+            border-radius: 4px 12px 12px 12px;
+            padding: 10px 16px;
+            margin: 8px 0;
+            color: #1a2540;
+            font-size: 14px;
+            line-height: 1.65;
+        }
+        .assistant-bubble {
+            background: #fdfcf9;
+            border: 1px solid #e5ddd0;
+            border-left: 3px solid #b8960f;
+            border-radius: 12px 4px 12px 12px;
+            padding: 10px 16px;
+            margin: 8px 0;
+            color: #1a1a1a;
+            font-size: 14px;
+            line-height: 1.75;
+        }
+        /* 模式状态徽章 */
+        .status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            padding: 6px 0 2px;
+        }
+        .s-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            background: rgba(0,0,0,0.05);
+            color: #3a3a3a;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        .s-badge-primary {
+            background: rgba(30,58,95,0.1);
+            color: #1e3a5f;
+            border-color: rgba(30,58,95,0.18);
+            font-weight: 600;
+        }
+        /* 示例问题按钮 */
+        div[data-testid="stHorizontalBlock"]
+            div[data-testid="stButton"] button {
+            background: #f8f4ee;
+            border: 1px solid #d8cbb8;
+            color: #3a2e20;
+            border-radius: 6px;
+            font-size: 12px;
+            padding: 8px 10px;
+            white-space: normal;
+            text-align: left;
+            line-height: 1.45;
+            min-height: 56px;
+            transition: background 0.12s, border-color 0.12s, color 0.12s;
+        }
+        div[data-testid="stHorizontalBlock"]
+            div[data-testid="stButton"] button:hover {
+            background: #1e3a5f;
+            border-color: #1e3a5f;
+            color: #fff;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _render_status_bar(mode_label, strategy_label, audience, citations_on, web_on):
+    color = _MODE_COLOR.get(mode_label, "#444")
+    parts = [
+        f'<span class="s-badge s-badge-primary" style="background:{color}18;color:{color};border-color:{color}30;">{mode_label}</span>',
+        f'<span class="s-badge">{strategy_label}</span>',
+        f'<span class="s-badge">{audience}</span>',
+    ]
+    if citations_on:
+        parts.append('<span class="s-badge">引用开启</span>')
+    if web_on:
+        parts.append('<span class="s-badge">联网补充</span>')
+    st.markdown(
+        f'<div class="status-bar">{"".join(parts)}</div>',
+        unsafe_allow_html=True,
+    )
+
+
 def _save_guide_settings(mode_label, strategy_label, allow_web, audience, citations_enabled):
-    st.session_state["guide_mode"] = mode_label
-    st.session_state["guide_strategy"] = strategy_label
+    st.session_state["guide_mode"]      = mode_label
+    st.session_state["guide_strategy"]  = strategy_label
     st.session_state["guide_allow_web"] = allow_web
-    st.session_state["guide_audience"] = audience
+    st.session_state["guide_audience"]  = audience
     st.session_state["guide_citations"] = citations_enabled
 
 
 def render_guide_sidebar(*, current_page, guide_page):
     if current_page != guide_page:
-        st.caption("当前页面为模块入口展示区。切换到“智能导览”可继续使用原有问答能力。")
+        st.caption('当前页面为模块入口展示区。切换到「智能导览」可继续使用原有问答能力。')
         return
 
     st.subheader("导览设置")
-    mode_options = list(MODE_MAP.keys())
+    mode_options     = list(MODE_MAP.keys())
     strategy_options = ["快速导览（直连RAG）", "智能导览（Agent）"]
     audience_options = ["大众观众", "学生/入门", "专业观众"]
 
@@ -43,14 +142,11 @@ def render_guide_sidebar(*, current_page, guide_page):
         "模式",
         options=mode_options,
         index=mode_options.index(st.session_state.get("guide_mode", "导览讲解"))
-        if st.session_state.get("guide_mode", "导览讲解") in mode_options
-        else 0,
+        if st.session_state.get("guide_mode", "导览讲解") in mode_options else 0,
         key="guide_mode_selector",
     )
 
-    # 展签文案/深度研究/FAQ生成 必须走 Agent，不允许选直连RAG
     mode_forces_agent = mode_label != "导览讲解"
-
     if mode_forces_agent:
         st.session_state["guide_strategy_selector"] = "智能导览（Agent）"
 
@@ -59,8 +155,7 @@ def render_guide_sidebar(*, current_page, guide_page):
         options=strategy_options,
         index=1 if mode_forces_agent else (
             strategy_options.index(st.session_state.get("guide_strategy", "快速导览（直连RAG）"))
-            if st.session_state.get("guide_strategy", "快速导览（直连RAG）") in strategy_options
-            else 0
+            if st.session_state.get("guide_strategy", "快速导览（直连RAG）") in strategy_options else 0
         ),
         disabled=mode_forces_agent,
         key="guide_strategy_selector",
@@ -70,8 +165,8 @@ def render_guide_sidebar(*, current_page, guide_page):
         strategy_label = "智能导览（Agent）"
 
     current_use_direct_rag = strategy_label == "快速导览（直连RAG）"
-    saved_allow_web = st.session_state.get("guide_allow_web", False)
-    effective_allow_web = False if current_use_direct_rag else saved_allow_web
+    saved_allow_web        = st.session_state.get("guide_allow_web", False)
+    effective_allow_web    = False if current_use_direct_rag else saved_allow_web
     if current_use_direct_rag and saved_allow_web:
         st.session_state["guide_allow_web"] = False
 
@@ -82,14 +177,12 @@ def render_guide_sidebar(*, current_page, guide_page):
         key="guide_allow_web_toggle",
     )
 
-    # 受众只对导览讲解有效，其他模式格式固定
     audience_active = not mode_forces_agent
     audience = st.selectbox(
         "受众",
         options=audience_options,
         index=audience_options.index(st.session_state.get("guide_audience", "大众观众"))
-        if st.session_state.get("guide_audience", "大众观众") in audience_options
-        else 0,
+        if st.session_state.get("guide_audience", "大众观众") in audience_options else 0,
         disabled=not audience_active,
         key="guide_audience_selector",
     )
@@ -120,7 +213,6 @@ def render_guide_sidebar(*, current_page, guide_page):
         _save_guide_settings(*current_settings)
 
     current_allow_web = False if current_use_direct_rag else allow_web
-
     if current_use_direct_rag:
         st.caption("当前为直连 RAG，联网补充已禁用。")
     elif current_allow_web:
@@ -137,10 +229,11 @@ def render_guide_sidebar(*, current_page, guide_page):
 
 
 def _render_message_block(message, highlight_latest=False):
-    role = message.get("role", "assistant")
-    content = message.get("content", "")
+    role             = message.get("role", "assistant")
+    content          = message.get("content", "")
     citations_payload = message.get("citations")
-    runtime_status = message.get("runtime_status") if role == "assistant" else None
+    runtime_status   = message.get("runtime_status") if role == "assistant" else None
+
     citation_items = []
     if isinstance(citations_payload, dict):
         citation_items = citations_payload.get("citations", []) or []
@@ -158,11 +251,11 @@ def _render_message_block(message, highlight_latest=False):
             for item in citation_items:
                 if not isinstance(item, dict):
                     continue
-                source = item.get("source", "unknown")
-                page = item.get("page")
+                source  = item.get("source", "unknown")
+                page    = item.get("page")
                 snippet = item.get("snippet", "")
-                url = item.get("url")
-                header = f"{item.get('index', '')}. {source}"
+                url     = item.get("url")
+                header  = f"{item.get('index', '')}. {source}"
                 if page is not None:
                     header += f" (p.{page})"
                 if url:
@@ -174,62 +267,72 @@ def _render_message_block(message, highlight_latest=False):
 
 
 def render_guide_page(*, run_agent_request_streaming, run_direct_rag_request):
-    st.title("文化导览")
-    st.caption("围绕侗绣纹样做讲解、展签转译与工艺解释")
+    _inject_css()
 
-    # 当前设置摘要
-    mode_label = st.session_state.get("guide_mode", "导览讲解")
-    strategy_label = st.session_state.get("guide_strategy", "快速导览（直连RAG）")
-    audience = st.session_state.get("guide_audience", "大众观众")
-    citations_on = st.session_state.get("guide_citations", True)
-    web_on = st.session_state.get("guide_allow_web", False)
-
-    status_text = f"模式：{mode_label}  ·  策略：{strategy_label}  ·  受众：{audience}"
-    if citations_on:
-        status_text += "  ·  显示引用"
-    if web_on:
-        status_text += "  ·  可联网"
-    st.caption(status_text)
-    st.divider()
-
-    # 示例问题
-    row1 = st.columns(3)
-    for i, q in enumerate(GUIDE_SAMPLE_QUESTIONS[:3]):
-        with row1[i]:
-            if st.button(q, key=f"preset_{i}", use_container_width=True):
-                st.session_state["preset_prompt"] = q
-                st.rerun()
-    row2 = st.columns(2)
-    for i, q in enumerate(GUIDE_SAMPLE_QUESTIONS[3:]):
-        with row2[i]:
-            if st.button(q, key=f"preset_extra_{i}", use_container_width=True):
-                st.session_state["preset_prompt"] = q
-                st.rerun()
-
-    st.divider()
-
-    left, right = st.columns([3, 1])
-
-    with left:
-        messages = st.session_state.get("messages", [])
-        if not messages:
-            st.info("点击上方问题或直接输入开始对话")
-        else:
-            show_count = min(6, len(messages))
-            for msg in messages[-show_count:]:
-                _render_message_block(msg)
-            if len(messages) > show_count:
-                with st.expander(f"更早的对话（{len(messages) - show_count} 条）"):
-                    for msg in messages[:-show_count]:
-                        _render_message_block(msg)
-
-    with right:
+    # ── 页头 ──────────────────────────────────────────────
+    head_left, head_right = st.columns([3, 1])
+    with head_left:
+        st.title("文化导览")
+        st.caption("围绕侗绣纹样做讲解、展签转译与工艺解释")
+    with head_right:
+        st.write("")
         if st.button("清空对话", use_container_width=True):
             st.session_state["messages"] = []
             st.rerun()
-        st.caption("设置请去左侧边栏")
 
-    prompt = st.chat_input("输入问题")
+    # ── 模式状态栏 ────────────────────────────────────────
+    mode_label     = st.session_state.get("guide_mode", "导览讲解")
+    strategy_label = st.session_state.get("guide_strategy", "快速导览（直连RAG）")
+    audience       = st.session_state.get("guide_audience", "大众观众")
+    citations_on   = st.session_state.get("guide_citations", True)
+    web_on         = st.session_state.get("guide_allow_web", False)
+
+    _render_status_bar(mode_label, strategy_label, audience, citations_on, web_on)
+
+    st.markdown(
+        '<hr style="border:none;border-top:2px solid #c9a227;margin:8px 0 14px;">',
+        unsafe_allow_html=True,
+    )
+
+    # ── 示例问题 ──────────────────────────────────────────
+    st.caption("示例问题")
+    q_cols = st.columns(len(GUIDE_SAMPLE_QUESTIONS), gap="small")
+    for i, (col, q) in enumerate(zip(q_cols, GUIDE_SAMPLE_QUESTIONS)):
+        with col:
+            if st.button(q, key=f"preset_{i}", use_container_width=True):
+                st.session_state["preset_prompt"] = q
+                st.rerun()
+
+    st.divider()
+
+    # ── 对话区 ────────────────────────────────────────────
+    messages = st.session_state.get("messages", [])
+
+    if not messages:
+        st.markdown(
+            """
+            <div style="text-align:center; padding:40px 20px;">
+                <div style="font-size:14px; color:#6b5a3a; line-height:1.9;">
+                    点击上方示例问题，或在下方输入框直接提问
+                </div>
+                <div style="font-size:12px; color:#a89878; margin-top:6px;">
+                    支持纹样讲解 · 展签生成 · 深度研究 · FAQ · 联网检索
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        show_count = min(6, len(messages))
+        if len(messages) > show_count:
+            with st.expander(f"更早的对话（{len(messages) - show_count} 条）", expanded=False):
+                for msg in messages[:-show_count]:
+                    _render_message_block(msg)
+        for msg in messages[-show_count:]:
+            _render_message_block(msg)
+
+    # ── 输入框 ────────────────────────────────────────────
+    prompt = st.chat_input("输入侗绣相关问题…")
     if not prompt:
         prompt = st.session_state.pop("preset_prompt", "")
 
@@ -237,14 +340,13 @@ def render_guide_page(*, run_agent_request_streaming, run_direct_rag_request):
         st.chat_message("user").write(prompt)
         st.session_state["messages"].append({"role": "user", "content": prompt})
 
-        mode = MODE_MAP[mode_label]
+        mode      = MODE_MAP[mode_label]
         use_direct = strategy_label == "快速导览（直连RAG）"
-        use_agent = not use_direct or mode != "guide"
+        use_agent  = not use_direct or mode != "guide"
 
-        with st.spinner("稍等..."):
-            placeholder = st.empty()
+        with st.spinner("稍等…"):
+            placeholder       = st.empty()
             thought_placeholder = st.empty()
-
             try:
                 if use_agent:
                     answer, citations, _ = run_agent_request_streaming(
