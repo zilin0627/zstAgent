@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+{% set active = "guide" %}
+{% block title %}文化导览{% endblock %}
+
+{% block sidebar_extra %}
+<div class="nav-section" style="border-top:1px solid #f0e8dc; padding-top:14px;">
+  <div class="nav-label">导览设置</div>
+  <div style="padding:0 14px; display:flex; flex-direction:column; gap:10px;">
+
+    <div class="setting-group">
+      <div class="setting-label">模式</div>
+      <select id="modeSelect" class="form-control" style="font-size:13px; padding:6px 10px;">
+        {% for m in mode_options %}
+        <option value="{{ m }}">{{ m }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">回答策略</div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="strategy" value="rag" checked> 快速导览（直连RAG）
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="strategy" value="agent"> 智能导览（Agent）
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-group">
+      <div class="setting-label">受众</div>
+      <select id="audienceSelect" class="form-control" style="font-size:13px; padding:6px 10px;">
+        <option>大众观众</option>
+        <option>学生/入门</option>
+        <option>专业观众</option>
+      </select>
+    </div>
+
+    <div class="toggle-row">
+      <span>显示参考资料</span>
+      <input type="checkbox" class="toggle" id="citationsToggle" checked>
+    </div>
+    <div class="toggle-row">
+      <span>允许联网补充</span>
+      <input type="checkbox" class="toggle" id="webToggle">
+    </div>
+
+    <hr class="divider" style="margin:4px 0;">
+    <div class="setting-label">示例问题</div>
+    {% for q in sample_questions %}
+    <button class="sidebar-sample-btn" onclick="fillQuestion(this.textContent)">{{ q }}</button>
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>文化导览</h2>
+  <p>围绕侗绣纹样做讲解、展签转译与工艺解释</p>
+</div>
+<div class="page-body" style="padding-top:16px;">
+
+  <!-- 状态栏 -->
+  <div class="status-row" id="statusRow">
+    <span class="mode-badge" id="modeBadge">导览讲解</span>
+    <span class="badge" id="strategyBadge">快速导览（直连RAG）</span>
+    <span class="badge" id="audienceBadge">大众观众</span>
+  </div>
+
+  <!-- 示例问题 -->
+  <div class="sample-questions">
+    {% for q in sample_questions %}
+    <button class="sample-q" onclick="fillQuestion(this.textContent)">{{ q }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- 聊天区 -->
+  <div class="chat-wrap">
+    <div class="chat-messages" id="chatMessages">
+      <div class="empty-state" id="emptyState">
+        <div>点击上方示例问题，或在下方输入框直接提问</div>
+        <div style="font-size:12px; margin-top:6px; color:#b0956e;">
+          支持纹样讲解 · 展签生成 · 深度研究 · FAQ · 联网检索
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-wrap">
+      <textarea
+        id="chatInput"
+        class="chat-input"
+        placeholder="输入侗绣相关问题…"
+        rows="2"
+        onkeydown="handleKey(event)"
+      ></textarea>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <button class="btn btn-primary" id="sendBtn" onclick="sendMessage()">发送</button>
+        <button class="btn btn-outline btn-sm" onclick="clearChat()">清空</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── 状态同步 ──────────────────────────────────
+const modeSelect    = document.getElementById('modeSelect');
+const audienceSelect = document.getElementById('audienceSelect');
+const modeBadge     = document.getElementById('modeBadge');
+const strategyBadge = document.getElementById('strategyBadge');
+const audienceBadge = document.getElementById('audienceBadge');
+
+function syncStatus() {
+  modeBadge.textContent    = modeSelect.value;
+  audienceBadge.textContent = audienceSelect.value;
+  const strategy = document.querySelector('input[name="strategy"]:checked').value;
+  strategyBadge.textContent = strategy === 'rag' ? '快速导览（直连RAG）' : '智能导览（Agent）';
+}
+modeSelect.addEventListener('change', syncStatus);
+audienceSelect.addEventListener('change', syncStatus);
+document.querySelectorAll('input[name="strategy"]').forEach(r => r.addEventListener('change', syncStatus));
+
+// 展签/研究/FAQ 强制 Agent
+modeSelect.addEventListener('change', () => {
+  if (modeSelect.value !== '导览讲解') {
+    document.querySelector('input[name="strategy"][value="agent"]').checked = true;
+    document.querySelector('input[name="strategy"][value="rag"]').disabled = true;
+  } else {
+    document.querySelector('input[name="strategy"][value="rag"]').disabled = false;
+  }
+  syncStatus();
+});
+
+// ── 填入问题 ──────────────────────────────────
+function fillQuestion(text) {
+  document.getElementById('chatInput').value = text.trim();
+  document.getElementById('chatInput').focus();
+}
+
+// ── Enter 发送 ────────────────────────────────
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function normalizeCitations(payload) {
+  if (!payload) return [];
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload.citations)) return payload.citations;
+  return [];
+}
+
+function renderCitationPanel(citations) {
+  const items = normalizeCitations(citations);
+  if (!items.length) return null;
+
+  const panel = document.createElement('div');
+  panel.className = 'citation-panel';
+  const toggle = document.createElement('div');
+  toggle.className = 'citation-toggle';
+  toggle.textContent = `参考资料（${items.length} 条）`;
+  const list = document.createElement('div');
+  list.className = 'citation-list';
+  items.forEach(c => {
+    const item = document.createElement('div');
+    item.className = 'citation-item';
+    const src = c.source || 'unknown';
+    const pg  = c.page != null ? ` (p.${c.page})` : '';
+    item.innerHTML = `<div class="citation-source">${c.index||''}. ${src}${pg}</div>${c.snippet||''}`;
+    list.appendChild(item);
+  });
+  toggle.onclick = () => list.classList.toggle('open');
+  panel.appendChild(toggle);
+  panel.appendChild(list);
+  return panel;
+}
+
+// ── 渲染消息 ──────────────────────────────────
+function addBubble(role, content, citations) {
+  const emptyState = document.getElementById('emptyState');
+  if (emptyState) emptyState.remove();
+
+  const wrap = document.createElement('div');
+  wrap.className = role === 'user' ? 'bubble bubble-user' : 'bubble bubble-ai';
+
+  if (role === 'user') {
+    wrap.textContent = content;
+  } else {
+    wrap.innerHTML = marked.parse(content || '');
+    const panel = renderCitationPanel(citations);
+    if (panel) wrap.appendChild(panel);
+  }
+
+  document.getElementById('chatMessages').appendChild(wrap);
+  document.getElementById('chatMessages').scrollTop = 99999;
+  return wrap;
+}
+
+// ── 发送消息（SSE 流式） ──────────────────────
+async function sendMessage() {
+  const input   = document.getElementById('chatInput');
+  const prompt  = input.value.trim();
+  if (!prompt) return;
+
+  input.value = '';
+  document.getElementById('sendBtn').disabled = true;
+
+  addBubble('user', prompt);
+
+  // 打字指示器
+  const typingWrap = document.createElement('div');
+  typingWrap.className = 'bubble bubble-ai typing-indicator';
+  typingWrap.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+  document.getElementById('chatMessages').appendChild(typingWrap);
+  document.getElementById('chatMessages').scrollTop = 99999;
+
+  const mode     = modeSelect.value;
+  const audience = audienceSelect.value;
+  const useAgent = document.querySelector('input[name="strategy"]:checked').value === 'agent'
+                   || mode !== '导览讲解';
+  const citOn  = document.getElementById('citationsToggle').checked;
+  const webOn  = document.getElementById('webToggle').checked;
+
+  const modeMap = { '导览讲解':'guide', '展签文案':'label', '深度研究':'research', 'FAQ生成':'faq' };
+
+  let fullText = '';
+  let citations = null;
+  let aiBubble  = null;
+
+  try {
+    const resp = await fetch('/api/guide/stream', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        prompt, mode: modeMap[mode] || 'guide',
+        audience, citations_enabled: citOn,
+        allow_web: webOn, use_agent: useAgent,
+      }),
+    });
+
+    const reader = resp.body.getReader();
+    const dec    = new TextDecoder();
+    let buf      = '';
+
+    typingWrap.remove();
+    aiBubble = addBubble('ai', '');
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data:')) continue;
+        const raw = line.slice(5).trim();
+        if (raw === '[DONE]') break;
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed.chunk) {
+            fullText += parsed.chunk;
+            aiBubble.innerHTML = marked.parse(fullText);
+            document.getElementById('chatMessages').scrollTop = 99999;
+          }
+          if (parsed.citations) citations = normalizeCitations(parsed.citations);
+        } catch {}
+      }
+    }
+
+    // 处理引用
+    const citationPanel = renderCitationPanel(citations);
+    if (citOn && citationPanel && aiBubble) {
+      aiBubble.appendChild(citationPanel);
+    }
+
+  } catch (err) {
+    typingWrap.remove();
+    addBubble('ai', `请求失败：${err.message}`);
+  }
+
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('chatMessages').scrollTop = 99999;
+}
+
+// ── 清空对话 ──────────────────────────────────
+function clearChat() {
+  const box = document.getElementById('chatMessages');
+  box.innerHTML = `<div class="empty-state" id="emptyState">
+    <div>点击上方示例问题，或在下方输入框直接提问</div>
+    <div style="font-size:12px; margin-top:6px; color:#b0956e;">
+      支持纹样讲解 · 展签生成 · 深度研究 · FAQ · 联网检索
+    </div>
+  </div>`;
+}
+</script>
+{% endblock %}

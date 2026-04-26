@@ -247,7 +247,8 @@ def _render_message_block(message, highlight_latest=False):
         render_runtime_status(runtime_status)
 
     if citation_items:
-        with st.expander("参考资料", expanded=False):
+        label = f"参考资料（{len(citation_items)} 条）"
+        with st.expander(label, expanded=True):
             for item in citation_items:
                 if not isinstance(item, dict):
                     continue

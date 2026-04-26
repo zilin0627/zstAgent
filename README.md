@@ -1,32 +1,22 @@
-# wxyAgent
+# 锈见侗韵——面向非遗文化理解与创意生成的AI工作流平台
 
-一个基于 `Streamlit + LangChain + RAG` 的侗族织绣纹样数字体验项目，包含：
+基于 `Streamlit + LangChain + RAG + Agent` 构建的侗族刺绣垂直领域 AI 辅助设计平台，支持：
 
-- 纹样图谱
-- 文化导览
-- 设计工作台
-- 文创展陈
-- 场景落地
+- **文化导览问答**：引用式知识问答，支持导览/展签/FAQ/深度研究四模式
+- **纹样图谱**：典型纹样卡片与真实绣片扫图浏览
+- **设计工作台**：将纹样语义转化为结构化创意提案
+- **文创展陈**：展示平面、样机与 AIGC 生成延展成果
+- **AI 工作流**：可视化展示 RAG 与 Agent 工作链路
+- **场景落地**：展馆、文旅、品牌合作等应用场景
 
 ---
 
-## 环境信息
+## 环境要求
 
-### 本地开发
-
-- OS：`Windows 10`
-- Shell：`PowerShell`
-- 项目路径：`e:\github project\wxyAgent`
-- Python：`3.12`
-- 依赖管理：`uv`
-
-### 云端部署
-
-- 服务器：`阿里云 ECS`
-- 系统：`Linux`
-- 项目目录：`/root/wxyAgent`
-- 端口：`8501`
-- 启动用户：`root`
+- Python 3.12
+- 依赖管理：[uv](https://github.com/astral-sh/uv)
+- 操作系统：Windows / Linux / macOS
+- 无需 GPU，CPU 本地可运行
 
 ---
 
@@ -38,194 +28,97 @@
 uv sync
 ```
 
-### 2. 配置环境变量
+### 2. 配置 API Key
 
-Windows PowerShell：
+**Windows PowerShell：**
 
 ```powershell
-$env:DASHSCOPE_API_KEY="你的 DashScope Key"
+$env:DASHSCOPE_API_KEY="你的 DashScope API Key"
 ```
 
-Linux：
+**Linux / macOS：**
 
 ```bash
-export DASHSCOPE_API_KEY="你的 DashScope Key"
+export DASHSCOPE_API_KEY="你的 DashScope API Key"
 ```
 
-### 3. 本地启动
+> DashScope API Key 可在 [阿里云百炼平台](https://bailian.console.aliyun.com/) 申请，用于驱动 `qwen3-max` 对话模型与 `text-embedding-v4` 向量模型。
 
-```bash
-uv run streamlit run app.py
-```
-
----
-
-## 常用命令
-
-### 本地运行
-
-```bash
-uv run streamlit run app.py
-```
-
-### 重建知识库
+### 3. 构建本地知识库（首次运行必须执行）
 
 ```bash
 uv run python rag/vector_store.py
 ```
 
-### 提交本地修改
+> 将 `data/dong_embroidery/` 下的侗绣文献解析、切分、向量化并写入 `chroma_db/`，约需 2-3 分钟。
+
+### 4. 启动应用
 
 ```bash
-git add .
-git commit -m "your message"
-git push origin main
+uv run streamlit run app.py
 ```
+
+浏览器访问 `http://localhost:8501`
 
 ---
 
-## 云端启动
+## 目录结构
 
-登录服务器：
-
-```bash
-ssh root@你的ECS公网IP
-```
-
-进入项目目录：
-
-```bash
-cd /root/wxyAgent
-```
-
-启动项目：
-
-```bash
-export DASHSCOPE_API_KEY="你的 DashScope Key"
-nohup uv run streamlit run app.py --server.address 0.0.0.0 --server.port 8501 > streamlit.log 2>&1 &
-```
-
-查看日志：
-
-```bash
-tail -n 50 streamlit.log
-```
-
-停止服务：
-
-```bash
-pkill -f "streamlit run app.py"
-```
-
----
-
-## 本地修改后同步到云端
-
-### 本地
-
-```bash
-git add .
-git commit -m "update"
-git push origin main
-```
-
-### 云端
-
-```bash
-cd /root/wxyAgent
-git pull origin main
-pkill -f "streamlit run app.py"
-nohup uv run streamlit run app.py --server.address 0.0.0.0 --server.port 8501 > streamlit.log 2>&1 &
-```
-
-如果依赖有变化，再执行：
-
-```bash
-uv sync
-```
-
----
-
-## 一条命令更新云端
-
-```bash
-cd /root/wxyAgent && git pull origin main && pkill -f "streamlit run app.py" && nohup uv run streamlit run app.py --server.address 0.0.0.0 --server.port 8501 > streamlit.log 2>&1 &
-```
-
-如果依赖也更新了：
-
-```bash
-cd /root/wxyAgent && git pull origin main && uv sync && pkill -f "streamlit run app.py" && nohup uv run streamlit run app.py --server.address 0.0.0.0 --server.port 8501 > streamlit.log 2>&1 &
+```text
+wxyAgent/
+├── app.py                  # Streamlit 主入口，页面路由与请求封装
+├── api_server.py           # FastAPI 接口服务（可选）
+├── runtime_status.py       # 运行状态可视化组件
+├── pyproject.toml          # 依赖配置
+├── agent/
+│   ├── react_agent.py      # LangChain ReAct Agent 执行器
+│   └── tools/
+│       ├── agent_tools.py  # 工具集（意图识别/RAG/联网/展品/兜底）
+│       └── middleware.py   # 模式切换与日志中间件
+├── rag/
+│   ├── rag_service.py      # 查询改写→多路召回→重排序→生成全链路
+│   └── vector_store.py     # 知识库构建与 Chroma 向量库维护
+├── model/
+│   └── factory.py          # 模型工厂（qwen3-max + text-embedding-v4）
+├── pages/                  # 各功能页面实现
+├── prompts/                # 四模式专属提示词模板
+├── config/                 # rag.yml / chroma.yml / prompts.yml
+├── utils/                  # 配置加载 / 提示词 / 日志 / 路径工具
+├── data/
+│   ├── dong_embroidery/    # 侗绣知识库原始文献（PDF/DOCX/TXT）
+│   └── platform/           # 页面结构化 JSON 数据
+├── assets/                 # 纹样图片、扫图、文创成果、工作流展板
+└── chroma_db/              # 本地向量数据库（运行 vector_store.py 后生成）
 ```
 
 ---
 
 ## 常见问题
 
-### 1. 云端 `git pull` 失败
+### API Key 未配置
 
-如果报：
-
-```text
-GnuTLS recv error (-110)
-```
-
-先执行：
-
-```bash
-git config --global http.version HTTP/1.1
-git pull origin main
-```
-
-### 2. 启动后没反应
-
-先检查：
-
-```bash
-tail -n 100 streamlit.log
-ps -ef | grep streamlit
-ss -lntp | grep 8501
-```
-
-### 3. 页面没变化
-
-按顺序检查：
-
-1. 本地是否已经 `git push`
-2. 云端是否已经 `git pull`
-3. 是否已经重启服务
-4. 浏览器是否 `Ctrl + F5`
-
-### 4. 环境变量缺失
-
-如果出现：
+如果启动后出现：
 
 ```text
 Did not find dashscope_api_key
 ```
 
-重新执行：
+重新执行环境变量配置命令后重启应用。
+
+### 知识库加载失败
+
+如果出现向量库相关报错，执行重建：
 
 ```bash
-export DASHSCOPE_API_KEY="你的 DashScope Key"
+uv run python rag/vector_store.py
 ```
 
----
+系统会自动清理损坏索引并重建，无需手动操作。
 
-## 项目结构
+### FastAPI 接口服务
 
-```text
-wxyAgent/
-├── app.py
-├── pyproject.toml
-├── README.md
-├── agent/
-├── rag/
-├── model/
-├── prompts/
-├── config/
-├── pages/
-├── assets/
-├── data/
-└── utils/
+如需启用接口服务（可选）：
+
+```bash
+uv run uvicorn api_server:app --port 8000
 ```

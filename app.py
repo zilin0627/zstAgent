@@ -1007,6 +1007,7 @@ def _build_network_error_notice(error: Exception) -> dict[str, str]:
 def _run_agent_request_streaming(prompt: str, context: dict, placeholder, thought_placeholder=None):
     response_message = []
     web_citations = []
+    rag_citations: list[dict] = []
     thought_steps: list[str] = []
     tool_calls: list[str] = []
     web_search_called = False
@@ -1029,6 +1030,14 @@ def _run_agent_request_streaming(prompt: str, context: dict, placeholder, though
                         web_citations = _extract_web_results_from_tool_text(tool_text)
                     if tool_name == "rag_summarize":
                         used_local_rag = True
+                        try:
+                            rag_data = json.loads(tool_text)
+                            if isinstance(rag_data, dict):
+                                extracted = rag_data.get("citations") or []
+                                if isinstance(extracted, list):
+                                    rag_citations.extend(extracted)
+                        except Exception:
+                            pass
                 else:
                     thought_steps.append(thought_text)
                     if thought_placeholder is not None:
@@ -1071,6 +1080,8 @@ def _run_agent_request_streaming(prompt: str, context: dict, placeholder, though
         answer = full_text
         citations = None
     answer = _clean_answer_text(str(answer or "").strip())
+    if not citations and rag_citations:
+        citations = rag_citations
     citations = _merge_citations(citations, web_citations)
     if not answer:
         answer = "我已检索到相关资料，但本次输出格式异常。请重试一次，或换一种问法。"

@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+{% set active = "cocreate" %}
+{% block title %}设计工作台{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>设计工作台</h2>
+  <p>选纹样 → 结合扫图观察 → 生成结构化设计提案</p>
+</div>
+<div class="page-body">
+
+  <!-- ── 主工作区 ── -->
+  <div class="workspace">
+
+    <!-- 左：配置 -->
+    <div>
+      <div class="sec-hd" style="background:#1e3a5f;">
+        <h3>设置任务</h3>
+        <p>选择纹样、用途和风格</p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">纹样</label>
+          <select id="patternSelect" class="form-control" onchange="onPatternChange()">
+            {% for name in pattern_names %}
+            <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">主题</label>
+          <input type="text" id="themeInput" class="form-control" placeholder="围绕…展开当代转化">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">用途</label>
+          <select id="targetSelect" class="form-control">
+            <option>海报视觉</option>
+            <option>丝巾设计</option>
+            <option>课程工作坊</option>
+            <option>品牌包装</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">风格</label>
+          <select id="toneSelect" class="form-control">
+            <option>传统庄重</option>
+            <option>轻盈现代</option>
+            <option>几何理性</option>
+            <option>节庆热烈</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">补充说明（可留空）</label>
+        <textarea id="extraInput" class="form-control" rows="3"
+                  placeholder="场景要求、受众特点、特殊限制…"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">调用模式</label>
+        <div class="radio-group" style="flex-direction:row; flex-wrap:wrap; gap:12px;">
+          <label class="radio-option">
+            <input type="radio" name="genMode" value="rag"> 直连 RAG
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="genMode" value="agent" checked> Agent
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="genMode" value="agent_web"> Agent + 联网
+          </label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-full" id="generateBtn" onclick="generateProposal()">
+        生成提案
+      </button>
+
+      <div style="margin-top:12px;">
+        <div class="setting-label" style="margin-bottom:8px;">快速填入示例</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+          <button class="btn btn-outline btn-sm"
+            onclick="fillPreset('龙纹','海报视觉','传统庄重','希望用于侗绣主题展主视觉，突出守护感、中心构图与礼仪气质。')">
+            展陈型示例
+          </button>
+          <button class="btn btn-outline btn-sm"
+            onclick="fillPreset('太阳榕树纹','品牌包装','轻盈现代','希望保留树形向上生长的视觉特征，并适合茶礼或文旅伴手礼包装。')">
+            文创型示例
+          </button>
+          <button class="btn btn-outline btn-sm"
+            onclick="fillPreset('混沌花纹','课程工作坊','几何理性','适合高校课程或研学工作坊，突出构图分析、纹样拆解和动手实践转化。')">
+            教学型示例
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：预览 -->
+    <div>
+      <div class="sec-hd" style="background:#1a5c4f;">
+        <h3>本次输入预览</h3>
+        <p>确认知识依据与设计语境</p>
+      </div>
+      <div id="previewBox" style="font-size:13px; line-height:1.8; color:var(--text-mid);">
+        <p id="previewLoading" style="color:var(--text-muted);">请先选择纹样…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 参考区 ── -->
+  <div class="ref-area">
+    <div class="card" style="padding:16px 18px;">
+      <div class="sec-hd" style="background:#2d4a1e; margin-bottom:10px;">
+        <h3>图谱卡片参考</h3>
+        <p>先看图谱，再做提案，结果更稳</p>
+      </div>
+      <div id="patternRef">
+        <div style="color:var(--text-muted); font-size:13px;">选择纹样后显示图谱信息</div>
+      </div>
+    </div>
+    <div class="card" style="padding:16px 18px;">
+      <div class="sec-hd" style="background:#4a2a10; margin-bottom:10px;">
+        <h3>真实扫图参考</h3>
+        <p>把针脚、层次和边饰带回设计转化</p>
+      </div>
+      <div id="scanRef">
+        <div style="color:var(--text-muted); font-size:13px;">选择纹样后显示关联扫图</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 结果区 ── -->
+  <div class="result-area">
+    <div class="result-section">
+      <div class="sec-hd" style="background:#3d2a5c; margin-bottom:10px;">
+        <h3>提案结果区</h3>
+        <p>生成后可直接用于方案初稿、课堂讨论或展陈文案整理</p>
+      </div>
+      <div id="resultContent">
+        <div class="result-placeholder" id="resultPlaceholder">
+          <div style="font-size:13px; color:var(--text-muted);">完成配置后点击「生成提案」</div>
+          <div style="font-size:11px; color:#b0956e;">支持：展陈文案 · 文创概念 · 课程提案 · 品牌策划</div>
+        </div>
+      </div>
+    </div>
+    <div class="result-section" style="background:var(--warm-card);">
+      <div style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:12px;">使用建议</div>
+      <ul style="font-size:13px; color:var(--text-mid); line-height:2; padding-left:16px;">
+        <li>先锁定一个核心纹样，避免主题过宽泛</li>
+        <li>先观察图谱和扫图，再写补充要求</li>
+        <li>目标是比赛/课程/品牌，把使用场景写进补充要求</li>
+        <li><strong>直连 RAG</strong>：快速打底稿</li>
+        <li><strong>Agent</strong>：完整结构 + 仅本地资料</li>
+        <li><strong>Agent + 联网</strong>：需补充公开资料</li>
+      </ul>
+      <hr class="divider">
+      <div style="font-size:13px; font-weight:700; color:var(--navy); margin-bottom:8px;">可输出到哪些场景</div>
+      <ul style="font-size:13px; color:var(--text-mid); line-height:2; padding-left:16px;">
+        <li>海报主视觉或展陈说明初稿</li>
+        <li>文旅包装与文创概念提案</li>
+        <li>课程工作坊与教学活动策划</li>
+        <li>展签、导览文案与页面首屏文案</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── 全量数据（由 Jinja2 注入） ────────────────
+const ALL_PATTERNS = {{ patterns | tojson }};
+const ALL_SCANS    = {{ scans | tojson }};
+
+function getPattern(name) { return ALL_PATTERNS.find(p => p.name === name) || null; }
+function getScans(name)   { return ALL_SCANS.filter(s => s.related_pattern === name); }
+
+// ── 初始化 ────────────────────────────────────
+window.addEventListener('load', () => {
+  // 从 pattern 页跳过来的预设
+  const preset = sessionStorage.getItem('cocreate_pattern');
+  if (preset) {
+    document.getElementById('patternSelect').value = preset;
+    sessionStorage.removeItem('cocreate_pattern');
+  }
+  onPatternChange();
+});
+
+// ── 纹样切换 ──────────────────────────────────
+function onPatternChange() {
+  const name = document.getElementById('patternSelect').value;
+  const p    = getPattern(name);
+  const scans = getScans(name);
+
+  // 更新主题默认值
+  document.getElementById('themeInput').value = `围绕${name}展开当代转化`;
+
+  // 预览区
+  if (p) {
+    document.getElementById('previewBox').innerHTML = `
+      <p><strong>纹样：</strong>${p.name}</p>
+      <p><strong>类别：</strong>${p.category}</p>
+      <p><strong>常见载体：</strong>${p.carrier}</p>
+      <p><strong>视觉关键词：</strong>${p.keywords.join('、')}</p>
+      <div style="background:rgba(30,58,95,0.05); border-radius:6px; padding:8px 12px; margin-top:8px;
+                  font-size:12px; color:var(--text-muted);">${p.summary}</div>
+      ${scans.length > 0 ? `<p style="margin-top:10px;"><strong>关联扫图：</strong>${scans.map(s=>s.name).join('、')}</p>` : ''}
+    `;
+  }
+
+  // 图谱参考区
+  if (p) {
+    document.getElementById('patternRef').innerHTML = `
+      <img src="/${p.image}" alt="${p.name}" class="ref-img" onerror="this.style.display='none'">
+      <div style="font-size:13px; font-weight:700; margin-bottom:4px;">${p.name}</div>
+      <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">${p.category}</div>
+      ${p.features.map(f => `<div style="font-size:12px; color:var(--text-mid);">· ${f}</div>`).join('')}
+    `;
+  }
+
+  // 扫图参考区
+  if (scans.length > 0) {
+    document.getElementById('scanRef').innerHTML = scans.slice(0, 2).map(s => `
+      <img src="/${s.image}" alt="${s.name}" class="ref-img" onerror="this.style.display='none'">
+      <div style="font-size:12px; font-weight:700;">${s.name}</div>
+      <div style="font-size:11px; color:var(--text-muted); margin-bottom:10px;">${s.caption}</div>
+    `).join('');
+  } else {
+    document.getElementById('scanRef').innerHTML = `<div style="color:var(--text-muted); font-size:13px;">当前纹样暂无关联扫图</div>`;
+  }
+}
+
+// ── 快速填入 ──────────────────────────────────
+function fillPreset(pattern, target, tone, extra) {
+  document.getElementById('patternSelect').value = pattern;
+  document.getElementById('targetSelect').value  = target;
+  document.getElementById('toneSelect').value    = tone;
+  document.getElementById('extraInput').value    = extra;
+  onPatternChange();
+}
+
+// ── 渲染结果分段 ──────────────────────────────
+function renderSections(text) {
+  const sections = [];
+  const re = /(?:^|\n)\s*(\d+[\.、][^\n：:]+[：:]?)/g;
+  let match, last = 0, lastTitle = '';
+  while ((match = re.exec(text)) !== null) {
+    if (lastTitle) sections.push({ title: lastTitle, body: text.slice(last, match.index).trim() });
+    lastTitle = match[1].trim().replace(/[：:]$/, '');
+    last = match.index + match[0].length;
+  }
+  if (lastTitle) sections.push({ title: lastTitle, body: text.slice(last).trim() });
+  if (!sections.length) return `<div style="font-size:14px; line-height:1.8;">${text}</div>`;
+  return sections.map(s => `
+    <div class="result-section-title">${s.title}</div>
+    <div style="font-size:13px; color:var(--text-mid); line-height:1.8; margin-bottom:10px;">${marked.parse(s.body)}</div>
+  `).join('');
+}
+
+// ── 生成提案 ──────────────────────────────────
+async function generateProposal() {
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 生成中…';
+
+  const name   = document.getElementById('patternSelect').value;
+  const theme  = document.getElementById('themeInput').value || `围绕${name}展开当代转化`;
+  const target = document.getElementById('targetSelect').value;
+  const tone   = document.getElementById('toneSelect').value;
+  const extra  = document.getElementById('extraInput').value;
+  const mode   = document.querySelector('input[name="genMode"]:checked').value;
+
+  const genModeMap = { 'rag':'快速模式（直连知识库）', 'agent':'Agent模式', 'agent_web':'Agent+联网模式' };
+
+  document.getElementById('resultContent').innerHTML = `
+    <div class="result-placeholder">
+      <div class="spinner"></div>
+      <div style="font-size:13px; color:var(--text-muted);">正在生成设计提案…</div>
+    </div>`;
+
+  try {
+    const resp = await fetch('/api/studio/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pattern_name: name, theme, target, tone, extra,
+        allow_web: mode === 'agent_web',
+        generation_mode: genModeMap[mode],
+      }),
+    });
+    if (!resp.ok) {
+      const text = await resp.text();
+      const msg = text.includes('Internal Server') ? '服务暂时不可用（可能是网络或 API Key 问题），请稍后重试。' : text.slice(0, 200);
+      throw new Error(msg);
+    }
+    const data = await resp.json();
+    const answer = data.answer || '';
+    const citations = data.citations;
+
+    let html = renderSections(answer);
+
+    if (citations && citations.length > 0) {
+      html += `<hr class="divider">
+      <div style="font-size:12px; font-weight:700; color:var(--navy); margin-bottom:8px;">本次提案参考资料</div>
+      ${citations.map(c => `
+        <div class="citation-item">
+          <div class="citation-source">${c.index||''}. ${c.source||''}${c.page!=null?' (p.'+c.page+')':''}</div>
+          ${c.snippet||''}
+        </div>`).join('')}`;
+    }
+
+    document.getElementById('resultContent').innerHTML = html;
+  } catch (err) {
+    document.getElementById('resultContent').innerHTML = `
+      <div class="result-placeholder" style="color:#c0392b;">生成失败：${err.message}</div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = '生成提案';
+}
+
+// ── guide 页预填 prompt ──────────────────────
+const guidePreset = sessionStorage.getItem('preset_prompt');
+if (guidePreset && location.pathname === '/guide') {
+  sessionStorage.removeItem('preset_prompt');
+  document.getElementById('chatInput').value = guidePreset;
+}
+</script>
+{% endblock %}

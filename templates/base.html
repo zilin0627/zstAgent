@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}绣见侗韵{% endblock %} · 侗绣AI智能体</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+{% block head %}{% endblock %}
+</head>
+<body>
+<div class="layout">
+
+  <!-- 侧边栏 -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h1>绣见侗韵</h1>
+      <p>侗绣 AI 智能体平台</p>
+    </div>
+
+    <nav class="nav-section">
+      <div class="nav-label">页面</div>
+      <a href="/"        class="nav-item {% if active=='home'    %}active{% endif %}">
+        <span class="nav-icon">⌂</span> 首页
+      </a>
+      <a href="/guide"   class="nav-item {% if active=='guide'   %}active{% endif %}">
+        <span class="nav-icon">◎</span> 文化导览
+      </a>
+      <a href="/pattern" class="nav-item {% if active=='pattern' %}active{% endif %}">
+        <span class="nav-icon">◈</span> 纹样图谱
+      </a>
+      <a href="/cocreate" class="nav-item {% if active=='cocreate' %}active{% endif %}">
+        <span class="nav-icon">◇</span> 设计工作台
+      </a>
+    </nav>
+
+    {% block sidebar_extra %}{% endblock %}
+
+    <div class="sidebar-extra">
+      侗绣垂直知识库<br>14 篇文献 · 14 条纹样 · ~420 向量
+    </div>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

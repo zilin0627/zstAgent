@@ -18,6 +18,7 @@ from langchain_core.prompts import PromptTemplate
 
 from model.factory import chat_model
 from rag.vector_store import VectorStoreService
+from utils.logger_handler import logger
 from utils.prompt_loader import load_rag_prompts
 
 
@@ -472,7 +473,11 @@ class RagSummarizeService:
         seen_keys = set()
 
         for item in expanded_queries:
-            docs = self.retrieve_docs(item)
+            try:
+                docs = self.retrieve_docs(item)
+            except Exception as _retrieval_err:
+                logger.warning("[retrieve_docs_with_meta] 单次检索失败，跳过: %s", str(_retrieval_err)[:120])
+                continue
             for doc in docs:
                 md = doc.metadata or {}
                 key = (

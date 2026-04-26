@@ -3,7 +3,6 @@ import csv
 import json
 import urllib.parse
 import urllib.request
-from urllib.error import HTTPError, URLError
 
 from langchain_core.tools import tool
 from rag.rag_service import RagSummarizeService
@@ -31,71 +30,6 @@ def _looks_like_useful_public_url(url: str) -> bool:
         return False
     return True
 
-
-def _fetch_page_text(url: str, timeout: float = 2.5) -> str:
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "Mozilla/5.0"},
-        method="GET",
-    )
-    with urllib.request.urlopen(req, timeout=timeout) as resp:
-        raw = resp.read(8192)
-        return raw.decode("utf-8", errors="ignore")
-
-
-def _looks_like_invalid_page_content(text: str) -> bool:
-    content = (text or "").strip().lower()
-    if not content:
-        return True
-
-    bad_markers = [
-        "welcome to nginx",
-        "404 not found",
-        "403 forbidden",
-        "502 bad gateway",
-        "503 service unavailable",
-        "index of /",
-        "nginx is successfully installed",
-        "test page for the nginx",
-        "iis windows server",
-        "apache2 default page",
-    ]
-    if any(marker in content for marker in bad_markers):
-        return True
-
-    stripped = " ".join(content.split())
-    if len(stripped) < 40:
-        return True
-    return False
-
-
-def _is_reachable_url(url: str) -> bool:
-    if not _looks_like_useful_public_url(url):
-        return False
-
-    try:
-        req = urllib.request.Request(
-            url,
-            headers={"User-Agent": "Mozilla/5.0"},
-            method="HEAD",
-        )
-        with urllib.request.urlopen(req, timeout=2) as resp:
-            status = getattr(resp, "status", 200)
-            if not 200 <= int(status) < 400:
-                return False
-    except HTTPError as e:
-        if not 200 <= int(getattr(e, "code", 500)) < 400:
-            return False
-    except (URLError, ValueError, TimeoutError):
-        return False
-    except Exception:
-        return False
-
-    try:
-        page_text = _fetch_page_text(url)
-        return not _looks_like_invalid_page_content(page_text)
-    except Exception:
-        return False
 
 
 @tool(description="识别当前用户问题属于哪类任务，并给出建议路由。返回 JSON 字符串。")
@@ -143,9 +77,19 @@ def classify_intent(query: str) -> str:
     )
 
 
-@tool(description="从向量存储中检索参考资料并总结，返回 JSON 字符串，包含 answer/citations/retrieval/confidence。")
+@tool(description="从向量存储中检索参考资料，返回 JSON 字符串，包含 context（可直接用于生成回答的文档原文）/citations/confidence。请基于 context 内容组织最终回答，不要复述 context 字段本身。")
 def rag_summarize(query: str) -> str:
-    return rag.rag_summarize_with_citations(query)
+    payload = rag.retrieve_docs_with_meta(query)
+    context = rag._build_context_from_docs(payload["docs"])
+    return json.dumps(
+        {
+            "context": context,
+            "citations": payload["citations"],
+            "confidence": payload["confidence"],
+            "queries": payload["queries"],
+        },
+        ensure_ascii=False,
+    )
 
 
 @tool(description="联网搜索公开网页信息（用于补充最新背景），返回JSON字符串，包含title/url/snippet列表")
@@ -209,7 +153,7 @@ def web_search(query: str) -> str:
         seen = set()
         for result in results:
             link = result.get("url", "")
-            if not _is_reachable_url(link):
+            if not _looks_like_useful_public_url(link):
                 continue
             if link not in seen:
                 seen.add(link)

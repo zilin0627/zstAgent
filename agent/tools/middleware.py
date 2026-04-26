@@ -31,6 +31,7 @@ def _build_runtime_instruction(context: dict) -> str:
     allow_web = bool(context.get("allow_web", False))
     citations_enabled = bool(context.get("citations_enabled", True))
     audience = str(context.get("audience", "") or "").strip()
+    lite_guide = bool(context.get("lite_guide", False))
 
     instruction_lines = [
         "\n\n### 本轮运行时约束（强制）",
@@ -38,6 +39,17 @@ def _build_runtime_instruction(context: dict) -> str:
         f"- 当前受众：{audience or '未指定'}",
         f"- 引用展示：{'开启' if citations_enabled else '关闭'}",
     ]
+
+    if lite_guide:
+        instruction_lines.extend(
+            [
+                "- 本轮使用文化导览轻量 Agent，只提供 rag_summarize 与可选 web_search 工具。",
+                "- 必须先调用且只调用一次 rag_summarize 获取本地资料，然后基于工具结果直接组织最终回答。",
+                "- 只有用户明确提出最新信息、官网、链接、公开网页、外部案例，或 rag_summarize 结果明确显示资料不足时，才允许额外调用一次 web_search。",
+                "- 不要调用意图分类、展品检索、人工转接等其它工具；不要反复调用同一工具。",
+                "- 输出应简洁，优先完成当前模式任务，不要展开无关推理过程。",
+            ]
+        )
 
     if allow_web:
         instruction_lines.extend(

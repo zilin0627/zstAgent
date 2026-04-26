@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% set active = "home" %}
+{% block title %}首页{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>侗绣 AI 智能体平台</h2>
+  <p>知识增强 + Agent 编排 · 侗绣垂直场景定制</p>
+</div>
+<div class="page-body">
+
+  <div class="home-hero">
+    <h2>看见纹样，听懂文化，再走向设计转化</h2>
+    <p>
+      这是一个以侗绣为起点的 AI 辅助平台。平台整合知识管理、文化导览、知识图谱、
+      设计集成与场景落地一体成一套连续工作流，支持从「看」到「懂」到「用」的完整链路。
+    </p>
+    <div style="margin-top:20px; display:flex; gap:12px;">
+      <a href="/guide"    class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.5);">开始导览</a>
+      <a href="/pattern"  class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.5);">浏览纹样</a>
+      <a href="/cocreate" class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.5);">设计工作台</a>
+    </div>
+  </div>
+
+  <div class="home-cards">
+    <a href="/guide" class="home-card">
+      <div class="home-card-icon">◎</div>
+      <div class="home-card-title">文化导览</div>
+      <div class="home-card-desc">
+        围绕侗绣纹样做知识问答、展签生成、深度研究与 FAQ 输出。
+        支持直连 RAG 与 Agent 两种策略，可联网补充。
+      </div>
+    </a>
+    <a href="/pattern" class="home-card">
+      <div class="home-card-icon">◈</div>
+      <div class="home-card-title">纹样图谱</div>
+      <div class="home-card-desc">
+        14 类典型纹样母题 + 12 张真实绣片扫图，可按类型筛选，
+        每张卡片可直接跳转导览或设计工作台。
+      </div>
+    </a>
+    <a href="/cocreate" class="home-card">
+      <div class="home-card-icon">◇</div>
+      <div class="home-card-title">设计工作台</div>
+      <div class="home-card-desc">
+        选纹样 → 结合扫图观察 → 生成结构化设计提案。
+        输出概念标题、创意定位、主文案、视觉关键词与转化建议。
+      </div>
+    </a>
+  </div>
+
+  <hr class="divider" style="margin-top:28px;">
+  <div class="metric-row">
+    <div class="metric-card">
+      <div class="label">CNKI 论文</div>
+      <div class="value">14 篇</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">纹样条目</div>
+      <div class="value">14 条</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">向量切片</div>
+      <div class="value">~420</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">工具封装</div>
+      <div class="value">5 类</div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

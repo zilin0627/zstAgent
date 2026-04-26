@@ -27,6 +27,14 @@ class ReactAgent:
             tools=[classify_intent, rag_summarize, fetch_exhibit, handoff_to_human],
             **shared_kwargs,
         )
+        self.guide_agent = create_agent(
+            tools=[rag_summarize, web_search],
+            **shared_kwargs,
+        )
+        self.guide_local_agent = create_agent(
+            tools=[rag_summarize],
+            **shared_kwargs,
+        )
 
     def execute_stream(self, query: str, context: dict | None = None):
         input_dict = {
@@ -37,7 +45,11 @@ class ReactAgent:
         runtime_context = context or {"mode": "guide"}
         emitted_contents: set[str] = set()
         allow_web = bool(runtime_context.get("allow_web", True)) if isinstance(runtime_context, dict) else True
-        runner = self.agent if allow_web else self.local_agent
+        lite_guide = bool(runtime_context.get("lite_guide", False)) if isinstance(runtime_context, dict) else False
+        if lite_guide:
+            runner = self.guide_agent if allow_web else self.guide_local_agent
+        else:
+            runner = self.agent if allow_web else self.local_agent
 
         for chunk in runner.stream(input_dict, stream_mode="values", context=runtime_context):
             latest_message = chunk["messages"][-1]

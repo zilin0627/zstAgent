@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% set active = "pattern" %}
+{% block title %}纹样图谱{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h2>纹样图谱</h2>
+  <p>先从母题和真实扫图建立视觉观察，再进入智能导览或设计工作台</p>
+</div>
+<div class="page-body">
+
+  <div class="metric-row">
+    <div class="metric-card"><div class="label">图谱类型</div><div class="value">5 类</div></div>
+    <div class="metric-card"><div class="label">图谱卡片</div><div class="value">{{ patterns|length }}</div></div>
+    <div class="metric-card"><div class="label">扫图样本</div><div class="value">{{ scans|length }}</div></div>
+    <div class="metric-card"><div class="label">联通方式</div><div class="value" style="font-size:16px;">导览 + 设计</div></div>
+  </div>
+
+  <!-- ── 典型纹样图谱 ── -->
+  <div class="sec-hd" style="background:#1a5c4f;">
+    <h3>典型纹样图谱</h3>
+    <p>先按类型筛选，再逐一查看 · 点「查看」进导览，点「去设计」预填工作台</p>
+  </div>
+
+  <div class="filter-row" id="patternFilter">
+    <button class="filter-btn active" data-filter="全部">全部</button>
+    <button class="filter-btn" data-filter="动物纹">动物纹</button>
+    <button class="filter-btn" data-filter="人物纹">人物纹</button>
+    <button class="filter-btn" data-filter="植物纹 / 天体纹">植物纹 / 天体纹</button>
+    <button class="filter-btn" data-filter="组合纹">组合纹</button>
+    <button class="filter-btn" data-filter="几何纹 / 花卉纹">几何纹 / 花卉纹</button>
+  </div>
+
+  <div class="pattern-grid" id="patternGrid">
+    {% for p in patterns %}
+    <div class="pattern-card" data-category="{{ p.category }}">
+      <img class="pattern-card-img" src="/{{ p.image }}" alt="{{ p.name }}"
+           onerror="this.style.display='none'"
+           onclick="openLightbox('/{{ p.image }}', '{{ p.name }}')">
+      <div class="pattern-card-body">
+        <div class="pattern-card-name">{{ p.name }}</div>
+        <div class="pattern-card-meta">{{ p.category }} · {{ p.tags | join(' / ') }}</div>
+        <div class="pattern-card-kw">{{ p.keywords | join(' · ') }}</div>
+        <details style="margin-bottom:10px;">
+          <summary style="font-size:12px; color:var(--text-muted); cursor:pointer;">图案特征</summary>
+          <div style="font-size:12px; color:var(--text-mid); margin-top:6px; line-height:1.6;">
+            <p>{{ p.summary }}</p>
+            {% for f in p.features %}<p>· {{ f }}</p>{% endfor %}
+          </div>
+        </details>
+        <div class="pattern-card-actions">
+          <button class="btn btn-outline btn-sm"
+            onclick="goGuide('介绍{{ p.name }}的特点和常见用法')">查看</button>
+          <button class="btn btn-primary btn-sm"
+            onclick="goCocreate('{{ p.name }}')">去设计</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <hr class="divider" style="margin: 28px 0;">
+
+  <!-- ── 真实刺绣扫图 ── -->
+  <div class="sec-hd" style="background:#1e3a5f;">
+    <h3>真实刺绣扫图</h3>
+    <p>查看关联 → 跳到智能导览 · 去设计 → 直接预填设计工作台</p>
+  </div>
+
+  <div class="filter-row" id="scanFilter">
+    <button class="filter-btn active" data-filter="全部">全部</button>
+    <button class="filter-btn" data-filter="龙纹类">龙纹类</button>
+    <button class="filter-btn" data-filter="花纹类">花纹类</button>
+    <button class="filter-btn" data-filter="盘型类">盘型类</button>
+    <button class="filter-btn" data-filter="树纹类">树纹类</button>
+  </div>
+
+  <div class="pattern-grid" id="scanGrid">
+    {% for s in scans %}
+    <div class="pattern-card" data-category="{{ s.category }}">
+      <img class="pattern-card-img" src="/{{ s.image }}" alt="{{ s.name }}"
+           onerror="this.style.display='none'"
+           onclick="openLightbox('/{{ s.image }}', '{{ s.name }}')">
+      <div class="pattern-card-body">
+        <div class="pattern-card-name">{{ s.name }}</div>
+        <div class="pattern-card-meta">{{ s.category }} · 图谱：{{ s.related_pattern }}</div>
+        <div class="pattern-card-kw" style="margin-bottom:10px;">{{ s.caption }}</div>
+        <div class="pattern-card-actions">
+          <button class="btn btn-outline btn-sm"
+            onclick="goGuide('介绍{{ s.related_pattern }}，结合真实绣片说明构图和工艺特点')">查看关联</button>
+          <button class="btn btn-primary btn-sm"
+            onclick="goCocreate('{{ s.related_pattern }}')">去设计</button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<!-- 灯箱 -->
+<div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.82);
+     z-index:999; align-items:center; justify-content:center; flex-direction:column; gap:12px;"
+     onclick="closeLightbox()">
+  <img id="lightboxImg" style="max-width:90vw; max-height:85vh; object-fit:contain; border-radius:8px;">
+  <div id="lightboxCaption" style="color:rgba(255,255,255,0.8); font-size:14px;"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// ── 筛选 ──────────────────────────────────────
+function initFilter(filterRowId, gridId) {
+  document.getElementById(filterRowId).addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll(`#${filterRowId} .filter-btn`).forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.filter;
+    document.querySelectorAll(`#${gridId} .pattern-card`).forEach(card => {
+      card.style.display = (cat === '全部' || card.dataset.category === cat) ? '' : 'none';
+    });
+  });
+}
+initFilter('patternFilter', 'patternGrid');
+initFilter('scanFilter', 'scanGrid');
+
+// ── 灯箱 ──────────────────────────────────────
+function openLightbox(src, caption) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightboxCaption').textContent = caption;
+  const lb = document.getElementById('lightbox');
+  lb.style.display = 'flex';
+}
+function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ── 跳转 ──────────────────────────────────────
+function goGuide(q) {
+  sessionStorage.setItem('preset_prompt', q);
+  location.href = '/guide';
+}
+function goCocreate(patternName) {
+  sessionStorage.setItem('cocreate_pattern', patternName);
+  location.href = '/cocreate';
+}
+</script>
+{% endblock %}
